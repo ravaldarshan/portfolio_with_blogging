@@ -1,0 +1,16 @@
+ns1.infinityfree.com
+grandline.jagoweb.org
+
+
+
+        // Mendapatkan informasi lokasi berdasarkan alamat IP
+        $location = Location::get($ipAddress);
+
+        // Mendapatkan kota
+        $city = $location->cityName;
+
+        // Mendapatkan negara
+        $country = $location->countryName;
+
+        // Mendapatkan alamat email dari user agent
+        $email = $request->header('User-Agent');
