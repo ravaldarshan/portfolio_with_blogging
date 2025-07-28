@@ -20,10 +20,17 @@ use App\Http\Controllers\frontpage\ServiceController;
 |
 */
 
-// Route::get('/ms-admin-ikhsannawawi', function () {
-//     Artisan::call('migrate:fresh --seed');
-//     return redirect()->route('index');
-// });
+// Application Clear-cache
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('route:cache');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return 'Cache Cleared';
+});
+Route::get('/link', function () {
+    Artisan::call('storage:link');
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('web.index');
 Route::get('/getService', [HomeController::class, 'getService'])->name('web.getService');

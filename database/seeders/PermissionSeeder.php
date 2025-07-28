@@ -63,8 +63,8 @@ class PermissionSeeder extends Seeder
                         "name"        => "Detail",
                     ],
                     [
-                        "identifiers" => "arsip",
-                        "name"        => "Arsip",
+                        "identifiers" => "archives",
+                        "name"        => "Archives",
                     ],
                     [
                         "identifiers" => "restore",
@@ -127,8 +127,8 @@ class PermissionSeeder extends Seeder
                 ]
             ],
             [
-                "identifiers"   => "kategori_blog",
-                "name"          => "Kategori Blog",
+                "identifiers"   => "category_blog",
+                "name"          => "Category Blog",
                 "access"        => [
                     [
                         "identifiers" => "view",
@@ -151,8 +151,8 @@ class PermissionSeeder extends Seeder
                         "name"        => "Detail",
                     ],
                     [
-                        "identifiers" => "arsip",
-                        "name"        => "Arsip",
+                        "identifiers" => "archives",
+                        "name"        => "Archives",
                     ],
                     [
                         "identifiers" => "restore",
@@ -161,8 +161,8 @@ class PermissionSeeder extends Seeder
                 ]
             ],
             [
-                "identifiers"   => "kategori_project",
-                "name"          => "Kategori Project",
+                "identifiers"   => "category_project",
+                "name"          => "Category Project",
                 "access"        => [
                     [
                         "identifiers" => "view",
@@ -185,8 +185,8 @@ class PermissionSeeder extends Seeder
                         "name"        => "Detail",
                     ],
                     [
-                        "identifiers" => "arsip",
-                        "name"        => "Arsip",
+                        "identifiers" => "archives",
+                        "name"        => "Archives",
                     ],
                     [
                         "identifiers" => "restore",
@@ -195,8 +195,8 @@ class PermissionSeeder extends Seeder
                 ]
             ],
             [
-                "identifiers"   => "komentar_blog",
-                "name"          => "Komentar Blog",
+                "identifiers"   => "blog_comments",
+                "name"          => "Comment Blog",
                 "access"        => [
                     [
                         "identifiers" => "view",
@@ -213,8 +213,8 @@ class PermissionSeeder extends Seeder
                 ]
             ],
             [
-                "identifiers"   => "komentar_project",
-                "name"          => "Komentar Project",
+                "identifiers"   => "comment_project",
+                "name"          => "Comment Project",
                 "access"        => [
                     [
                         "identifiers" => "view",
@@ -283,8 +283,8 @@ class PermissionSeeder extends Seeder
                         "name"        => "Detail",
                     ],
                     [
-                        "identifiers" => "arsip",
-                        "name"        => "Arsip",
+                        "identifiers" => "archives",
+                        "name"        => "Archives",
                     ],
                     [
                         "identifiers" => "restore",
@@ -361,8 +361,8 @@ class PermissionSeeder extends Seeder
                         "name"        => "Detail",
                     ],
                     [
-                        "identifiers" => "arsip",
-                        "name"        => "Arsip",
+                        "identifiers" => "archives",
+                        "name"        => "Archives",
                     ],
                     [
                         "identifiers" => "restore",

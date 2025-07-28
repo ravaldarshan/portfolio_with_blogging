@@ -21,10 +21,10 @@
                     </div>
                     <div class="col-4" style="display: flex; justify-content: flex-end;">
                         @if (isallowed('user', 'add'))
-                            <a href="{{ route('admin.users.add') }}" class="btn btn-primary">Tambah Data</a>
+                            <a href="{{ route('admin.users.add') }}" class="btn btn-primary">Add Data</a>
                         @endif
-                        @if (isallowed('user', 'arsip'))
-                            <a href="{{ route('admin.users.arsip') }}" class="btn btn-primary mx-3">Arsip</a>
+                        @if (isallowed('user', 'archives'))
+                            <a href="{{ route('admin.users.archives') }}" class="btn btn-primary mx-3">Archives</a>
                         @endif
                         <a href="javascript:void(0)" class="btn btn-primary" id="filterButton">Filter</a>
                     </div>
@@ -123,12 +123,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ini',
+                    title: 'Are you sure you want to delete this data?',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -146,7 +146,7 @@
                                 //     .load();
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
-                                    title: 'Berhasil!',
+                                    title: 'Succeed!',
                                     text: 'Data berhasil dihapus.',
                                     icon: 'success',
                                     timer: 1500, // 2 detik
@@ -166,12 +166,12 @@
             $(document).on('click', '.changeStatus', function(event) {
                 var ix = $(this).data('ix');
                 if ($(this).is(':checked')) {
-                    var status = "Tidak Aktif";
-                    var changeto = "Aktif";
+                    var status = "Not Active";
+                    var changeto = "Active";
                     var message = "";
                 } else {
-                    var status = "Aktif"
-                    var changeto = "Tidak Aktif";
+                    var status = "Active"
+                    var changeto = "Not Active";
                     var message = "";
                 }
 
@@ -207,7 +207,7 @@
                             success: function() {
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
-                                    title: 'Berhasil!',
+                                    title: 'Succeed!',
                                     text: 'Status berhasil diubah ke ' +
                                         changeto,
                                     icon: 'success',
@@ -218,7 +218,7 @@
                         });
 
                     } else {
-                        if (status == "Aktif") {
+                        if (status == "Active") {
                             $(this).prop("checked", true);
                         } else {
                             $(this).prop("checked", false);
@@ -238,7 +238,7 @@
             optionUserGroup.html(
                 '<option id="loadingSpinner" style="display: none;">' +
                 '<i class="fas fa-spinner fa-spin">' +
-                '</i> Sedang memuat...</option>'
+                '</i> Loading...</option>'
             );
 
             var loadingSpinner = $('#loadingSpinner');

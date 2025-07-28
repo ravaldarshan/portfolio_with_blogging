@@ -27,7 +27,7 @@
 
             var modalBody = $('#detailModuleBody');
             modalBody.html('<div id="loadingSpinner" style="display: none;">' +
-                '<i class="fas fa-spinner fa-spin"></i> Sedang memuat...' +
+                '<i class="fas fa-spinner fa-spin"></i> Loading...' +
                 '</div>');
             var loadingSpinner = $('#loadingSpinner');
 
@@ -38,7 +38,7 @@
                 method: 'GET',
                 success: function(response) {
                     var data = response.data;
-                    var permissions = response.access; // Asumsikan ini adalah array objek izin
+                    var permissions = response.access;
 
                     var permissionTableHTML =
                         '<table class="compact table table-bordered" width="100%">' +
@@ -90,15 +90,9 @@
 
                         '<p><strong>Modul Akses:</strong></p>' + (permissions.length > 0 ? permissionTableHTML : 'No access permissions for any module')
                     );
-
-
-                    loadingSpinner.hide(); // Sembunyikan elemen animasi setelah data dimuat
+                    loadingSpinner.hide();
                 }
             });
-
-
-
-
         });
     </script>
 @endpush

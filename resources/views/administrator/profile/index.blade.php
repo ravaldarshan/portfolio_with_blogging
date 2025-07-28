@@ -6,7 +6,7 @@
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
             <div class="breadcrumb-item">Profile</div>
-            <div class="breadcrumb-item">{{auth()->user()->kode}}</div>
+            <div class="breadcrumb-item">{{auth()->user()->code}}</div>
         </div>
     @endpush
     @push('section_title')
@@ -21,15 +21,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ img_src($data->foto, 'profile') ? img_src($data->foto, 'profile') : '' }}"
+                                <img src="{{ img_src($data->photo, 'profile') ? img_src($data->photo, 'profile') : '' }}"
                                     alt="Admin" class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ $data->user->name ? $data->user->name : '' }}</h4>
                                     <p class="text-secondary mb-1">Full Stack Developer</p>
                                     <p class="text-muted font-size-sm">
-                                        {{ $data->alamat ? $data->alamat : '' }}</p>
+                                        {{ $data->address ? $data->address : '' }}</p>
                                     <a href="javascript:void(0)" class="btn btn-outline-primary" data-toggle="modal"
-                                        data-target="#fileinput-preview-profile">Ubah Foto Profile</a>
+                                        data-target="#fileinput-preview-profile">Ubah photo Profile</a>
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                         <form action="{{ route('admin.profile.update') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <input type="hidden" name="kode" value="{{ $data->user->kode ? $data->user->kode : '' }}">
+                            <input type="hidden" name="code" value="{{ $data->user->code ? $data->user->code : '' }}">
                             <input type="hidden" name="email" value="{{ $data->user->email ? $data->user->email : '' }}">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -104,8 +104,8 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" name="kode" id="kodeField"
-                                    value="{{ $data->user->kode ? $data->user->kode : '' }}">
+                                <input type="hidden" name="code" id="codeField"
+                                    value="{{ $data->user->code ? $data->user->code : '' }}">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Full Name</h6>
@@ -127,11 +127,11 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">No Telepon</h6>
+                                        <h6 class="mb-0">No Telephone</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input autocomplete="off" type="text" class="form-control" name="no_telepon"
-                                            id="noTeleponField" value="{{ $data->no_telepon ? $data->no_telepon : '' }}">
+                                        <input autocomplete="off" type="text" class="form-control" name="phone_number"
+                                            id="noTelephoneField" value="{{ $data->phone_number ? $data->phone_number : '' }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -139,21 +139,21 @@
                                         <h6 class="mb-0">Pendidikan Terakhir</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <select class="form-control" name="pendidikan_terakhir"
+                                        <select class="form-control" name="last_education"
                                             id="pendidikanTerakhirField">
-                                            <option value="">Pilih Pendidikan Terakhir</option>
+                                            <option value="">Choose Pendidikan Terakhir</option>
                                             <option value="SD"
-                                                {{ $data->pendidikan_terakhir == 'SD' ? 'selected' : '' }}>
+                                                {{ $data->last_education == 'SD' ? 'selected' : '' }}>
                                                 SD</option>
                                             <option value="SMP"
-                                                {{ $data->pendidikan_terakhir == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                                {{ $data->last_education == 'SMP' ? 'selected' : '' }}>SMP</option>
                                             <option value="SMA"
-                                                {{ $data->pendidikan_terakhir == 'SMA' ? 'selected' : '' }}>SMA</option>
+                                                {{ $data->last_education == 'SMA' ? 'selected' : '' }}>SMA</option>
                                             <option value="Diploma"
-                                                {{ $data->pendidikan_terakhir == 'Diploma' ? 'selected' : '' }}>Diploma
+                                                {{ $data->last_education == 'Diploma' ? 'selected' : '' }}>Diploma
                                             </option>
                                             <option value="Sarjana"
-                                                {{ $data->pendidikan_terakhir == 'Sarjana' ? 'selected' : '' }}>Sarjana
+                                                {{ $data->last_education == 'Sarjana' ? 'selected' : '' }}>Sarjana
                                             </option>
                                             <!-- Tambahkan opsi lain sesuai kebutuhan -->
                                         </select>
@@ -162,30 +162,30 @@
 
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Tempat Lahir</h6>
+                                        <h6 class="mb-0">Place of birth</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input autocomplete="off" type="text" class="form-control"
-                                            name="tempat_lahir" id="tempatLahirField"
-                                            value="{{ $data->tempat_lahir ? $data->tempat_lahir : '' }}">
+                                            name="place_of_birth" id="tempatLahirField"
+                                            value="{{ $data->place_of_birth ? $data->place_of_birth : '' }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Tanggal Lahir</h6>
+                                        <h6 class="mb-0">Date of Birth</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input autocomplete="off" type="text" class="form-control tanggal_lahir_input"
-                                            name="tanggal_lahir" id="tanggalLahirField"
-                                            value="{{ $data->tanggal_lahir ? $data->tanggal_lahir : '' }}">
+                                        <input autocomplete="off" type="text" class="form-control date_of_birth_input"
+                                            name="date_of_birth" id="dateLahirField"
+                                            value="{{ $data->date_of_birth ? $data->date_of_birth : '' }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Alamat</h6>
+                                        <h6 class="mb-0">Address</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <textarea type="text" name="alamat" id="alamatField" class="form-control">{{ $data->alamat ? $data->alamat : '' }}</textarea>
+                                        <textarea type="text" name="address" id="addressField" class="form-control">{{ $data->address ? $data->address : '' }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -194,7 +194,7 @@
                                         <button type="submit" id="formSubmit" class="btn btn-primary me-1 mb-1">
                                             <span class="indicator-label">Save Changes</span>
                                             <span class="indicator-progress" style="display: none;">
-                                                Tunggu Sebentar...
+                                                Wait a moment...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                             </span>
                                         </button>
@@ -292,7 +292,7 @@
 
             async function validateRemoteEmail() {
                 const emailInput = $('#emailField');
-                const kodeField = $('#kodeField');
+                const codeField = $('#codeField');
                 const remoteValidationUrl = "{{ route('admin.profile.checkEmail') }}";
                 const csrfToken = "{{ csrf_token() }}";
 
@@ -303,7 +303,7 @@
                         data: {
                             _token: csrfToken,
                             email: emailInput.val(),
-                            kode: kodeField.val()
+                            code: codeField.val()
                         }
                     });
 
@@ -321,9 +321,9 @@
                 }
             }
 
-            // Ambil data tanggal dari database (gantilah ini dengan logika pengambilan data sesuai dengan aplikasi Anda)
-            const tanggalDariDatabase =
-                "{{ $data->tanggal_lahir ? $data->tanggal_lahir : '2023-09-01' }}"; // Isi ini dengan tanggal dari database jika tersedia atau null jika tidak tersedia
+            // Ambil data date dari database (gantilah ini dengan logika pengambilan data sesuai dengan aplikasi Anda)
+            const dateDariDatabase =
+                "{{ $data->date_of_birth ? $data->date_of_birth : '2023-09-01' }}"; // Contents ini dengan date dari database jika tersedia atau null jika tidak tersedia
 
 
             const options = {
@@ -370,11 +370,11 @@
                         }
                     }
                 },
-                startDate: tanggalDariDatabase,
+                startDate: dateDariDatabase,
 
             }
 
-            const calendarify = new Calendarify('.tanggal_lahir_input', options);
+            const calendarify = new Calendarify('.date_of_birth_input', options);
 
 
             calendarify.init();

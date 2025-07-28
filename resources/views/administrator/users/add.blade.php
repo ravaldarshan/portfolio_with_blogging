@@ -35,7 +35,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="nameField" class="form-label">Nama</label>
-                                <input type="text" id="nameField" class="form-control" placeholder="Masukan Nama"
+                                <input type="text" id="nameField" class="form-control" placeholder="Enter Nama"
                                     name="name" autocomplete="off" data-parsley-required="true">
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="emailField" class="form-label">Email</label>
-                                <input type="text" id="emailField" class="form-control" placeholder="Masukan Email"
+                                <input type="text" id="emailField" class="form-control" placeholder="Enter Email"
                                     name="email" autocomplete="off" data-parsley-required="true">
                                 <div class="" style="color: #dc3545" id="accessErrorEmail"></div>
                             </div>
@@ -53,17 +53,17 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
-                                <label for="kodeField" class="form-label">Kode</label>
+                                <label for="codeField" class="form-label">Code</label>
                                 <div class="row">
                                     <div class="col-8">
-                                        <input type="text" id="kodeField" class="form-control" placeholder="Masukan Kode"
-                                            name="kode" autocomplete="off" data-parsley-required="true">
-                                        <div class="" style="color: #dc3545" id="accessErrorKode"></div>
+                                        <input type="text" id="codeField" class="form-control" placeholder="Enter Code"
+                                            name="code" autocomplete="off" data-parsley-required="true">
+                                        <div class="" style="color: #dc3545" id="accessErrorCode"></div>
                                     </div>
                                     <div class="col-2">
-                                        <a href="javascript:void(0)" class="btn btn-primary" id="buttonGenerateKode"><span
-                                                class="indicator-label-kode">Generate</span>
-                                            <span class="indicator-progress-kode" style="display: none;">
+                                        <a href="javascript:void(0)" class="btn btn-primary" id="buttonGenerateCode"><span
+                                                class="indicator-label-code">Generate</span>
+                                            <span class="indicator-progress-code" style="display: none;">
                                                 <div class="d-flex">
                                                     Generate...
                                                     <span
@@ -80,7 +80,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="passwordField" class="form-label">Password</label>
-                                <input type="text" id="passwordField" class="form-control" placeholder="Masukan Password"
+                                <input type="text" id="passwordField" class="form-control" placeholder="Enter Password"
                                     name="password" autocomplete="off" data-parsley-required="true">
                                 <div class="" style="color: #dc3545" id="accessErrorPasssword"></div>
                             </div>
@@ -89,11 +89,11 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
-                                <label for="konfirmasiPasswordField" class="form-label">Konfirmasi Password</label>
+                                <label for="konfirmasiPasswordField" class="form-label">Confirmation Password</label>
                                 <input type="text" id="konfirmasiPasswordField" class="form-control"
-                                    placeholder="Masukan Konfirmasi Password" name="konfirmasi_password"
+                                    placeholder="Enter Confirmation Password" name="konfirmasi_password"
                                     autocomplete="off" data-parsley-required="true">
-                                <div class="" style="color: #dc3545" id="accessErrorKonfirmasiPasssword"></div>
+                                <div class="" style="color: #dc3545" id="accessErrorConfirmationPasssword"></div>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                         <input class="form-check-input" type="radio" name="status" value="1"
                                             id="flexRadioDefault1" checked data-parsley-required="true">
                                         <label class="form-check-label form-label" for="flexRadioDefault1">
-                                            Aktif
+                                            Active
                                         </label>
                                     </div>
                                 </fieldset>
@@ -120,7 +120,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary me-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -143,33 +143,33 @@
     <script type="text/javascript">
         $(document).ready(function() {
             // Add an event listener to the "Generate" button
-            const generateKodeButton = document.getElementById("buttonGenerateKode");
-            const kodeField = document.getElementById("kodeField");
-            const indicatorLabelKode = document.querySelector(".indicator-label-kode");
-            const indicatorProgressKode = document.querySelector(".indicator-progress-kode");
-            const remoteGenerateKodeUrl = "{{ route('admin.users.generateKode') }}";
+            const generateCodeButton = document.getElementById("buttonGenerateCode");
+            const codeField = document.getElementById("codeField");
+            const indicatorLabelCode = document.querySelector(".indicator-label-code");
+            const indicatorProgressCode = document.querySelector(".indicator-progress-code");
+            const remoteGenerateCodeUrl = "{{ route('admin.users.generateCode') }}";
 
-            generateKodeButton.addEventListener("click", async function() {
+            generateCodeButton.addEventListener("click", async function() {
                 // Show the indicator when the button is clicked
-                indicatorLabelKode.style.display = "none";
-                indicatorProgressKode.style.display = "inline-block";
+                indicatorLabelCode.style.display = "none";
+                indicatorProgressCode.style.display = "inline-block";
 
                 // Make an AJAX request to generate the code
                 try {
                     const response = await $.ajax({
                         method: "GET",
-                        url: remoteGenerateKodeUrl,
+                        url: remoteGenerateCodeUrl,
                     });
 
-                    // Assuming the response is JSON and contains a "generateKode" key
-                    kodeField.value = response.generateKode;
+                    // Assuming the response is JSON and contains a "generateCode" key
+                    codeField.value = response.generateCode;
                 } catch (error) {
                     console.error("Generate error:", error);
                     // Handle errors as needed
                 } finally {
                     // Hide the indicator when the AJAX request is complete
-                    indicatorLabelKode.style.display = "inline-block";
-                    indicatorProgressKode.style.display = "none";
+                    indicatorLabelCode.style.display = "inline-block";
+                    indicatorProgressCode.style.display = "none";
                 }
             });
 
@@ -211,40 +211,40 @@
                     accessErrorEmail.text('');
                 }
 
-                const remoteValidationResultKode = await validateRemoteKode();
-                const kodeField = $("#kodeField");
-                const accessErrorKode = $("#accessErrorKode");
-                if (!remoteValidationResultKode.valid) {
+                const remoteValidationResultCode = await validateRemoteCode();
+                const codeField = $("#codeField");
+                const accessErrorCode = $("#accessErrorCode");
+                if (!remoteValidationResultCode.valid) {
                     // Remote validation failed, display the error message
-                    accessErrorKode.addClass('invalid-feedback');
-                    kodeField.addClass('is-invalid');
+                    accessErrorCode.addClass('invalid-feedback');
+                    codeField.addClass('is-invalid');
 
-                    accessErrorKode.text(remoteValidationResultKode
+                    accessErrorCode.text(remoteValidationResultCode
                         .errorMessage); // Set the error message from the response
 
                     return;
                 } else {
-                    accessErrorKode.removeClass('invalid-feedback');
-                    kodeField.removeClass('is-invalid');
-                    accessErrorKode.text('');
+                    accessErrorCode.removeClass('invalid-feedback');
+                    codeField.removeClass('is-invalid');
+                    accessErrorCode.text('');
                 }
-                // Get the value from the kode field
-                const kodeValue = kodeField.val().trim();
+                // Get the value from the code field
+                const codeValue = codeField.val().trim();
 
-                // Validate the length and format of the kode
-                if (kodeValue.length !== 12 || !kodeValue.startsWith('webits-') || kodeValue.substring(
+                // Validate the length and format of the code
+                if (codeValue.length !== 12 || !codeValue.startsWith('webits-') || codeValue.substring(
                         7).length !== 5) {
-                    accessErrorKode.addClass('invalid-feedback');
-                    kodeField.addClass('is-invalid');
+                    accessErrorCode.addClass('invalid-feedback');
+                    codeField.addClass('is-invalid');
 
-                    accessErrorKode.text(
-                        'Kode harus 12 characters dan diawali dengan webits- lalu diakhiri oleh 5 uniqid.'
+                    accessErrorCode.text(
+                        'Code harus 12 characters dan diawali dengan webits- lalu diakhiri oleh 5 uniqid.'
                     );
                     return;
                 } else {
-                    accessErrorKode.removeClass('invalid-feedback');
-                    kodeField.removeClass('is-invalid');
-                    accessErrorKode.text('');
+                    accessErrorCode.removeClass('invalid-feedback');
+                    codeField.removeClass('is-invalid');
+                    accessErrorCode.text('');
                 }
 
                 const passwordField = $('#passwordField').val().trim();
@@ -321,9 +321,9 @@
                 }
             }
 
-            async function validateRemoteKode() {
-                const kodeInput = $('#kodeField');
-                const remoteValidationUrl = "{{ route('admin.users.checkKode') }}";
+            async function validateRemoteCode() {
+                const codeInput = $('#codeField');
+                const remoteValidationUrl = "{{ route('admin.users.checkCode') }}";
                 const csrfToken = "{{ csrf_token() }}";
 
                 try {
@@ -332,7 +332,7 @@
                         url: remoteValidationUrl,
                         data: {
                             _token: csrfToken,
-                            kode: kodeInput.val(),
+                            code: codeInput.val(),
                         }
                     });
 
@@ -358,7 +358,7 @@
                 const passwordField = $('#passwordField');
                 const accessErrorPassword = $("#accessErrorPasssword");
                 const konfirmasiPasswordField = $('#konfirmasiPasswordField');
-                const accessErrorKonfirmasiPassword = $("#accessErrorKonfirmasiPasssword");
+                const accessErrorConfirmationPassword = $("#accessErrorConfirmationPasssword");
 
                 if (passwordField.val().length < 8) {
                     passwordField.addClass('is-invalid');
@@ -368,13 +368,13 @@
                     passwordField.removeClass('is-invalid');
                     accessErrorPassword.text('');
                     konfirmasiPasswordField.addClass('is-invalid');
-                    accessErrorKonfirmasiPassword.text('Konfirmasi Password harus sama dengan Password');
+                    accessErrorConfirmationPassword.text('Confirmation Password harus sama dengan Password');
                     return false;
                 } else {
                     passwordField.removeClass('is-invalid');
                     accessErrorPassword.text('');
                     konfirmasiPasswordField.removeClass('is-invalid');
-                    accessErrorKonfirmasiPassword.text('');
+                    accessErrorConfirmationPassword.text('');
                     return true;
                 }
             }
@@ -387,7 +387,7 @@
             optionUserGroup.html(
                 '<option id="loadingSpinner" style="display: none;">' +
                 '<i class="fas fa-spinner fa-spin">' +
-                '</i> Sedang memuat...</option>'
+                '</i> Loading...</option>'
             );
 
             var loadingSpinner = $('#loadingSpinner');
@@ -409,7 +409,7 @@
                     }
 
                     // Construct the final dropdown HTML
-                    var finalDropdownHtml = '<option value="">Pilih Data</option>' + optionsHtml;
+                    var finalDropdownHtml = '<option value="">Choose Data</option>' + optionsHtml;
 
                     optionUserGroup.html(finalDropdownHtml);
 

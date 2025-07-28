@@ -27,7 +27,7 @@
                                 <div class="col-12">
                                     <div class="form-group mandatory">
                                         <label for="namaField" class="form-label">Nama</label>
-                                        <input type="text" id="namaField" class="form-control" placeholder="Masukan Nama"
+                                        <input type="text" id="namaField" class="form-control" placeholder="Enter Nama"
                                             name="name" autocomplete="off" value="{{ $data->name }}"
                                             data-parsley-required="true">
                                     </div>
@@ -39,35 +39,35 @@
                                     <div class="form-group mandatory">
                                         <label for="identifierField" class="form-label">Identifier</label>
                                         <input type="text" id="identifierField" class="form-control"
-                                            placeholder="Masukan Identifier" name="identifiers" autocomplete="off"
+                                            placeholder="Enter Identifier" name="identifiers" autocomplete="off"
                                             value="{{ $data->identifiers }}" data-parsley-required="true">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
-                            <div id="modul_akses">
+                            <div id="modul_access">
                                 <!-- Assuming $moduleAccessData is an array of module access data from your controller -->
                                 @if ($data->access->count() == 0)
-                                    <div class="modul_akses-list" index-element="0">
+                                    <div class="modul_access-list" index-element="0">
                                         <div class="row rowAkses">
                                             <div class="col-md-5 col-11">
                                                 <div class="form-group">
                                                     <label class="form-label">Tipe</label>
-                                                    <select class="modul_akses-tipe form-control"
-                                                        data-parsley-required="true" name="modul_akses[0][tipe]">
+                                                    <select class="modul_access-tipe form-control"
+                                                        data-parsley-required="true" name="modul_access[0][tipe]">
                                                         <option value="">Please Select</option>
-                                                        <option value="page">Elemen Standar</option>
-                                                        <option value="element">Elemen Lainnya</option>
+                                                        <option value="page">Standard Elements</option>
+                                                        <option value="element">Other Elements</option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 col-11">
-                                                <div class="form-group kode_akses-select" style="display: none;">
-                                                    <label class="form-label">Kode Akses</label>
-                                                    <select class="modul_akses-kode_akses-select kode_akses form-control"
-                                                        name="modul_akses[0][kode_akses]">
+                                                <div class="form-group code_access-select" style="display: none;">
+                                                    <label class="form-label">Access Code</label>
+                                                    <select class="modul_access-code_access-select code_access form-control"
+                                                        name="modul_access[0][code_access]">
                                                         <option value="">Please Select</option>
                                                         <option value="view">View</option>
                                                         <option value="add">Add</option>
@@ -76,10 +76,10 @@
                                                         <option value="detail">Detail</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-group kode_akses-input" style="display: none;">
-                                                    <label class="form-label">Kode Akses</label>
-                                                    <input class="modul_akses-kode_akses-input kode_akses form-control" autocomplete="off"
-                                                        placeholder="Masukan Kode Akses" name="modul_akses[0][kode_akses]"
+                                                <div class="form-group code_access-input" style="display: none;">
+                                                    <label class="form-label">Access Code</label>
+                                                    <input class="modul_access-code_access-input code_access form-control" autocomplete="off"
+                                                        placeholder="Enter Access Code" name="modul_access[0][code_access]"
                                                         type="text" />
                                                 </div>
                                             </div>
@@ -87,14 +87,14 @@
                                     </div>
                                 @else
                                     @foreach ($data->access as $index => $moduleAccess)
-                                        <div class="modul_akses-list" index-element="{{ $index }}">
+                                        <div class="modul_access-list" index-element="{{ $index }}">
                                             <div class="row rowAkses">
                                                 <div class="col-md-5 col-11">
                                                     <div class="form-group">
                                                         <label class="form-label">Tipe</label>
-                                                        <select class="modul_akses-tipe form-control"
+                                                        <select class="modul_access-tipe form-control"
                                                             data-parsley-required="true"
-                                                            name="modul_akses[{{ $index }}][tipe]">
+                                                            name="modul_access[{{ $index }}][tipe]">
                                                             <option value="">Please Select</option>
                                                             <option value="page"
                                                                 {{ $moduleAccess['identifiers'] == 'view' ||
@@ -114,24 +114,24 @@
                                                                 $moduleAccess['identifiers'] != 'detail'
                                                                     ? 'selected'
                                                                     : '' }}>
-                                                                Elemen Lainnya
+                                                                Other Elements
                                                             </option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-11">
-                                                    <div class="form-group kode_akses-select"
+                                                    <div class="form-group code_access-select"
                                                         style="@if (
                                                             $moduleAccess['identifiers'] != 'view' &&
                                                                 $moduleAccess['identifiers'] != 'add' &&
                                                                 $moduleAccess['identifiers'] != 'edit' &&
                                                                 $moduleAccess['identifiers'] != 'delete' &&
                                                                 $moduleAccess['identifiers'] != 'detail') display: none; @endif">
-                                                        <label class="form-label">Kode Akses</label>
+                                                        <label class="form-label">Access Code</label>
                                                         <select
-                                                            class="modul_akses-kode_akses-select kode_akses form-control"
-                                                            name="modul_akses[{{ $index }}][kode_akses]">
+                                                            class="modul_access-code_access-select code_access form-control"
+                                                            name="modul_access[{{ $index }}][code_access]">
                                                             <option value="">Please Select</option>
                                                             <option value="view"
                                                                 {{ $moduleAccess['identifiers'] == 'view' ? 'selected' : '' }}>
@@ -150,17 +150,17 @@
                                                                 Detail</option>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group kode_akses-input"
+                                                    <div class="form-group code_access-input"
                                                         style="@if (
                                                             $moduleAccess['identifiers'] == 'view' ||
                                                                 $moduleAccess['identifiers'] == 'add' ||
                                                                 $moduleAccess['identifiers'] == 'edit' ||
                                                                 $moduleAccess['identifiers'] == 'delete' ||
                                                                 $moduleAccess['identifiers'] == 'detail') display: none; @endif">
-                                                        <label class="form-label">Kode Akses</label>
-                                                        <input class="modul_akses-kode_akses-input kode_akses form-control"
-                                                            placeholder="Masukan Kode Akses" autocomplete="off"
-                                                            name="modul_akses[{{ $index }}][kode_akses]"
+                                                        <label class="form-label">Access Code</label>
+                                                        <input class="modul_access-code_access-input code_access form-control"
+                                                            placeholder="Enter Access Code" autocomplete="off"
+                                                            name="modul_access[{{ $index }}][code_access]"
                                                             value="{{ $moduleAccess['identifiers'] }}" type="text" />
                                                     </div>
                                                 </div>
@@ -180,8 +180,8 @@
 
                             </div>
                             <br>
-                            <button class="more-akses btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i>
-                                Add more akses</button>
+                            <button class="more-access btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i>
+                                Add more access</button>
 
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                         <button type="submit" id="formSubmit" class="btn btn-primary mx-1 mb-1">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress" style="display: none;">
-                                Tunggu Sebentar...
+                                Wait a moment...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
                         </button>
@@ -206,20 +206,20 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $(".more-akses").on("click", function() {
+            $(".more-access").on("click", function() {
                 // Clone the first module access element
-                var clonning = $(".modul_akses-list:first").clone();
+                var clonning = $(".modul_access-list:first").clone();
 
                 // Clear any errors and values from the cloned element
                 clonning.find(".error-block").remove();
                 clonning.find(".deleteRow").remove();
                 clonning.find(".form-group").removeClass("has-error");
-                clonning.find(".modul_akses-id").val("");
-                clonning.find(".modul_akses-tipe").val("");
-                clonning.find(".kode_akses-select").css("display", "none");
-                clonning.find(".kode_akses-input").css("display", "none");
-                clonning.find(".modul_akses-kode_akses-input").val("");
-                clonning.find(".modul_akses-kode_akses-select").val("");
+                clonning.find(".modul_access-id").val("");
+                clonning.find(".modul_access-tipe").val("");
+                clonning.find(".code_access-select").css("display", "none");
+                clonning.find(".code_access-input").css("display", "none");
+                clonning.find(".modul_access-code_access-input").val("");
+                clonning.find(".modul_access-code_access-select").val("");
 
                 // Add a delete button to the cloned element
                 clonning.find(".rowAkses").append(
@@ -229,15 +229,15 @@
                 );
 
                 // Append the cloned element to the form
-                $("#modul_akses").append(clonning);
+                $("#modul_access").append(clonning);
 
                 resetData();
             });
             resetData();
 
             // Menggunakan event delegate untuk mengikuti klik pada tombol "Delete"
-            $("#modul_akses").on("click", ".removeData", function() {
-                var rowToDelete = $(this).closest(".modul_akses-list");
+            $("#modul_access").on("click", ".removeData", function() {
+                var rowToDelete = $(this).closest(".modul_access-list");
 
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
@@ -253,16 +253,16 @@
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Hapus baris dari tampilan
+                        // Wipe baris dari tampilan
                         deleteRow(rowToDelete);
                         // Tampilkan pesan sukses selama 2 detik dan kemudian otomatis tutup
                         swalWithBootstrapButtons.fire({
-                            title: 'Berhasil!',
+                            title: 'Succeed!',
                             text: 'Baris telah dihapus.',
                             icon: 'success',
                             timer: 1500, // 2 detik
@@ -334,7 +334,7 @@
         function resetData() {
 
             var index = 0;
-            $(".modul_akses-list").each(function() {
+            $(".modul_access-list").each(function() {
                 var another = this;
                 search_index = $(this).attr("index-element");
                 $(this).find('input, select').each(function() {
@@ -344,59 +344,59 @@
                 });
 
 
-                $(this).find(".modul_akses-tipe").on("change", function() {
+                $(this).find(".modul_access-tipe").on("change", function() {
                     $(another).find(".error-block").remove();
                     var tipe = $(this).val();
                     if (tipe == 'element') {
-                        // Menampilkan elemen kode_akses-input
-                        $(another).find(".kode_akses-input").show();
-                        // Mengaktifkan validasi pada elemen kode_akses-input
-                        $(another).find(".modul_akses-kode_akses-input").prop("disabled", false);
+                        // Menampilkan elemen code_access-input
+                        $(another).find(".code_access-input").show();
+                        // Mengaktifkan validasi pada elemen code_access-input
+                        $(another).find(".modul_access-code_access-input").prop("disabled", false);
 
-                        // Menghilangkan elemen kode_akses-select
-                        $(another).find(".kode_akses-select").hide();
-                        // Menonaktifkan validasi pada elemen kode_akses-select
-                        $(another).find(".modul_akses-kode_akses-select").prop("disabled", true);
-                        // Menghapus nilai pada elemen kode_akses-select
-                        $(another).find(".modul_akses-kode_akses-select").val("").attr(
+                        // Menghilangkan elemen code_access-select
+                        $(another).find(".code_access-select").hide();
+                        // Menonaktifkan validasi pada elemen code_access-select
+                        $(another).find(".modul_access-code_access-select").prop("disabled", true);
+                        // Menghapus nilai pada elemen code_access-select
+                        $(another).find(".modul_access-code_access-select").val("").attr(
                             "data-parsley-required", "false");
 
-                        // Menambahkan validasi pada elemen kode_akses-input
-                        $(another).find(".modul_akses-kode_akses-input").attr("data-parsley-required",
+                        // Menambahkan validasi pada elemen code_access-input
+                        $(another).find(".modul_access-code_access-input").attr("data-parsley-required",
                             "true");
                     } else if (tipe == 'page') {
-                        // Menampilkan elemen kode_akses-select
-                        $(another).find(".kode_akses-select").show();
-                        // Mengaktifkan validasi pada elemen kode_akses-select
-                        $(another).find(".modul_akses-kode_akses-select").prop("disabled", false);
+                        // Menampilkan elemen code_access-select
+                        $(another).find(".code_access-select").show();
+                        // Mengaktifkan validasi pada elemen code_access-select
+                        $(another).find(".modul_access-code_access-select").prop("disabled", false);
 
-                        // Menghilangkan elemen kode_akses-input
-                        $(another).find(".kode_akses-input").hide();
-                        // Menonaktifkan validasi pada elemen kode_akses-input
-                        $(another).find(".modul_akses-kode_akses-input").prop("disabled", true);
-                        // Menghapus nilai pada elemen kode_akses-input
-                        $(another).find(".modul_akses-kode_akses-input").val("").attr(
+                        // Menghilangkan elemen code_access-input
+                        $(another).find(".code_access-input").hide();
+                        // Menonaktifkan validasi pada elemen code_access-input
+                        $(another).find(".modul_access-code_access-input").prop("disabled", true);
+                        // Menghapus nilai pada elemen code_access-input
+                        $(another).find(".modul_access-code_access-input").val("").attr(
                             "data-parsley-required", "false");
 
-                        // Menambahkan validasi pada elemen kode_akses-select
-                        $(another).find(".modul_akses-kode_akses-select").attr("data-parsley-required",
+                        // Menambahkan validasi pada elemen code_access-select
+                        $(another).find(".modul_access-code_access-select").attr("data-parsley-required",
                             "true");
                     } else if (tipe == '') {
-                        // Menghilangkan elemen kode_akses-select
-                        $(another).find(".kode_akses-select").hide();
-                        // Mengaktifkan validasi pada elemen kode_akses-select
-                        $(another).find(".modul_akses-kode_akses-select").prop("disabled", false);
-                        // Menghapus nilai pada elemen kode_akses-select
-                        $(another).find(".modul_akses-kode_akses-select").val("").attr(
+                        // Menghilangkan elemen code_access-select
+                        $(another).find(".code_access-select").hide();
+                        // Mengaktifkan validasi pada elemen code_access-select
+                        $(another).find(".modul_access-code_access-select").prop("disabled", false);
+                        // Menghapus nilai pada elemen code_access-select
+                        $(another).find(".modul_access-code_access-select").val("").attr(
                             "data-parsley-required", "false");
 
-                        // Menampilkan elemen kode_akses-input
-                        $(another).find(".kode_akses-input").show();
-                        // Mengaktifkan validasi pada elemen kode_akses-input
-                        $(another).find(".modul_akses-kode_akses-input").prop("disabled", false);
+                        // Menampilkan elemen code_access-input
+                        $(another).find(".code_access-input").show();
+                        // Mengaktifkan validasi pada elemen code_access-input
+                        $(another).find(".modul_access-code_access-input").prop("disabled", false);
 
-                        // Menambahkan validasi pada elemen kode_akses-input
-                        $(another).find(".modul_akses-kode_akses-input").attr("data-parsley-required",
+                        // Menambahkan validasi pada elemen code_access-input
+                        $(another).find(".modul_access-code_access-input").attr("data-parsley-required",
                             "true");
                     }
                 });

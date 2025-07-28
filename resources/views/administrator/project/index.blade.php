@@ -21,10 +21,10 @@
                     </div>
                     <div class="col-4" style="display: flex; justify-content: flex-end;">
                         @if (isallowed('project', 'add'))
-                            <a href="{{ route('admin.project.add') }}" class="btn btn-primary">Tambah Data</a>
+                            <a href="{{ route('admin.project.add') }}" class="btn btn-primary">Add Data</a>
                         @endif
-                        @if (isallowed('project', 'arsip'))
-                            <a href="{{ route('admin.project.arsip') }}" class="btn btn-primary mx-3">Arsip</a>
+                        @if (isallowed('project', 'archives'))
+                            <a href="{{ route('admin.project.archives') }}" class="btn btn-primary mx-3">Archives</a>
                         @endif
                     </div>
                     
@@ -35,7 +35,7 @@
                             <thead>
                                 <tr>
                                     <th width="25">No</th>
-                                    <th width="300">Kategori</th>
+                                    <th width="300">Category</th>
                                     <th width="100%">Nama</th>
                                     <th width="200">Action</th>
                                 </tr>
@@ -81,8 +81,8 @@
                         },
                     },
                     {
-                        data: 'kategori_project.nama',
-                        name: 'kategori_project.nama'
+                        data: 'category_project.nama',
+                        name: 'category_project.nama'
                     },
                     {
                         data: 'nama',
@@ -110,12 +110,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ini',
+                    title: 'Are you sure you want to delete this data?',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -133,7 +133,7 @@
                                 //     .load();
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
-                                    title: 'Berhasil!',
+                                    title: 'Succeed!',
                                     text: 'Data berhasil dihapus.',
                                     icon: 'success',
                                     timer: 1500, // 2 detik

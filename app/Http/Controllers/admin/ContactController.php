@@ -50,7 +50,7 @@ class ContactController extends Controller
                 $set = Contact::where('name', $key)->first();
                 $set->update($data);
 
-                $logs[] = ['---'.$key.'---' => ['Data Sebelumnya' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
+                $logs[] = ['---'.$key.'---' => ['Previous Data' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
             } else {
                 $data["name"] = $key;
                 $data["value"] = $value;
@@ -63,7 +63,7 @@ class ContactController extends Controller
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
-        return redirect(route('admin.contact'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.contact'))->with(['success' => 'Data updated successfully.']);
 
     }
 }

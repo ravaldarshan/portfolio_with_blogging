@@ -24,7 +24,7 @@
                                     <label for="inputEmail">Email</label>
                                     <input id="inputEmail" type="email" class="form-control" name="email" tabindex="1"
                                         data-parsley-required="true" data-parsley-type="email" data-parsley-trigger="change"
-                                        data-parsley-error-message="Masukan alamat email yang valid." autocomplete="off"
+                                        data-parsley-error-message="Enter a valid email address." autocomplete="off"
                                         autofocus>
                                     <div class="" style="color: #dc3545" id="accessErrorEmail"></div>
                                 </div>
@@ -41,7 +41,7 @@
                                     <input id="inputPassword" type="password" class="form-control" name="password"
                                         autocomplete="off" tabindex="2" data-parsley-required="true"
                                         data-parsley-minlength="8" data-parsley-trigger="change"
-                                        data-parsley-error-message="Password harus memiliki setidaknya 8 karakter.">
+                                        data-parsley-error-message="Password must have at least 8 characters.">
                                     <div class="" style="color: #dc3545" id="accessErrorPassword"></div>
                                 </div>
 
@@ -58,7 +58,7 @@
                                         tabindex="4">
                                         <span class="indicator-label">Login</span>
                                         <span class="indicator-progress" style="display: none;">
-                                            Tunggu Sebentar...
+                                            Wait a moment...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                         </span>
                                     </button>

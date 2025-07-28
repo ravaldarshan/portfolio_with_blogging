@@ -38,7 +38,7 @@ class AboutController extends Controller
 
         
         $data_settings = [];
-        $data_settings["deskripsi"] = $request->deskripsi;
+        $data_settings["description"] = $request->description;
         $data_settings["image"] = $request->image;
 
         $logs = []; // Buat array kosong untuk menyimpan log
@@ -51,7 +51,7 @@ class AboutController extends Controller
                 $set = About::where('name', $key)->first();
                 $set->update($data);
 
-                $logs[] = ['---'.$key.'---' => ['Data Sebelumnya' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
+                $logs[] = ['---'.$key.'---' => ['Previous Data' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
             } else {
                 $data["name"] = $key;
                 $data["value"] = $value;
@@ -63,13 +63,13 @@ class AboutController extends Controller
 
         
 
-        // Setelah perulangan selesai, $logs akan berisi semua log untuk setiap data yang diproses.
+        // Setelah perulangan selesai, $logs akan bercontents semua log untuk setiap data yang diproses.
 
 
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
-        return redirect(route('admin.about'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.about'))->with(['success' => 'Data updated successfully.']);
     }
 
     public function getDataGallery(){

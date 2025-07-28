@@ -33,7 +33,7 @@
                 
                                 <div class="row mb-3">
                                     <div class="col-md-6 col-12">
-                                        <a href="{{ route('web.index') }}#sectionService" id="triggerPromosi"
+                                        <a href="{{ route('web.index') }}#sectionService" id="triggerPromotion"
                                             class="play-btn window-popup"><i class="fa fa-play"></i> Preview </a>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                     <div class="col-12">
                                         <div class="form-group mandatory">
                                             <label for="inputBodyService" class="form-label">Body</label>
-                                            <textarea name="body_service_frontpage_homepage" class="form-control" id="inputBodyService" placeholder="Masukan Body"
+                                            <textarea name="body_service_frontpage_homepage" class="form-control" id="inputBodyService" placeholder="Enter Body"
                                                 cols="30" rows="100" autocomplete="off" data-parsley-required="true">{{ array_key_exists('body_service_frontpage_homepage', $settings) ? $settings['body_service_frontpage_homepage'] : '' }}</textarea>
                                         </div>
                                     </div>
@@ -54,14 +54,14 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h4>Section Promosi</h4>
+                            <h4>Section Promotion</h4>
                         </div>
                         <div class="card-content">
                             <div class="card-body">
                 
                                 <div class="row mb-3">
                                     <div class="col-md-6 col-12">
-                                        <a href="{{ route('web.index') }}#sectionPromosi" id="triggerPromosi"
+                                        <a href="{{ route('web.index') }}#sectionPromotion" id="triggerPromotion"
                                             class="play-btn window-popup"><i class="fa fa-play"></i> Preview </a>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group mandatory">
                                             <label for="inputTitle" class="form-label">Title</label>
-                                            <input type="text" id="inputTitle" class="form-control" placeholder="Masukan Title"
+                                            <input type="text" id="inputTitle" class="form-control" placeholder="Enter Title"
                                                 value="{{ array_key_exists('title_promosi_frontpage_homepage', $settings) ? $settings['title_promosi_frontpage_homepage'] : '' }}"
                                                 name="title_promosi_frontpage_homepage" data-parsley-required="true" autocomplete="off">
                                         </div>
@@ -81,7 +81,7 @@
                                     <div class="col-12">
                                         <div class="form-group mandatory">
                                             <label for="inputBody" class="form-label">Body</label>
-                                            <textarea name="body_promosi_frontpage_homepage" class="form-control" id="inputBody" placeholder="Masukan Body"
+                                            <textarea name="body_promosi_frontpage_homepage" class="form-control" id="inputBody" placeholder="Enter Body"
                                                 cols="30" rows="100" autocomplete="off" data-parsley-required="true">{{ array_key_exists('body_promosi_frontpage_homepage', $settings) ? $settings['body_promosi_frontpage_homepage'] : '' }}</textarea>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
                                         <div class="form-group mandatory">
                                             <label for="inputTextButton" class="form-label">Text Button</label>
                                             <input type="text" id="inputTextButton" class="form-control"
-                                                placeholder="Masukan Text Button"
+                                                placeholder="Enter Text Button"
                                                 value="{{ array_key_exists('text_button_promosi_frontpage_homepage', $settings) ? $settings['text_button_promosi_frontpage_homepage'] : '' }}"
                                                 name="text_button_promosi_frontpage_homepage" data-parsley-required="true"
                                                 autocomplete="off">
@@ -102,7 +102,7 @@
                                         <div class="form-group mandatory">
                                             <label for="inputUrlButton" class="form-label">Url Button</label>
                                             <input type="text" id="inputUrlButton" class="form-control"
-                                                placeholder="Masukan Url Button"
+                                                placeholder="Enter Url Button"
                                                 value="{{ array_key_exists('url_button_promosi_frontpage_homepage', $settings) ? $settings['url_button_promosi_frontpage_homepage'] : '' }}"
                                                 name="url_button_promosi_frontpage_homepage" data-parsley-required="true"
                                                 autocomplete="off">
@@ -120,7 +120,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary mx-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>

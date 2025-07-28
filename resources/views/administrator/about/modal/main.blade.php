@@ -14,7 +14,7 @@
             </div>
             <div class="modal-footer bg-whitesmoke br">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="selectData" class="btn btn-primary">Pilih</button>
+                <button type="button" id="selectData" class="btn btn-primary">Choose</button>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
 
             var modalBody = $('#modalGalleryBody');
             modalBody.html('<div id="loadingSpinner" style="display: none;">' +
-                '<i class="fas fa-spinner fa-spin"></i> Sedang memuat...' +
+                '<i class="fas fa-spinner fa-spin"></i> Loading...' +
                 '</div>');
             var loadingSpinner = $('#loadingSpinner');
 
@@ -68,32 +68,29 @@
                         `</div>` +
                         `</div>`
                     );
-                    loadingSpinner.hide(); // Sembunyikan elemen animasi setelah data dimuat
+                    loadingSpinner.hide();
                 }
             });
 
             $('#selectData').on('click', function() {
                 var selectedImages = [];
 
-                // Loop melalui checkbox yang dicentang dan mengumpulkan nilai identifier
                 $('input[name="imagecheck"]:checked').each(function() {
                     selectedImages.push($(this).val());
                 });
 
-                // Validasi jumlah gambar yang dipilih
                 if (selectedImages.length > 0 && selectedImages.length <= 3) {
                     var selectedImagesJSON = JSON.stringify(selectedImages);
                     $("#inputImage").val(selectedImagesJSON);
                     $('#buttonCloseModuleModal').click();
                 } else {
                     Swal.fire({
-                        title: "Peringatan!",
-                        text: "Pilih antara 1 hingga 3 gambar.",
+                        title: "Warning!",
+                        text: "Choose between 1 to 3 images.",
                         icon: "warning"
                     });
                 }
             });
-            //end click di baris tabel barang
         });
     </script>
 @endpush

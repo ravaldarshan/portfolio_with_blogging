@@ -26,7 +26,7 @@ class AddColumnModuleIdToModuleAccesssTable extends Migration
     public function down()
     {
         Schema::table('module_access', function (Blueprint $table) {
-            //
+            $table->string('module_id');
         });
     }
 }

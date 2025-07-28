@@ -15,15 +15,15 @@ class CreateProfileTable extends Migration
     {
         Schema::create('profile', function (Blueprint $table) {
             $table->id();
-            $table->string('user_kode');
+            $table->string('user_code');
             $table->string('full_name')->nullable();
-            $table->string('no_telepon')->nullable();
-            $table->string('pendidikan_terakhir')->nullable();
-            $table->string('foto')->nullable();
-            $table->string('sosial_media')->nullable();
-            $table->string('tempat_lahir')->nullable();
-            $table->date('tanggal_lahir')->nullable();
-            $table->text('alamat')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('last_education')->nullable();
+            $table->string('photo')->nullable();
+            $table->string('social_media')->nullable();
+            $table->string('place_of_birth')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->text('address')->nullable();
             $table->string('created_by')->nullable();
             $table->timestamps();
             $table->string('updated_by')->nullable();

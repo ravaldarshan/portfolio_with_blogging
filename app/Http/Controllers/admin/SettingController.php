@@ -128,7 +128,7 @@ class SettingController extends Controller
                 $set = Setting::where('name', $key)->first();
                 $set->update($data);
 
-                $logs[] = ['---'.$key.'---' => ['Data Sebelumnya' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
+                $logs[] = ['---'.$key.'---' => ['Previous Data' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
             } else {
                 $data["name"] = $key;
                 $data["value"] = $value;
@@ -138,15 +138,10 @@ class SettingController extends Controller
             }
         }
 
-        
-
-        // Setelah perulangan selesai, $logs akan berisi semua log untuk setiap data yang diproses.
-
-
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
-        return redirect(route('admin.settings.admin.general'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.settings.admin.general'))->with(['success' => 'Data updated successfully.']);
 
     }
     
@@ -185,7 +180,7 @@ class SettingController extends Controller
         $data_settings["about_frontpage_footer"] = $request->about_frontpage_footer;
 
         $dataLink = [];
-        for ($i = 0; $i < $request->jumlah_link; $i++) {
+        for ($i = 0; $i < $request->link_count; $i++) {
             $dataLink[] = [
                 'nama_link' => $request->{'nama_link_' . $i},
                 'url_link' => $request->{'url_link_' . $i},
@@ -209,7 +204,7 @@ class SettingController extends Controller
                 $set = Setting::where('name', $key)->first();
                 $set->update($data);
 
-                $logs[] = ['---'.$key.'---' => ['Data Sebelumnya' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
+                $logs[] = ['---'.$key.'---' => ['Previous Data' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
             } else {
                 $data["name"] = $key;
                 $data["value"] = $value;
@@ -219,15 +214,10 @@ class SettingController extends Controller
             }
         }
 
-        
-
-        // Setelah perulangan selesai, $logs akan berisi semua log untuk setiap data yang diproses.
-
-
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
-        return redirect(route('admin.settings.frontpage.footer'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.settings.frontpage.footer'))->with(['success' => 'Data updated successfully.']);
 
     }
 
@@ -344,7 +334,7 @@ class SettingController extends Controller
                 $set = Setting::where('name', $key)->first();
                 $set->update($data);
 
-                $logs[] = ['---'.$key.'---' => ['Data Sebelumnya' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
+                $logs[] = ['---'.$key.'---' => ['Previous Data' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
             } else {
                 $data["name"] = $key;
                 $data["value"] = $value;
@@ -354,15 +344,10 @@ class SettingController extends Controller
             }
         }
 
-        
-
-        // Setelah perulangan selesai, $logs akan berisi semua log untuk setiap data yang diproses.
-
-
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
-        return redirect(route('admin.settings.frontpage.general'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.settings.frontpage.general'))->with(['success' => 'Data updated successfully.']);
 
     }
 
@@ -440,7 +425,7 @@ class SettingController extends Controller
                 $set = Setting::where('name', $key)->first();
                 $set->update($data);
 
-                $logs[] = ['---'.$key.'---' => ['Data Sebelumnya' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
+                $logs[] = ['---'.$key.'---' => ['Previous Data' => ['value' => $settings[$key]], 'Data terbaru' => ['value' => $value]]];
             } else {
                 $data["name"] = $key;
                 $data["value"] = $value;
@@ -453,7 +438,7 @@ class SettingController extends Controller
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
-        return redirect(route('admin.settings.frontpage.homepage'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.settings.frontpage.homepage'))->with(['success' => 'Data updated successfully.']);
 
     }
 

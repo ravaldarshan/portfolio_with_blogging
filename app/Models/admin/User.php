@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password',
         'status',
         'user_group_id',
-        'kode',
+        'code',
     ];
 
     /**
@@ -55,7 +55,7 @@ class User extends Authenticatable
     }
     
     public function profile(){
-        return $this->hasOne(Profile::class, 'user_kode', 'kode');
+        return $this->hasOne(Profile::class, 'user_code', 'code');
     }
     
 }

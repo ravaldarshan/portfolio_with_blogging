@@ -4,12 +4,12 @@
                 src="https://bootdey.com/img/Content/avatar/avatar{{ mt_rand(1, 8) }}.png"></a>
         <div class="media-body">
             <div class="mar-btm">
-                <a href="#" class="btn-link text-semibold media-heading box-inline">Anonimous.</a>
+                <a href="#" class="btn-link text-semibold media-heading box-inline">Anonymous.</a>
                 <p class="text-muted text-sm">
                     {{ Carbon\Carbon::parse($row->created_at)->diffForHumans() }}
                 </p>
             </div>
-            <p>{{ $row->isi }}</p>
+            <p>{{ $row->contents }}</p>
             <div class="pad-ver">
                 <div class="btn-group">
                     <a class="btn btn-sm btn-default btn-hover-success" href="javascript:void(0)"><i
@@ -41,12 +41,12 @@
                         <div class="media-body">
                             <div class="mar-btm">
                                 <a href="javascript:void(0)"
-                                    class="btn-link text-semibold media-heading box-inline">Anonimous</a>
+                                    class="btn-link text-semibold media-heading box-inline">Anonymous</a>
                                 <p class="text-muted text-sm">
                                     {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
                                 </p>
                             </div>
-                            <p>{{ $item->isi }}</p>
+                            <p>{{ $item->contents }}</p>
                             <div class="pad-ver">
                                 <div class="btn-group">
                                     <a class="btn btn-sm btn-default btn-hover-success active"
@@ -86,7 +86,7 @@
                         "_token": "{{ csrf_token() }}",
                         "_method": "POST",
                         "comment": textarea.val(),
-                        komentar_id: comment_id
+                        comment_id: comment_id
                     },
                     success: function() {
                         $.ajax({

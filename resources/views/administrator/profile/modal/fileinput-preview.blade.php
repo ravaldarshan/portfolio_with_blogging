@@ -13,19 +13,19 @@
                 <form action="{{ route('admin.profile.update') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="kode" value="{{ $data->user->kode ? $data->user->kode : '' }}">
+                    <input type="hidden" name="code" value="{{ $data->user->code ? $data->user->code : '' }}">
                     <input type="hidden" name="email" value="{{ $data->user->email ? $data->user->email : '' }}">
                     <div class="d-flex flex-column align-items-center text-center">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                             <div class="fileinput-preview thumbnail mb20" data-trigger="fileinput">
-                                <img src="{{img_src($data->foto, 'profile') ? img_src($data->foto, 'profile') : ''}}" alt="Admin"
+                                <img src="{{img_src($data->photo, 'profile') ? img_src($data->photo, 'profile') : ''}}" alt="Admin"
                                     class="rounded-circle" width="150">
                             </div>
                             <div class="my-3">
-                                <label for="userFotoInputFile" class="btn btn-outline-primary btn-file">
+                                <label for="userphotoInputFile" class="btn btn-outline-primary btn-file">
                                     <span class="fileinput-new ">Select Image</span>
-                                    <input type="file" class="d-none" id="userFotoInputFile"
-                                        name="foto_user_profile">
+                                    <input type="file" class="d-none" id="userphotoInputFile"
+                                        name="photo_user_profile">
                                 </label>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
 @push('js')
     {{-- Tambahkan FileInput JavaScript --}}
     <script>
-        $("#userFotoInputFile").fileinput({
+        $("#userphotoInputFile").fileinput({
             showUpload: false, // Hilangkan tombol "Upload"
             showRemove: false, // Hilangkan tombol "Remove"
             language: 'id', // Gantilah LANG dengan bahasa yang sesuai

@@ -26,7 +26,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="inputFooterText" class="form-label">Footer</label>
-                                <input type="text" id="inputFooterText" class="form-control" placeholder="Masukan Footer text"
+                                <input type="text" id="inputFooterText" class="form-control" placeholder="Enter Footer text"
                                     value="{{ array_key_exists('text_frontpage_footer', $settings) ? $settings['text_frontpage_footer'] : '' }}"
                                     name="text_frontpage_footer" autocomplete="off">
                             </div>
@@ -37,7 +37,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="inputFooterAbout" class="form-label">About Us</label>
-                                <textarea name="about_frontpage_footer" class="form-control" id="inputFooterAbout" placeholder="Masukan About Us" cols="30"
+                                <textarea name="about_frontpage_footer" class="form-control" id="inputFooterAbout" placeholder="Enter About Us" cols="30"
                                     rows="100" autocomplete="off" data-parsley-required="true">{{ array_key_exists('about_frontpage_footer', $settings) ? $settings['about_frontpage_footer'] : '' }}</textarea>
                             </div>
                         </div>
@@ -49,12 +49,12 @@
                                 @php
                                     $link = array_key_exists('link_frontpage_footer', $settings) ? json_decode($settings['link_frontpage_footer']) : '';
                                     if (!empty($link)) {
-                                        $jumlah_link = count($link);
+                                        $link_count = count($link);
                                     }else {
-                                        $jumlah_link = 1;
+                                        $link_count = 1;
                                     }
                                 @endphp
-                                <div class="link-list" index-element="{{ $jumlah_link - 1 }}">
+                                <div class="link-list" index-element="{{ $link_count - 1 }}">
                                     @if (!empty($link))
                                     @foreach ($link as $i => $row)
                                         <div class="row rowLink_{{ $i }}">
@@ -66,7 +66,7 @@
                                                     <input type="text" name="nama_link_{{ $i }}"
                                                         value="{{ $row->nama_link }}" class="form-control"
                                                         id="inputNamaLink_{{ $i }}" data-parsley-required="true"
-                                                        placeholder="Masukan Nama Sosial Media" autocomplete="off">
+                                                        placeholder="Enter Social Media Name" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-11">
@@ -76,7 +76,7 @@
                                                     <input type="text" name="url_link_{{ $i }}"
                                                         value="{{ $row->url_link }}" class="form-control"
                                                         id="inputLinkUrl_{{ $i }}" data-parsley-required="true"
-                                                        placeholder="Masukan Icon Sosial Media (contoh 'fa fa-instagram')" autocomplete="off">
+                                                        placeholder="Enter Social Media Icons (contoh 'fa fa-instagram')" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-md-1 col-1">
@@ -89,8 +89,7 @@
                                     @endforeach
                                     @endif
                                 </div>
-                                <input type="hidden" name="jumlah_link" value="{{ $jumlah_link }}" id="jumlah_link">
-                                <!-- Cloned link-list will be inserted here -->
+                                <input type="hidden" name="link_count" value="{{ $link_count }}" id="link_count">
                             </div>
                             <button class="more-link btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> Add
                                 more link</button>
@@ -102,7 +101,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary mx-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -120,7 +119,7 @@
             <div class="form-group">
                 <label for="inputNamaLink_0" class="form-label">Nama Link</label>
                 <input type="text" name="nama_link_0" class="form-control" id="inputNamaLink_0" data-parsley-required="true"
-                    placeholder="Masukan Nama Sosial Media" autocomplete="off">
+                    placeholder="Enter Nama Sosial Media" autocomplete="off">
             </div>
         </div>
         <div class="col-md-6 col-11">
@@ -147,7 +146,7 @@
             function addLinkList() {
                 // Use a class selector to get the count of cloned elements
                 var currentIndex = $(".link-list").find('.row').length;
-                $('#jumlah_link').val((currentIndex + 1));
+                $('#link_count').val((currentIndex + 1));
 
                 // Clone the template-link
                 var clonedElement = $(".template-link").clone();
@@ -188,8 +187,8 @@
                 // Check if it is not the first row before deleting
                 if (linkList.attr("index-element") !== "0") {
                     linkList.remove();
-                    const jmlah = parseInt($('#jumlah_link').val()) - 1;
-                    $('#jumlah_link').val(jmlah);
+                    const jmlah = parseInt($('#link_count').val()) - 1;
+                    $('#link_count').val(jmlah);
                 }
             }
 
@@ -213,12 +212,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ini?',
+                    title: 'Are you sure you want to delete this data??',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -235,7 +234,7 @@
                                 success: function() {
                                     deleteLinkList(linkList, index);
                                     swalWithBootstrapButtons.fire({
-                                        title: 'Berhasil!',
+                                        title: 'Succeed!',
                                         text: 'Data berhasil dihapus.',
                                         icon: 'success',
                                         timer: 1500, // 2 detik
@@ -246,7 +245,7 @@
                         } else {
                             deleteLinkList(linkList, index);
                             swalWithBootstrapButtons.fire({
-                                title: 'Berhasil!',
+                                title: 'Succeed!',
                                 text: 'Data berhasil dihapus.',
                                 icon: 'success',
                                 timer: 1500, // 2 detik

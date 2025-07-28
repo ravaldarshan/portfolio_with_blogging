@@ -15,4 +15,4 @@
 
 @section('title', __('Not Found'))
 @section('code', '404')
-@section('message', __('Halaman tidak ditemukan, pastikan url anda dengan benar'))
+@section('message', __('Page not found, please make sure your url is correct'))

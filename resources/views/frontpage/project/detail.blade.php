@@ -172,11 +172,11 @@
                             </div>
                         </div>
                         <div class="blog__details__desc">
-                            {!! $data->deskripsi !!}
+                            {!! $data->description !!}
                         </div>
                         <div class="blog__details__tags">
                             <span><i class="fa fa-tag"></i> Tag:</span>
-                            <a href="#">{{ $data->kategori_project->nama }}</a>
+                            <a href="#">{{ $data->category_project->nama }}</a>
                         </div>
                         <div class="blog__details__option">
                             <div class="row">
@@ -250,7 +250,7 @@
                                                             {{ Carbon\Carbon::parse($row->created_at)->diffForHumans() }}
                                                         </p>
                                                     </div>
-                                                    <p class="text-white">{{ $row->isi }}</p>
+                                                    <p class="text-white">{{ $row->contents }}</p>
                                                     <div class="pad-ver">
                                                         <div class="btn-group">
                                                             <a class="btn btn-sm btn-default btn-hover-success"
@@ -293,7 +293,7 @@
                                                                             {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
                                                                         </p>
                                                                     </div>
-                                                                    <p class="text-white">{{ $item->isi }}</p>
+                                                                    <p class="text-white">{{ $item->contents }}</p>
                                                                     <div class="pad-ver">
                                                                         <div class="btn-group">
                                                                             <a class="btn btn-sm btn-default btn-hover-success active"
@@ -393,7 +393,7 @@
                             "_token": "{{ csrf_token() }}",
                             "_method": "POST",
                             "comment": textarea.val(),
-                            komentar_id: comment_id
+                            comment_id: comment_id
                         },
                         success: function() {
                             $.ajax({

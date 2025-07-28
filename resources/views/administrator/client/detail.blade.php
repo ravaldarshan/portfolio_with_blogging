@@ -37,7 +37,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="inputNama" class="form-label">Nama</label>
-                                <input type="text" id="inputNama" class="form-control" placeholder="Masukan Nama" value="{{$data->nama}}"
+                                <input type="text" id="inputNama" class="form-control" placeholder="Enter Nama" value="{{$data->nama}}"
                                     name="nama" autocomplete="off" data-parsley-required="true" readonly>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="inputWebsite" class="form-label">Website</label>
-                                <input type="text" id="inputWebsite" class="form-control" placeholder="Masukan Url Website" value="{{$data->website_url}}"
+                                <input type="text" id="inputWebsite" class="form-control" placeholder="Enter Url Website" value="{{$data->website_url}}"
                                     name="website" autocomplete="off" readonly>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label for="gambarLainnyaInputFile" class="form-label">Image</label>
+                                <label for="otherPicturesInputFile" class="form-label">Image</label>
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview-image thumbnail mb20">
                                         @if ($data->img_url != '-')
@@ -65,13 +65,13 @@
                                             src="{{ img_src($data->img_url, 'client') }}"><a
                                             class="btn btn-secondary btn-sm data_disabled "
                                             data-img="{{ $data->img_url }}"
-                                            data-id="{{ $data->id }}">Hapus</a></div>
+                                            data-id="{{ $data->id }}">Wipe</a></div>
                                         @endif
                                     </div>
                                     <div class="mt-3">
-                                        <label for="gambarLainnyaInputFile" class="btn btn-light btn-file">
+                                        <label for="otherPicturesInputFile" class="btn btn-light btn-file">
                                             <span class="fileinput-new">Select image</span>
-                                            <input type="file" class="d-none" id="gambarLainnyaInputFile"
+                                            <input type="file" class="d-none" id="otherPicturesInputFile"
                                                  name="img" disabled>
                                             <!-- Tambahkan atribut "multiple" di sini -->
                                         </label>

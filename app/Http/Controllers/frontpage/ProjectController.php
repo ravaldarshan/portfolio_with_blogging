@@ -5,33 +5,33 @@ namespace App\Http\Controllers\frontpage;
 use Illuminate\Http\Request;
 use App\Models\admin\Project;
 use App\Http\Controllers\Controller;
-use App\Models\admin\KategoriProject;
-use App\Models\admin\KomentarProject;
-use App\Models\admin\KomentarProjectReply;
+use App\Models\admin\CategoryProject;
+use App\Models\admin\CommentProject;
+use App\Models\admin\CommentProjectReply;
 
 class ProjectController extends Controller
 {
     public function index(){
-        $kategori = KategoriProject::all();
+        $category = CategoryProject::all();
 
-        $project = Project::with('kategori_project')->paginate(9);
+        $project = Project::with('category_project')->paginate(9);
 
-        return view('frontpage.project.index', compact('kategori', 'project'));
+        return view('frontpage.project.index', compact('category', 'project'));
     }
 
     public function fetchData(Request $request)
     {
         if ($request->ajax()) {
-            $kategori = KategoriProject::all();
+            $category = CategoryProject::all();
 
-            $project = Project::with('kategori_project')->paginate(9);
+            $project = Project::with('category_project')->paginate(9);
 
-            return view('frontpage.project.fetchData.index', compact('kategori', 'project'))->render();
+            return view('frontpage.project.fetchData.index', compact('category', 'project'))->render();
         }
     }
 
     public function detail($slug){
-        $data = Project::with('kategori_project')->where('slug', $slug)->first();
+        $data = Project::with('category_project')->where('slug', $slug)->first();
 
         if (!$data) {
             abort(404);
@@ -47,8 +47,8 @@ class ProjectController extends Controller
                     ->inRandomOrder()
                     ->get();
 
-        $comment = KomentarProject::with('reply')->where('project_id', $data->id)->get();
-        $reply = KomentarProjectReply::where('project_id', $data->id)->get();
+        $comment = CommentProject::with('reply')->where('project_id', $data->id)->get();
+        $reply = CommentProjectReply::where('project_id', $data->id)->get();
 
         $countComment = count($comment) + count($reply);
 
@@ -58,42 +58,42 @@ class ProjectController extends Controller
     public function fetchDataComment(Request $request)
     {
         if ($request->ajax()) {
-            $data = Project::with('kategori_project')->where('slug', $request->slug)->first();
-            $comment = KomentarProject::with('reply')->where('project_id', $data->id)->get();
+            $data = Project::with('category_project')->where('slug', $request->slug)->first();
+            $comment = CommentProject::with('reply')->where('project_id', $data->id)->get();
 
             return view('frontpage.project.fetchData.comment', compact('comment','data'))->render();
         }
     }
 
     public function comment(Request $request,$slug){
-        $project = Project::with('kategori_project')->where('slug', $slug)->first();
+        $project = Project::with('category_project')->where('slug', $slug)->first();
 
-        $data = KomentarProject::create([
+        $data = CommentProject::create([
             'user_id' => 0,
-            'komentar_id' => 0,
+            'comment_id' => 0,
             'project_id' => $project->id,
-            'isi' => $request->comment,
+            'contents' => $request->comment,
         ]);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah disimpan.',
+            'message' => 'Data has been saved.',
         ]);
     }
 
     public function reply(Request $request,$slug){
-        $project = Project::with('kategori_project')->where('slug', $slug)->first();
+        $project = Project::with('category_project')->where('slug', $slug)->first();
 
-        $data = KomentarProjectReply::create([
+        $data = CommentProjectReply::create([
             'user_id' => 0,
-            'komentar_id' => $request->komentar_id,
+            'comment_id' => $request->comment_id,
             'project_id' => $project->id,
-            'isi' => $request->comment,
+            'contents' => $request->comment,
         ]);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah disimpan.',
+            'message' => 'Data has been saved.',
         ]);
     }
 }

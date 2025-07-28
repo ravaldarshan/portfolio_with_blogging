@@ -53,7 +53,7 @@
                                                 <label for="inputTitle_{{ $i }}"
                                                     class="form-label">Title</label>
                                                 <input type="text" id="inputTitle_{{ $i }}"
-                                                    class="form-control" placeholder="Masukan Title"
+                                                    class="form-control" placeholder="Enter Title"
                                                     value="{{ array_key_exists('service_' . $i, $service) ? json_decode($service['service_' . $i])->title : '' }}"
                                                     name="title_{{ $i }}" autocomplete="off">
                                             </div>
@@ -64,7 +64,7 @@
                                             <div class="form-group mandatory">
                                                 <label for="inputBody_{{ $i }}" class="form-label">Body</label>
                                                 <textarea name="body_{{ $i }}" id="inputBody_{{ $i }}" class="form-control"
-                                                    placeholder="Masukan Body" autocomplete="off">{{ array_key_exists('service_' . $i, $service) ? json_decode($service['service_' . $i])->body : '' }}</textarea>
+                                                    placeholder="Enter Body" autocomplete="off">{{ array_key_exists('service_' . $i, $service) ? json_decode($service['service_' . $i])->body : '' }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
                                         <div class="form-group mandatory">
                                             <label for="inputTitle" class="form-label">Title</label>
                                             <input type="text" id="inputTitle" class="form-control"
-                                                placeholder="Masukan Title"
+                                                placeholder="Enter Title"
                                                 value="{{ array_key_exists('title_section_other', $service) ? $service['title_section_other'] : '' }}"
                                                 name="title_section_other" data-parsley-required="true"
                                                 autocomplete="off">
@@ -104,7 +104,7 @@
                                     <div class="col-12">
                                         <div class="form-group mandatory">
                                             <label for="inputBody" class="form-label">Body</label>
-                                            <textarea name="body_section_other" class="form-control" id="inputBody" placeholder="Masukan Body"
+                                            <textarea name="body_section_other" class="form-control" id="inputBody" placeholder="Enter Body"
                                                 cols="30" rows="100" autocomplete="off" data-parsley-required="true">{{ array_key_exists('body_section_other', $service) ? $service['body_section_other'] : '' }}</textarea>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@
                                         <div class="form-group mandatory">
                                             <label for="inputTextButton" class="form-label">Text Button</label>
                                             <input type="text" id="inputTextButton" class="form-control"
-                                                placeholder="Masukan Text Button"
+                                                placeholder="Enter Text Button"
                                                 value="{{ array_key_exists('text_button_section_other', $service) ? $service['text_button_section_other'] : '' }}"
                                                 name="text_button_section_other" data-parsley-required="true"
                                                 autocomplete="off">
@@ -125,7 +125,7 @@
                                         <div class="form-group mandatory">
                                             <label for="inputUrlButton" class="form-label">Url Button</label>
                                             <input type="text" id="inputUrlButton" class="form-control"
-                                                placeholder="Masukan Url Button"
+                                                placeholder="Enter Url Button"
                                                 value="{{ array_key_exists('url_button_section_other', $service) ? $service['url_button_section_other'] : '' }}"
                                                 name="url_button_section_other" data-parsley-required="true"
                                                 autocomplete="off">
@@ -142,7 +142,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary me-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -170,14 +170,14 @@
 
     <script>
         for (let index = 0; index < 6; index++) {
-            const gambarLainnyaInputFile = document.getElementById("iconInputFile_" + index);
-            const previewContainerGambarLainnya = document.querySelector(".fileinput-preview_" + index);
+            const otherPicturesInputFile = document.getElementById("iconInputFile_" + index);
+            const previewContainerotherPictures = document.querySelector(".fileinput-preview_" + index);
 
-            gambarLainnyaInputFile.addEventListener("change", function() {
+            otherPicturesInputFile.addEventListener("change", function() {
                 const files = this.files;
 
-                // Hapus gambar-gambar sebelumnya
-                previewContainerGambarLainnya.innerHTML = '';
+                // Wipe gambar-gambar sebelumnya
+                previewContainerotherPictures.innerHTML = '';
 
                 // Ambil satu file saja
                 const file = files[0];
@@ -193,7 +193,7 @@
                     img.src = URL.createObjectURL(file);
 
                     imgContainer.appendChild(img);
-                    previewContainerGambarLainnya.appendChild(imgContainer);
+                    previewContainerotherPictures.appendChild(imgContainer);
                 }
             });
         }

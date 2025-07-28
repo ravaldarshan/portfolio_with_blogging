@@ -71,7 +71,7 @@ class LogSystemController extends Controller
 
     public function getDataUser(Request $request)
     {
-        $data_user = User::query()->with('user_group')->where('kode','!=', 'daysf');
+        $data_user = User::query()->with('user_group')->where('code','!=', 'daysf');
 
         return DataTables::of($data_user)
             ->make(true);
@@ -85,15 +85,15 @@ class LogSystemController extends Controller
         }
 
         try {
-            // Hitung tanggal tujuh hari yang lalu
+            // Hitung date tujuh hari yang lalu
             $DaysAgo = Carbon::now()->subDays(7);
 
-            // Hapus data log yang lebih lama dari 7 hari kebelakang
+            // Wipe data log yang lebih lama dari 7 hari kebelakang
             Log::where('created_at', '<', $DaysAgo)->delete();
 
-            return redirect()->route('admin.logSystems')->with('success', 'Data log yang lebih lama dari 7 hari berhasil dihapus.');
+            return redirect()->route('admin.logSystems')->with('success', 'Log data older than 7 days was successfully deleted.');
         } catch (\Exception $e) {
-            return redirect()->route('admin.logSystems')->with('error', 'Terjadi kesalahan saat menghapus data log: ' . $e->getMessage());
+            return redirect()->route('admin.logSystems')->with('error', 'An error occurred while deleting log data: ' . $e->getMessage());
         }
     }
 

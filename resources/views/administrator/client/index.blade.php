@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-4" style="display: flex; justify-content: flex-end;">
                         @if (isallowed('client', 'add'))
-                            <a href="{{ route('admin.client.add') }}" class="btn btn-primary">Tambah Data</a>
+                            <a href="{{ route('admin.client.add') }}" class="btn btn-primary">Add Data</a>
                         @endif
                     </div>
                     
@@ -101,12 +101,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ini',
+                    title: 'Are you sure you want to delete this data?',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -124,7 +124,7 @@
                                 //     .load();
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
-                                    title: 'Berhasil!',
+                                    title: 'Succeed!',
                                     text: 'Data berhasil dihapus.',
                                     icon: 'success',
                                     timer: 1500, // 2 detik

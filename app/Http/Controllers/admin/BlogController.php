@@ -7,7 +7,7 @@ use DataTables;
 use App\Models\admin\Blog;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\admin\KategoriBlog;
+use App\Models\admin\CategoryBlog;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
@@ -25,7 +25,7 @@ class BlogController extends Controller
     }
     
     public function getData(Request $request){
-        $data = Blog::query()->with('kategori');
+        $data = Blog::query()->with('category');
 
         $data = $data->get();
 
@@ -70,10 +70,10 @@ class BlogController extends Controller
         }
 
         $rules = [
-            'judul' => 'required',
-            'kategori' => 'required',
-            'isi' => 'required',
-            'tanggal_posting' => 'required',
+            'title' => 'required',
+            'category' => 'required',
+            'contents' => 'required',
+            'posting_date' => 'required',
             'status' => 'required',
         ];
 
@@ -81,7 +81,7 @@ class BlogController extends Controller
 
         // dd($request);
 
-        $slug = Str::slug($request->judul);
+        $slug = Str::slug($request->title);
         $cekSlugCount = Blog::where('slug', $slug)->count();
 
         // Handle duplicate slug
@@ -89,9 +89,9 @@ class BlogController extends Controller
             $slug = $slug . '-' . ($cekSlugCount + 1);
         }
 
-        $isi = $request->isi;
+        $contents = $request->contents;
         $dom = new \domdocument();
-        $dom->loadHtml($isi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHtml($contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         
         $images = $dom->getelementsbytagname('img');
         foreach($images as $k => $img){
@@ -100,22 +100,22 @@ class BlogController extends Controller
             list(, $datas)      = explode(',', $datas);
 
             $datas = base64_decode($datas);
-            $image_name= 'isi_'.$slug.'-'.time().$k.'.png';
+            $image_name= 'contents_'.$slug.'-'.time().$k.'.png';
             $path = public_path() .'/administrator/assets/media/blog/'. $image_name;
             file_put_contents($path, $datas);
 
             $img->removeattribute('src');
             $img->setattribute('src', '/administrator/assets/media/blog/'.$image_name);
         }
-        $isi = $dom->saveHTML();
+        $contents = $dom->saveHTML();
 
         $data = Blog::create([
-            'kategori_id' => $request->kategori,
+            'category_id' => $request->category,
             'user_id' => auth()->user()->id,
-            'judul' => $request->judul,
-            'tanggal_posting' => date('Y-m-d', strtotime($request->tanggal_posting)),
+            'title' => $request->title,
+            'posting_date' => date('Y-m-d', strtotime($request->posting_date)),
             'slug' => $slug,
-            'isi' => $isi,
+            'contents' => $contents,
             'status' => $request->status,
             'img_url' => '[]',
             'created_by' => auth()->user()->id,
@@ -123,7 +123,7 @@ class BlogController extends Controller
         if ($request->hasFile('img')) {
             $dataImgJson = [];
             foreach ($request->file('img') as $image) {
-                $fileName = 'image_' . Str::slug($data->judul) . '_' . date('Y-m-d-H-i-s') . '_' . uniqid(2) . '.' . $image->getClientOriginalExtension();
+                $fileName = 'image_' . Str::slug($data->title) . '_' . date('Y-m-d-H-i-s') . '_' . uniqid(2) . '.' . $image->getClientOriginalExtension();
                 $path = upload_path('blog') . $fileName;
                 Image::make($image->getRealPath())->save($path, 100);
                 $dataImgJson[] = $fileName;
@@ -134,9 +134,9 @@ class BlogController extends Controller
         }
 
         // Log the data
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data yang disimpan' => $data]);
+        createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
 
-        return redirect()->route('admin.blog')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('admin.blog')->with('success', 'Data saved successfully.');
     }
     
     public function edit($id){
@@ -166,22 +166,22 @@ class BlogController extends Controller
         $data = Blog::find($id);
 
         $rules = [
-            'judul' => 'required',
-            'kategori' => 'required',
-            'isi' => 'required',
-            'tanggal_posting' => 'required',
+            'title' => 'required',
+            'category' => 'required',
+            'contents' => 'required',
+            'posting_date' => 'required',
             'status' => 'required',
         ];
 
         $request->validate($rules);
 
-        // Simpan data sebelum diupdate
+        // Simpan Data before updating
         $previousData = $data->toArray();
 
-        $img_isi = $data->isi;
+        $img_contents = $data->contents;
         $dom = new \domdocument();
         libxml_use_internal_errors(true);
-        $dom->loadHTML($img_isi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML($img_contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $errors = libxml_get_errors();
         libxml_clear_errors();
         
@@ -196,7 +196,7 @@ class BlogController extends Controller
                     }
         }
 
-        $slug = Str::slug($request->judul);
+        $slug = Str::slug($request->title);
         $cekSlugCount = Blog::where('id','!=',$id)->where('slug', $slug)->count();
 
         // Handle duplicate slug
@@ -204,10 +204,10 @@ class BlogController extends Controller
             $slug = $slug . ($cekSlugCount + 1);
         }
 
-        $isi = $request->isi;
+        $contents = $request->contents;
         $dom = new \domdocument();
         libxml_use_internal_errors(true);
-        $dom->loadHTML($isi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML($contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $errors = libxml_get_errors();
         libxml_clear_errors();
         
@@ -220,7 +220,7 @@ class BlogController extends Controller
                 list(, $datas) = explode(',', $datas);
 
                 $datas = base64_decode($datas);
-                $image_name = 'isi_' . $slug . '-' . time() . $k . '.png';
+                $image_name = 'contents_' . $slug . '-' . time() . $k . '.png';
                 $path = public_path() . '/administrator/assets/media/blog/' . $image_name;
                 file_put_contents($path, $datas);
 
@@ -228,15 +228,15 @@ class BlogController extends Controller
                 $img->setAttribute('src', '/administrator/assets/media/blog/' . $image_name);
             }
         }
-        $isi = $dom->saveHTML();
+        $contents = $dom->saveHTML();
 
         $updates = [
-            'kategori_id' => $request->kategori,
+            'category_id' => $request->category,
             'user_id' => auth()->user()->id,
-            'judul' => $request->judul,
-            'tanggal_posting' => date('Y-m-d', strtotime($request->tanggal_posting)),
+            'title' => $request->title,
+            'posting_date' => date('Y-m-d', strtotime($request->posting_date)),
             'slug' => $slug,
-            'isi' => $isi,
+            'contents' => $contents,
             'status' => $request->status,
             'img_url' => '[]',
             'updated_by' => auth()->user()->id,
@@ -273,8 +273,8 @@ class BlogController extends Controller
 
         $data->update($updates);
 
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data sebelum diupdate' => $previousData, 'Data sesudah diupdate' => $updatedData]);
-        return redirect()->route('admin.blog')->with('success', 'Data berhasil diupdate.');
+        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => $updatedData]);
+        return redirect()->route('admin.blog')->with('success', 'Data updated successfully.');
     }
     
     public function delete(Request $request)
@@ -299,17 +299,17 @@ class BlogController extends Controller
         $data->delete();
 
         // Write logs for soft delete
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang diarsip' => $dataJson]);
+        createLog(static::$module, __FUNCTION__, $id, ['Archived data' => $dataJson]);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah diarsipkan.',
+            'message' => 'Data has been archived.',
         ]);
     }
 
-    public function getDataKategori(Request $request)
+    public function getDataCategory(Request $request)
     {
-        $data = KategoriBlog::query();
+        $data = CategoryBlog::query();
 
         return DataTables::of($data)
             ->make(true);
@@ -326,7 +326,7 @@ class BlogController extends Controller
     
             if($users->exists()){
                 return response()->json([
-                    'message' => 'Nama sudah dipakai',
+                    'message' => 'Name is already in use',
                     'valid' => false
                 ]);
             } else {
@@ -337,18 +337,18 @@ class BlogController extends Controller
         }
     }
 
-    public function arsip(){
+    public function archives(){
         //Check permission
-        if (!isAllowed(static::$module, "arsip")) {
+        if (!isAllowed(static::$module, "archives")) {
             abort(403);
         }
 
-        return view('administrator.blog.arsip');
+        return view('administrator.blog.archives');
     }
 
-    public function getDataArsip(Request $request){
+    public function getDataArchives(Request $request){
         $data = Blog::query()
-                    ->with('kategori')
+                    ->with('category')
                     ->onlyTrashed()
                     ->get();
 
@@ -386,7 +386,7 @@ class BlogController extends Controller
         if (!$data) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Data tidak ditemukan.'
+                'message' => 'Data not found.'
             ], 404);
         }
 
@@ -403,7 +403,7 @@ class BlogController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah dipulihkan.'
+            'message' => 'Data has been restored.'
         ]);
     }
 
@@ -418,11 +418,11 @@ class BlogController extends Controller
         
         $id = $request->id;
 
-        $data = Blog::onlyTrashed()->with('komentar_blog')->with('komentar_blog_reply')->find($id);
+        $data = Blog::onlyTrashed()->with('blog_comments')->with('blog_comments_reply')->find($id);
 
         // Check if data exists in the trash
         if (!$data) {
-            return redirect()->route('admin.blog.arsip')->with('error', 'Data tidak ditemukan.');
+            return redirect()->route('admin.blog.archives')->with('error', 'Data not found.');
         }
 
         $dataimgdecode = json_decode($data->img_url);
@@ -435,10 +435,10 @@ class BlogController extends Controller
             }
         }
 
-        $isi = $data->isi;
+        $contents = $data->contents;
         $dom = new \domdocument();
         libxml_use_internal_errors(true);
-        $dom->loadHTML($isi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML($contents, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $errors = libxml_get_errors();
         libxml_clear_errors();
         
@@ -453,12 +453,12 @@ class BlogController extends Controller
                     }
         }
         
-        if (!$data->komentar_blog->isEmpty()) {
-            $data->komentar_blog->each->delete();
+        if (!$data->blog_comments->isEmpty()) {
+            $data->blog_comments->each->delete();
         }
         
-        if (!$data->komentar_blog_reply->isEmpty()) {
-            $data->komentar_blog_reply->each->delete();
+        if (!$data->blog_comments_reply->isEmpty()) {
+            $data->blog_comments_reply->each->delete();
         }
         
         $data->forceDelete();
@@ -473,7 +473,7 @@ class BlogController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah dihapus secara permanent.',
+            'message' => 'Data has been permanently deleted.',
         ]);
     }
 

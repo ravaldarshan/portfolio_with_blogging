@@ -27,7 +27,7 @@
 
             var modalBody = $('#detailUserBody');
             modalBody.html('<div id="loadingSpinner" style="display: none;">' +
-                '<i class="fas fa-spinner fa-spin"></i> Sedang memuat...' +
+                '<i class="fas fa-spinner fa-spin"></i> Loading...' +
                 '</div>');
             var loadingSpinner = $('#loadingSpinner');
 
@@ -52,23 +52,23 @@
                         return namaBulan[angkaBulan - 1] || "";
                     }
 
-                    // Ubah format tanggal
-                    var rawDate = data.profile.tanggal_lahir ? data.profile.tanggal_lahir : '';
-                    var tanggal = new Date(rawDate).getDate();
+                    // Ubah format date
+                    var rawDate = data.profile.date_of_birth ? data.profile.date_of_birth : '';
+                    var date = new Date(rawDate).getDate();
                     var bulan = new Date(rawDate).getMonth() +
                     1; // Tambahkan 1 karena bulan dimulai dari 0
                     var tahun = new Date(rawDate).getFullYear();
 
-                    var formattedDate = tanggal + " " + formatBulan(bulan) + " " + tahun;
+                    var formattedDate = date + " " + formatBulan(bulan) + " " + tahun;
 
                     // Tampilkan data dengan format bulan yang baru
                     modalBody.html(
                         '<div class="row">' +
                         '<div class="col-5">' +
-                        '<div class="title">Tempat, Tanggal Lahir</div>' +
+                        '<div class="title">Tempat, Date of Birth</div>' +
                         '</div>' +
                         '<div class="col-7">' +
-                        '<div class="data">: ' + data.profile.tempat_lahir + ', ' + formattedDate +
+                        '<div class="data">: ' + data.profile.place_of_birth + ', ' + formattedDate +
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -116,7 +116,7 @@
                         '<div class="title">Status</div>' +
                         '</div>' +
                         '<div class="col-7">' +
-                        '<div class="data">: ' + (data.status === '1' ? 'Aktif' : 'Tidak Aktif') +
+                        '<div class="data">: ' + (data.status === '1' ? 'Active' : 'Not Active') +
                         '</div>' +
                         '</div>' +
                         '</div>' +
@@ -132,10 +132,10 @@
 
                         '<div class="row">' +
                         '<div class="col-5">' +
-                        '<div class="title">No Telepon</div>' +
+                        '<div class="title">No Telephone</div>' +
                         '</div>' +
                         '<div class="col-7">' +
-                        '<div class="data">: ' + data.profile.no_telepon + '</div>' +
+                        '<div class="data">: ' + data.profile.phone_number + '</div>' +
                         '</div>' +
                         '</div>' +
 
@@ -144,26 +144,26 @@
                         '<div class="title">Pendidikan Terakhir</div>' +
                         '</div>' +
                         '<div class="col-7">' +
-                        '<div class="data">: ' + data.profile.pendidikan_terakhir + '</div>' +
+                        '<div class="data">: ' + data.profile.last_education + '</div>' +
                         '</div>' +
                         '</div>' +
 
                         '<div class="row">' +
                         '<div class="col-5">' +
-                        '<div class="title">Tempat, Tanggal Lahir</div>' +
+                        '<div class="title">Tempat, Date of Birth</div>' +
                         '</div>' +
                         '<div class="col-7">' +
-                        '<div class="data">: ' + data.profile.tempat_lahir + ', ' + formattedDate +
+                        '<div class="data">: ' + data.profile.place_of_birth + ', ' + formattedDate +
                         '</div>' +
                         '</div>' +
                         '</div>' +
 
                         '<div class="row">' +
                         '<div class="col-5">' +
-                        '<div class="title">Alamat</div>' +
+                        '<div class="title">Address</div>' +
                         '</div>' +
                         '<div class="col-7">' +
-                        '<div class="data">: ' + data.profile.alamat + '</div>' +
+                        '<div class="data">: ' + data.profile.address + '</div>' +
                         '</div>' +
                         '</div>'
                     );

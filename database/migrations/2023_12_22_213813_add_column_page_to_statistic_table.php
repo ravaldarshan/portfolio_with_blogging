@@ -26,7 +26,7 @@ class AddColumnPageToStatisticTable extends Migration
     public function down()
     {
         Schema::table('statistic', function (Blueprint $table) {
-            //
+            $table->string('url');
         });
     }
 }

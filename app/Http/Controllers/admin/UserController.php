@@ -32,7 +32,7 @@ class UserController extends Controller
         if ($request->status || $request->usergroup) {
             $data = $data->where(function ($query) use ($request) {
                 if ($request->status != "") {
-                    $status = $request->status == "Aktif" ? 1 : 0;
+                    $status = $request->status == "Active" ? 1 : 0;
                     $query->where("status", $status);
                 }
 
@@ -53,14 +53,14 @@ class UserController extends Controller
                             name="status" checked="checked"  id="status'.$row->id.'"/>
                         <label class="tgl-btn" for="status'.$row->id.'"></label>
                     </div>';
-                        $status .= '<span class="badge bg-success">Aktif</span></div>';
+                        $status .= '<span class="badge bg-success">Active</span></div>';
                     } else {
                         $status = '<div class="d-flex"><div>
                         <input class="tgl tgl-ios changeStatus" data-ix="' . $row->id . '" type="checkbox" value="1"
                             name="status" id="status'.$row->id.'"/>
                             <label class="tgl-btn" for="status'.$row->id.'"></label>
                             </div>';
-                        $status .= '<span class="badge bg-danger">Tidak Aktif</span></div>';
+                        $status .= '<span class="badge bg-danger">Not Active</span></div>';
                     }
                     return $status;
                 endif;
@@ -118,13 +118,13 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'user_group_id' => $request->user_group,
             'status' => $request->status,
-            'kode' => $request->kode,
+            'code' => $request->code,
             'remember_token' => Str::random(60),
         ]);
 
         $profile = Profile::create([
-            'user_kode' => $data['kode'],
-            'sosial_media' => '{
+            'user_code' => $data['code'],
+            'social_media' => '{
                 "linkedin": "",
                 "twitter": "",
                 "instagram": "",
@@ -132,8 +132,8 @@ class UserController extends Controller
               }',
         ]);
     
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data yang disimpan' => $data]);
-        return redirect()->route('admin.users')->with('success', 'Data berhasil disimpan.');
+        createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
+        return redirect()->route('admin.users')->with('success', 'Data saved successfully.');
     }
     
     
@@ -148,13 +148,13 @@ class UserController extends Controller
         if (!$data) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Pengguna tidak ditemukan'
+                'message' => 'User not found'
             ], 404);
         }
 
         if ($id == 1) {
-            if (auth()->user()->kode != 'daysf') {
-                // dd(auth()->user()->kode);
+            if (auth()->user()->code != 'daysf') {
+                // dd(auth()->user()->code);
                 return view('administrator.users.index');
             }
         }
@@ -176,7 +176,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email,'.$id,
             'user_group' => 'required',
-            'kode' => 'required|unique:users,kode,'.$id,
+            'code' => 'required|unique:users,code,'.$id,
         ];
 
         if ($request->password) {
@@ -186,7 +186,7 @@ class UserController extends Controller
 
         $request->validate($rules);
 
-        // Simpan data sebelum diupdate
+        // Simpan Data before updating
         $previousData = $data->toArray();
 
         $updates = [
@@ -194,7 +194,7 @@ class UserController extends Controller
             'email' => $request->email,
             'user_group_id' => $request->user_group,
             'status' => $request->status,
-            'kode' => $request->kode,
+            'code' => $request->code,
             'remember_token' => Str::random(60),
         ];
 
@@ -203,13 +203,13 @@ class UserController extends Controller
         }
 
         // Check if a profile exists for the user
-        $profile = Profile::where('user_kode', $data->kode)->firstOrNew([
-            'user_kode' => $data->kode,
-            'sosial_media' => '{"linkedin":"","twitter":"","instagram":"","facebook":""}',
+        $profile = Profile::where('user_code', $data->code)->firstOrNew([
+            'user_code' => $data->code,
+            'social_media' => '{"linkedin":"","twitter":"","instagram":"","facebook":""}',
         ]);
 
         // Update the profile data
-        $profile->user_kode = $updates['kode'];
+        $profile->user_code = $updates['code'];
         $profile->save();
 
         // Filter only the updated data
@@ -217,8 +217,8 @@ class UserController extends Controller
 
         $data->update($updates);
 
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data sebelum diupdate' => $previousData, 'Data sesudah diupdate' => $updatedData]);
-        return redirect()->route('admin.users')->with('success', 'Data berhasil diupdate.');
+        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => $updatedData]);
+        return redirect()->route('admin.users')->with('success', 'Data updated successfully.');
     }
 
     
@@ -230,9 +230,6 @@ class UserController extends Controller
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
-
-        // Ensure you have authorization mechanisms here before proceeding to delete data.
-
         $id = $request->id;
 
         // Find the user based on the provided ID.
@@ -241,15 +238,15 @@ class UserController extends Controller
         if (!$user) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Pengguna tidak ditemukan'
+                'message' => 'User not found'
             ], 404);
         }
 
         if ($id == 1) {
-            if (auth()->user()->kode != 'daysf') {
+            if (auth()->user()->code != 'daysf') {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Pengguna tidak ditemukan'
+                    'message' => 'User not found'
                 ], 404);
             }
         }
@@ -260,7 +257,7 @@ class UserController extends Controller
         // Delete the user.
         $user->delete();
 
-        $profile = Profile::where('user_kode', $user->kode)->first();
+        $profile = Profile::where('user_code', $user->code)->first();
 
         if ($profile) {
             // Check if the profile is being force-deleted
@@ -272,7 +269,7 @@ class UserController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Pengguna telah dihapus.',
+            'message' => 'User has been deleted.',
         ]);
     }
 
@@ -289,7 +286,7 @@ class UserController extends Controller
         return response()->json([
             'data' => $data,
             'status' => 'success',
-            'message' => 'Sukses memuat detail user.',
+            'message' => 'Successfully loaded user details.',
         ]);
     }
 
@@ -300,11 +297,11 @@ class UserController extends Controller
             abort(403);
         }
         
-        $data['status'] = $request->status == "Aktif" ? 1 : 0;
+        $data['status'] = $request->status == "Active" ? 1 : 0;
         $log = $request->status;
         $id = $request->ix;
         $updates = User::where(["id" => $id])->first();
-        // Simpan data sebelum diupdate
+        // Simpan Data before updating
         $previousData = $updates->toArray();
         $updates->update($data);
 
@@ -312,7 +309,7 @@ class UserController extends Controller
         createLog(static::$module, __FUNCTION__, $id, ['Data User' => $previousData,'Statusnya diubah menjadi' => $log]);
         return response()->json([
             'status' => 'success',
-            'message' => 'Status telah diubah.',
+            'message' => 'Status has been changed.',
         ]);
     }
     
@@ -324,11 +321,11 @@ class UserController extends Controller
         ]);
     }
     
-    public function generateKode(){
-        $generateKode = 'webits-' . substr(uniqid(), -5);
+    public function generateCode(){
+        $generateCode = 'webits-' . substr(uniqid(), -5);
 
         return response()->json([
-            'generateKode' => $generateKode,
+            'generateCode' => $generateCode,
         ]);
     }
     
@@ -342,7 +339,7 @@ class UserController extends Controller
     
             if($users->exists()){
                 return response()->json([
-                    'message' => 'Email sudah dipakai',
+                    'message' => 'Email is already in use',
                     'valid' => false
                 ]);
             } else {
@@ -353,9 +350,9 @@ class UserController extends Controller
         }
     }
     
-    public function checkKode(Request $request){
+    public function checkCode(Request $request){
         if($request->ajax()){
-            $users = User::where('kode', $request->kode)->withTrashed();
+            $users = User::where('code', $request->code)->withTrashed();
             
             if(isset($request->id)){
                 $users->where('id', '!=', $request->id);
@@ -363,7 +360,7 @@ class UserController extends Controller
     
             if($users->exists()){
                 return response()->json([
-                    'message' => 'Kode sudah dipakai',
+                    'message' => 'Code has been used',
                     'valid' => false
                 ]);
             } else {
@@ -375,16 +372,16 @@ class UserController extends Controller
     }
 
 
-    public function arsip(){
+    public function archives(){
         //Check permission
-        if (!isAllowed(static::$module, "arsip")) {
+        if (!isAllowed(static::$module, "archives")) {
             abort(403);
         }
 
-        return view('administrator.users.arsip');
+        return view('administrator.users.archives');
     }
 
-    public function getDataArsip(Request $request){
+    public function getDataArchives(Request $request){
         $data = User::query()
                     ->with('user_group')
                     ->onlyTrashed()
@@ -393,7 +390,7 @@ class UserController extends Controller
         if ($request->status || $request->usergroup) {
             $data = $data->where(function ($query) use ($request) {
                 if ($request->status != "") {
-                    $status = $request->status == "Aktif" ? 1 : 0;
+                    $status = $request->status == "Active" ? 1 : 0;
                     $query->where("status", $status);
                 }
 
@@ -415,7 +412,7 @@ class UserController extends Controller
                         <label class="form-check-label fw-bold text-gray-400"
                             for="status"></label>
                     </div>';
-                        $status .= '<span class="badge bg-success">Aktif</span></div>';
+                        $status .= '<span class="badge bg-success">Active</span></div>';
                     } else {
                         $status = '<div class="d-flex"><div class="form-check form-switch form-check-custom form-check-solid">
                         <input class="form-check-input h-20px w-30px changeStatus" data-ix="' . $row->id . '" type="checkbox" value="1"
@@ -423,7 +420,7 @@ class UserController extends Controller
                             <label class="form-check-label fw-bold text-gray-400"
                             for="status"></label>
                             </div>';
-                        $status .= '<span class="badge bg-danger">Tidak Aktif</span></div>';
+                        $status .= '<span class="badge bg-danger">Not Active</span></div>';
                     }
                     return $status;
                 endif;
@@ -455,25 +452,25 @@ class UserController extends Controller
         
         $id = $request->id;
         $data = User::withTrashed()->find($id);
-        $profile = Profile::withTrashed()->where('user_kode', $data->kode)->first();
+        $profile = Profile::withTrashed()->where('user_code', $data->code)->first();
 
         if (!$data) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Data tidak ditemukan.'
+                'message' => 'Data not found.'
             ], 404);
         }
 
         if (!$profile) {
             $profile = Profile::create([
-                'user_kode' => $data->kode,
+                'user_code' => $data->code,
             ]);
             $userProfiletoarray = '';
         } else {
             # code...
             $userProfiletoarray = "'User Profile' => $profile->toArray()";
         }
-        // Simpan data sebelum diupdate
+        // Simpan Data before updating
         $previousData = [
             'User' => $data->toArray(),
             $userProfiletoarray
@@ -491,7 +488,7 @@ class UserController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah dipulihkan.'
+            'message' => 'Data has been restored.'
         ]);
     }
 
@@ -506,16 +503,16 @@ class UserController extends Controller
         $id = $request->id;
 
         $data = User::withTrashed()->find($id);
-        $profile = Profile::withTrashed()->where('user_kode',$data->kode)->first();
+        $profile = Profile::withTrashed()->where('user_code',$data->code)->first();
 
         if (!$data) {
-            return redirect()->route('admin.users.arsip')->with('error', 'Data tidak ditemukan.');
+            return redirect()->route('admin.users.archives')->with('error', 'Data not found.');
         }
         if ($id == 1) {
-            if (auth()->user()->kode != 'daysf') {
+            if (auth()->user()->code != 'daysf') {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Pengguna tidak ditemukan'
+                    'message' => 'User not found'
                 ], 404);
             }
         }
@@ -537,7 +534,7 @@ class UserController extends Controller
     
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah dihapus secara permanent.',
+            'message' => 'Data has been permanently deleted.',
         ]);
     }
 

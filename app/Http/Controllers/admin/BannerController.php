@@ -83,7 +83,7 @@ class BannerController extends Controller
                 $set = Banner::where('name', $key)->first();
                 $set->update($data);
 
-                $logs[] = ['---'.$key.'---' => ['Data Sebelumnya' => ['value' => $banner[$key]], 'Data terbaru' => ['value' => $value]]];
+                $logs[] = ['---'.$key.'---' => ['Previous Data' => ['value' => $banner[$key]], 'Data terbaru' => ['value' => $value]]];
             } else {
                 $data["name"] = $key;
                 $data["value"] = $value;
@@ -95,13 +95,9 @@ class BannerController extends Controller
 
         
 
-        // Setelah perulangan selesai, $logs akan berisi semua log untuk setiap data yang diproses.
-
-
-        //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
-        return redirect(route('admin.banner'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.banner'))->with(['success' => 'Data updated successfully.']);
 
     }
 }

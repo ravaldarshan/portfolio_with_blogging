@@ -1,21 +1,16 @@
 @extends('frontpage.layouts.main')
 @push('css')
     <style>
-        /* Set a fixed height for the container */
         .logo__item {
             height: 150px;
-            /* Adjust the height as needed */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Set a max-width for the images to maintain their original aspect ratio */
         .client-logo {
             max-width: 100%;
-            /* Ensure the image doesn't exceed the container width */
             max-height: 100%;
-            /* Ensure the image doesn't exceed the container height */
         }
     </style>
 @endpush
@@ -48,7 +43,7 @@
                             <img src="{{ template_frontpage('img/icons/si-2.png') }}" alt="">
                         </div>
                         <h4>Scriptwriting and editing</h4>
-                        <p>Whether you’re halfway through the editing process, or you haven’t even started, our post
+                        <p>Whether you're halfway through the editing process, or you haven't even started, our post
                             production services can put the finishing touches.</p>
                     </div>
                 </div>
@@ -58,7 +53,7 @@
                             <img src="{{ template_frontpage('img/icons/si-1.png') }}" alt="">
                         </div>
                         <h4>Motion graphics</h4>
-                        <p>Whether you’re halfway through the editing process, or you haven’t even started, our post
+                        <p>Whether you're halfway through the editing process, or you haven't even started, our post
                             production services can put the finishing touches.</p>
                     </div>
                 </div>
@@ -68,7 +63,7 @@
                             <img src="{{ template_frontpage('img/icons/si-2.png') }}" alt="">
                         </div>
                         <h4>Scriptwriting and editing</h4>
-                        <p>Whether you’re halfway through the editing process, or you haven’t even started, our post
+                        <p>Whether you're halfway through the editing process, or you haven't even started, our post
                             production services can put the finishing touches.</p>
                     </div>
                 </div>
@@ -78,7 +73,7 @@
                             <img src="{{ template_frontpage('img/icons/si-3.png') }}" alt="">
                         </div>
                         <h4>Video distribution</h4>
-                        <p>Whether you’re halfway through the editing process, or you haven’t even started, our post
+                        <p>Whether you're halfway through the editing process, or you haven't even started, our post
                             production services can put the finishing touches.</p>
                     </div>
                 </div>

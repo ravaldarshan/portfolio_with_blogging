@@ -9,8 +9,8 @@
                                 <label class="required form-label">Status</label>
                                 <select class="form-control" data-hide-search="true" id="filterstatus">
                                     <option value="">Semua</option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Tidak Aktif">Tidak Aktif</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Not Active">Not Active</option>
                                 </select>
                             </div>
                         </div>

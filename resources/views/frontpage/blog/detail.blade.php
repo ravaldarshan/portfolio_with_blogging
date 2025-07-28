@@ -126,9 +126,9 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
                     <div class="blog__hero__text">
-                        <h2>{{ $data->judul }}</h2>
+                        <h2>{{ $data->title }}</h2>
                         <ul>
-                            <li>{{ date('F d, Y', strtotime($data->tanggal_posting)) }}</li>
+                            <li>{{ date('F d, Y', strtotime($data->posting_date)) }}</li>
                             <li>{{ $countComment }} Comment</li>
                         </ul>
                     </div>
@@ -171,11 +171,11 @@
                             </div>
                         </div>
                         <div class="blog__details__desc">
-                            {!! $data->isi !!}
+                            {!! $data->contents !!}
                         </div>
                         <div class="blog__details__tags">
                             <span><i class="fa fa-tag"></i> Tag:</span>
-                            <a href="#">{{ $data->kategori->nama }}</a>
+                            <a href="#">{{ $data->category->nama }}</a>
                         </div>
                         <div class="blog__details__option">
                             <div class="row">
@@ -194,7 +194,7 @@
                                                     alt="">
                                             </div>
                                             <div class="blog__details__option__item__text">
-                                                <h6>{{ $row->judul }}</h6>
+                                                <h6>{{ $row->title }}</h6>
                                                 <span>{{ date('F d, Y', strtotime($row->created_at)) }}</span>
                                             </div>
                                         </a>
@@ -249,7 +249,7 @@
                                                             {{ Carbon\Carbon::parse($row->created_at)->diffForHumans() }}
                                                         </p>
                                                     </div>
-                                                    <p class="text-white">{{ $row->isi }}</p>
+                                                    <p class="text-white">{{ $row->contents }}</p>
                                                     <div class="pad-ver">
                                                         <div class="btn-group">
                                                             <a class="btn btn-sm btn-default btn-hover-success"
@@ -292,7 +292,7 @@
                                                                             {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
                                                                         </p>
                                                                     </div>
-                                                                    <p class="text-white">{{ $item->isi }}</p>
+                                                                    <p class="text-white">{{ $item->contents }}</p>
                                                                     <div class="pad-ver">
                                                                         <div class="btn-group">
                                                                             <a class="btn btn-sm btn-default btn-hover-success active"
@@ -386,7 +386,7 @@
                             "_token": "{{ csrf_token() }}",
                             "_method": "POST",
                             "comment": textarea.val(),
-                            komentar_id: comment_id
+                            comment_id: comment_id
                         },
                         success: function() {
                             $.ajax({

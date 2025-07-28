@@ -68,31 +68,31 @@ class ModuleController extends Controller
         $request->validate([
             'name' => 'required|string',
             'identifiers' => 'required|string',
-            'modul_akses.*.tipe' => 'required|string',
-            'modul_akses.*.kode_akses' => 'required_if:modul_akses.*.tipe,element|string',
-            'modul_akses.*.kode_akses' => 'required_if:modul_akses.*.tipe,page|string',
+            'modul_access.*.tipe' => 'required|string',
+            'modul_access.*.code_access' => 'required_if:modul_access.*.tipe,element|string',
+            'modul_access.*.code_access' => 'required_if:modul_access.*.tipe,page|string',
         ]);
 
-        // Simpan data modul akses ke dalam database
+        // Simpan data modul access ke dalam database
         $module = Module::Create([
             'name' => Str::ucfirst($request->name),
             'identifiers' => Str::lower($request->identifiers),
         ]);
 
-        // Simpan data modul akses terkait (modul_akses) ke dalam database
-        foreach ($request->input('modul_akses') as $modulAkses) {
+        // Simpan data modul access terkait (modul_access) ke dalam database
+        foreach ($request->input('modul_access') as $modulAkses) {
             $module->access()->create([
                 'module_id' => $module->id,
-                'name' => Str::ucfirst($modulAkses['kode_akses']),
-                'identifiers' => Str::lower($modulAkses['kode_akses']),
+                'name' => Str::ucfirst($modulAkses['code_access']),
+                'identifiers' => Str::lower($modulAkses['code_access']),
             ]);
         }
     
 
         $module_access = ModuleAccess::where('module_id',$module->id)->get();
 
-        createLog(static::$module, __FUNCTION__, $module->id, ['Data yang disimpan' => ['Modul' => $module, 'Modul Akses' => $module_access]]);
-        return redirect()->route('admin.module')->with('success', 'Data berhasil disimpan.');
+        createLog(static::$module, __FUNCTION__, $module->id, ['Saved data' => ['Modul' => $module, 'Modul Akses' => $module_access]]);
+        return redirect()->route('admin.module')->with('success', 'Data saved successfully.');
     }
     
     
@@ -118,9 +118,9 @@ class ModuleController extends Controller
         $request->validate([
             'name' => 'required|string',
             'identifiers' => 'required|string',
-            'modul_akses.*.tipe' => 'required|string',
-            'modul_akses.*.kode_akses' => 'required_if:modul_akses.*.tipe,element|string',
-            'modul_akses.*.kode_akses' => 'required_if:modul_akses.*.tipe,page|string',
+            'modul_access.*.tipe' => 'required|string',
+            'modul_access.*.code_access' => 'required_if:modul_access.*.tipe,element|string',
+            'modul_access.*.code_access' => 'required_if:modul_access.*.tipe,page|string',
         ]);
 
         $id = $request->id;
@@ -147,22 +147,22 @@ class ModuleController extends Controller
         $module->access()->delete();
 
         // Save the updated module access data
-        foreach ($request->input('modul_akses') as $modulAkses) {
+        foreach ($request->input('modul_access') as $modulAkses) {
             $module->access()->create([
                 'module_id' => $module->id,
-                'name' => Str::ucfirst($modulAkses['kode_akses']),
-                'identifiers' => Str::lower($modulAkses['kode_akses']),
+                'name' => Str::ucfirst($modulAkses['code_access']),
+                'identifiers' => Str::lower($modulAkses['code_access']),
             ]);
         }
 
         $log_module_access = ModuleAccess::where('module_id', $module->id)->get();
 
         createLog(static::$module, __FUNCTION__, $module->id, [
-            'Data sebelum diupdate' => ['Modul' => $log_module_before, 'Modul Akses' => $log_module_access_after],
+            'Data before updating' => ['Modul' => $log_module_before, 'Modul Akses' => $log_module_access_after],
             'Data sesudah diupdate' => ['Modul' => $module, 'Modul Akses' => $log_module_access],
         ]);
 
-        return redirect()->route('admin.module')->with('success', 'Data berhasil diupdate.');
+        return redirect()->route('admin.module')->with('success', 'Data updated successfully.');
     }
 
 
@@ -186,7 +186,7 @@ class ModuleController extends Controller
         if (!$data) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Pengguna tidak ditemukan'
+                'message' => 'User not found'
             ], 404);
         }
 
@@ -205,7 +205,7 @@ class ModuleController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Pengguna telah dihapus.',
+            'message' => 'User has been deleted.',
         ]);
     }
 
@@ -224,7 +224,7 @@ class ModuleController extends Controller
             'data' => $data,
             'access' => $access,
             'status' => 'success',
-            'message' => 'Sukses memuat detail module.',
+            'message' => 'Successfully loaded module details.',
         ]);
     }
 }

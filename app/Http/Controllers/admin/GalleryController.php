@@ -68,9 +68,9 @@ class GalleryController extends Controller
         }
 
         // Log the data
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data yang disimpan' => $data]);
+        createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
 
-        return redirect()->route('admin.gallery')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('admin.gallery')->with('success', 'Data saved successfully.');
     }
 
     public function deleteImage(Request $request){

@@ -53,7 +53,7 @@
                                                 <label for="inputTitle_{{ $i }}"
                                                     class="form-label">Title</label>
                                                 <input type="text" id="inputTitle_{{ $i }}"
-                                                    class="form-control" placeholder="Masukan Title"
+                                                    class="form-control" placeholder="Enter Title"
                                                     value="{{ array_key_exists('banner_' . $i, $data) ? json_decode($data['banner_' . $i])->title : '' }}"
                                                     name="title_{{ $i }}" autocomplete="off">
                                             </div>
@@ -64,7 +64,7 @@
                                             <div class="form-group mandatory">
                                                 <label for="inputBody_{{ $i }}" class="form-label">Body</label>
                                                 <textarea name="body_{{ $i }}" id="inputBody_{{ $i }}" class="form-control"
-                                                    placeholder="Masukan Body" autocomplete="off">{{ array_key_exists('banner_' . $i, $data) ? json_decode($data['banner_' . $i])->body : '' }}</textarea>
+                                                    placeholder="Enter Body" autocomplete="off">{{ array_key_exists('banner_' . $i, $data) ? json_decode($data['banner_' . $i])->body : '' }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -78,7 +78,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary me-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -94,21 +94,16 @@
 @endsection
 
 @push('js')
-    {{-- <script src="{{ asset('templateAdmin/assets/extensions/parsleyjs/parsley.min.js') }}"></script>
-    <script src="{{ asset('templateAdmin/assets/js/pages/parsley.js') }}"></script> --}}
-
-
-
     <script>
         for (let index = 0; index < 3; index++) {
-            const gambarLainnyaInputFile = document.getElementById("iconInputFile_" + index);
-            const previewContainerGambarLainnya = document.querySelector(".fileinput-preview_" + index);
+            const otherPicturesInputFile = document.getElementById("iconInputFile_" + index);
+            const previewContainerotherPictures = document.querySelector(".fileinput-preview_" + index);
 
-            gambarLainnyaInputFile.addEventListener("change", function() {
+            otherPicturesInputFile.addEventListener("change", function() {
                 const files = this.files;
 
-                // Hapus gambar-gambar sebelumnya
-                previewContainerGambarLainnya.innerHTML = '';
+                // Wipe gambar-gambar sebelumnya
+                previewContainerotherPictures.innerHTML = '';
 
                 // Ambil satu file saja
                 const file = files[0];
@@ -120,11 +115,11 @@
 
                     const img = document.createElement("img");
                     img.classList.add("img-thumbnail");
-                    img.width = 200; // Sesuaikan ukuran gambar sesuai kebutuhan
+                    img.width = 200;
                     img.src = URL.createObjectURL(file);
 
                     imgContainer.appendChild(img);
-                    previewContainerGambarLainnya.appendChild(imgContainer);
+                    previewContainerotherPictures.appendChild(imgContainer);
                 }
             });
         }

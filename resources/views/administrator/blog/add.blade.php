@@ -24,17 +24,17 @@
                     <div class="row">
                         <div class="col-md-4 col-12">
                             <div class="form-group mandatory">
-                                <label for="inputKategoriName" class="form-label">Kategori</label>
+                                <label for="inputCategoryName" class="form-label">Category</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="inputKategoriName" readonly>
+                                    <input type="text" class="form-control" id="inputCategoryName" readonly>
                                     <div class="input-group-append">
                                         <a href="#" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#modalKategori">
+                                            data-target="#modalCategory">
                                             <i class="fas fa-search"></i>
                                         </a>
                                     </div>
-                                    <input type="text" class="d-none" name="kategori" id="inputKategori"
-                                        data-parsley-required="true" aria-labelledby="inputKategoriNameLabel">
+                                    <input type="text" class="d-none" name="category" id="inputCategory"
+                                        data-parsley-required="true" aria-labelledby="inputCategoryNameLabel">
                                 </div>
                             </div>
                         </div>
@@ -43,9 +43,9 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
-                                <label for="inputTanggalPosting" class="form-label">Tanggal Posting</label>
-                                <input type="text" id="inputTanggalPosting" class="form-control"
-                                    placeholder="Pilih Tanggal Posting" name="tanggal_posting" autocomplete="off"
+                                <label for="inputDatePosting" class="form-label">Posting Date</label>
+                                <input type="text" id="inputDatePosting" class="form-control"
+                                    placeholder="Choose Posting Date" name="posting_date" autocomplete="off"
                                     data-parsley-required="true">
                             </div>
                         </div>
@@ -54,9 +54,9 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
-                                <label for="inputJudul" class="form-label">Judul</label>
-                                <input type="text" id="inputJudul" class="form-control" placeholder="Masukan Judul"
-                                    name="judul" autocomplete="off" data-parsley-required="true">
+                                <label for="inputTitle" class="form-label">Title</label>
+                                <input type="text" id="inputTitle" class="form-control" placeholder="Title"
+                                    name="title" autocomplete="off" data-parsley-required="true">
                             </div>
                         </div>
                     </div>
@@ -64,17 +64,15 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
-                                <label for="gambarLainnyaInputFile" class="form-label">Gambar Lainnya</label>
+                                <label for="otherPicturesInputFile" class="form-label">More Images</label>
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <div class="fileinput-preview-gambar_lainnya thumbnail mb20">
-                                        <!-- Tampilkan preview gambar-gambar yang diunggah di sini -->
+                                    <div class="fileinput-preview-other_pictures thumbnail mb20">
                                     </div>
                                     <div class="mt-3">
-                                        <label for="gambarLainnyaInputFile" class="btn btn-light btn-file">
+                                        <label for="otherPicturesInputFile" class="btn btn-light btn-file">
                                             <span class="fileinput-new">Select image</span>
-                                            <input type="file" class="d-none" id="gambarLainnyaInputFile"
+                                            <input type="file" class="d-none" id="otherPicturesInputFile"
                                                 data-parsley-required="true" name="img[]" multiple>
-                                            <!-- Tambahkan atribut "multiple" di sini -->
                                         </label>
                                     </div>
                                 </div>
@@ -85,8 +83,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mandatory">
-                                <label for="inputIsi" class="form-label">Isi</label>
-                                <textarea name="isi" id="inputIsi" class="form-control summernote" placeholder="Masukan Isi Blog"
+                                <label for="inputContents" class="form-label">Contents</label>
+                                <textarea name="contents" id="inputContents" class="form-control summernote" placeholder="Enter Contents Blog"
                                     autocomplete="off" data-parsley-required="true"></textarea>
                             </div>
                         </div>
@@ -117,7 +115,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary me-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -129,7 +127,7 @@
             </div>
         </div>
     </div>
-    @include('administrator.blog.modal.kategori')
+    @include('administrator.blog.modal.category')
     <!-- Basic Tables end -->
 @endsection
 
@@ -146,31 +144,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-        // Fungsi untuk menangani perubahan pada file input
         function handleFileInputChange() {
-            const newInput = this; // 'this' mengacu pada elemen file input yang dipicu oleh perubahan
-
-            // Mendapatkan file yang baru dipilih
+            const newInput = this;
             const newFiles = newInput.files;
-
-            // Lakukan sesuatu dengan file yang baru dipilih
             for (let i = 0; i < newFiles.length; i++) {
                 const newFile = newFiles[i];
-
-                // Lakukan sesuatu dengan setiap file, misalnya, tampilkan informasi di konsol
                 console.log(`File Baru: ${newFile.name}, Tipe: ${newFile.type}, Ukuran: ${newFile.size} bytes`);
             }
-
-            // Anda dapat menambahkan logika lain sesuai kebutuhan Anda di sini
         }
 
-        // Variabel untuk menyimpan array file
         let filesArray = [];
+        const otherPicturesInputFile = document.getElementById("otherPicturesInputFile");
+        const previewContainerotherPictures = document.querySelector(".fileinput-preview-other_pictures");
 
-        const gambarLainnyaInputFile = document.getElementById("gambarLainnyaInputFile");
-        const previewContainerGambarLainnya = document.querySelector(".fileinput-preview-gambar_lainnya");
-
-        gambarLainnyaInputFile.addEventListener("change", function() {
+        otherPicturesInputFile.addEventListener("change", function() {
             const files = this.files;
 
             // Loop melalui semua file yang dipilih
@@ -187,12 +174,12 @@
 
                 const img = document.createElement("img");
                 img.classList.add("img-thumbnail");
-                img.width = 200; // Sesuaikan ukuran gambar sesuai kebutuhan
+                img.width = 200;
                 img.src = URL.createObjectURL(file);
 
                 const deleteButton = document.createElement("a");
                 deleteButton.classList.add("btn", "btn-danger", "btn-sm", "deleteImg");
-                deleteButton.textContent = "Hapus";
+                deleteButton.textContent = "Wipe";
                 deleteButton.addEventListener("click", function() {
 
                     const swalWithBootstrapButtons = Swal.mixin({
@@ -204,35 +191,24 @@
                     });
 
                     swalWithBootstrapButtons.fire({
-                        title: 'Apakah anda yakin ingin menghapus image ini',
+                        title: 'Are you sure you want to delete this image?',
                         icon: 'warning',
                         buttonsStyling: false,
                         showCancelButton: true,
-                        confirmButtonText: 'Ya, Saya yakin!',
-                        cancelButtonText: 'Tidak, Batalkan!',
+                        confirmButtonText: 'Yes, I am sure!',
+                        cancelButtonText: 'No, Cancel!',
                         reverseButtons: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-
-                            // Hapus gambar saat tombol "Hapus" diklik
                             const fileIndex = filesArray.indexOf(file);
                             if (fileIndex !== -1) {
                                 filesArray.splice(fileIndex, 1);
-
-                                // Buat objek DataTransfer baru
                                 const newFilesList = new DataTransfer();
-
-                                // Tambahkan file ke objek DataTransfer
                                 filesArray.forEach(file => newFilesList.items.add(file));
-
-                                // Set nilai baru untuk file input
-                                gambarLainnyaInputFile.files = newFilesList.files;
-
-                                // Tambahkan event listener ke file input baru
-                                gambarLainnyaInputFile.addEventListener("change",
+                                otherPicturesInputFile.files = newFilesList.files;
+                                otherPicturesInputFile.addEventListener("change",
                                     handleFileInputChange);
                             }
-
                             imgContainer.remove();
                         }
                     });
@@ -240,9 +216,7 @@
 
                 imgContainer.appendChild(img);
                 imgContainer.appendChild(deleteButton);
-                previewContainerGambarLainnya.appendChild(imgContainer);
-
-                // Tambahkan file ke dalam array
+                previewContainerotherPictures.appendChild(imgContainer);
                 filesArray.push(file);
             }
         });
@@ -251,7 +225,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $('#inputTanggalPosting').datepicker({
+            $('#inputDatePosting').datepicker({
                 language:'id',
                 format:'dd-mm-yyyy',
 

@@ -26,7 +26,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="inputNamaApp" class="form-label">Nama App</label>
-                                <input type="text" id="inputNamaApp" class="form-control" placeholder="Masukan Nama App"
+                                <input type="text" id="inputNamaApp" class="form-control" placeholder="Enter Nama App"
                                     value="{{ array_key_exists('general_nama_app', $settings) ? $settings['general_nama_app'] : '' }}"
                                     name="general_nama_app" autocomplete="off">
                             </div>
@@ -36,16 +36,16 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label for="gambarLainnyaInputFile" class="form-label">Favicon</label>
+                                <label for="otherPicturesInputFile" class="form-label">Favicon</label>
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview-image thumbnail mb20">
                                         <img width="200px"
                                             src="{{ array_key_exists('general_frontpage_favicon', $settings) ? img_src($settings['general_frontpage_favicon'], 'settings') : '' }}">
                                     </div>
                                     <div class="mt-3">
-                                        <label for="gambarLainnyaInputFile" class="btn btn-light btn-file">
+                                        <label for="otherPicturesInputFile" class="btn btn-light btn-file">
                                             <span class="fileinput-new">Select image</span>
-                                            <input type="file" class="d-none" id="gambarLainnyaInputFile"
+                                            <input type="file" class="d-none" id="otherPicturesInputFile"
                                                 name="general_frontpage_favicon">
                                             <!-- Tambahkan atribut "multiple" di sini -->
                                         </label>
@@ -77,7 +77,7 @@
                                                     <input type="text" name="nama_sosmed_{{ $i }}"
                                                         value="{{ $row->nama_sosmed }}" class="form-control"
                                                         id="inputNamaSosmed_{{ $i }}" data-parsley-required="true"
-                                                        placeholder="Masukan Nama Sosial Media" autocomplete="off">
+                                                        placeholder="Enter Nama Sosial Media" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-11">
@@ -88,7 +88,7 @@
                                                     <input type="text" name="icon_sosmed_{{ $i }}"
                                                         value="{{ $row->icon_sosmed }}" class="form-control"
                                                         id="inputFontAawesomeSosmed_{{ $i }}" data-parsley-required="true"
-                                                        placeholder="Masukan Icon Sosial Media (contoh 'fa fa-instagram')" autocomplete="off">
+                                                        placeholder="Enter Icon Sosial Media (contoh 'fa fa-instagram')" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-md-1 col-1">
@@ -116,7 +116,7 @@
                                 <div class="input-group colorpickerinput">
                                     <input type="text" class="form-control" name="general_main_text_color"
                                         value="{{ array_key_exists('general_main_text_color', $settings) ? $settings['general_main_text_color'] : '' }}"
-                                        id="main-text-color" placeholder="Masukan Kode Warna" autocomplete="off"
+                                        id="main-text-color" placeholder="Enter Code Warna" autocomplete="off"
                                         data-parsley-required="true">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -135,7 +135,7 @@
                                 <div class="input-group colorpickerinput">
                                     <input type="text" class="form-control" name="general_breadcrumb_color"
                                         value="{{ array_key_exists('general_breadcrumb_color', $settings) ? $settings['general_breadcrumb_color'] : '' }}"
-                                        id="breadcrumb-color" placeholder="Masukan Kode Warna" autocomplete="off"
+                                        id="breadcrumb-color" placeholder="Enter Code Warna" autocomplete="off"
                                         data-parsley-required="true">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -154,7 +154,7 @@
                                 <div class="input-group colorpickerinput">
                                     <input type="text" class="form-control" name="general_primary_color"
                                         value="{{ array_key_exists('general_primary_color', $settings) ? $settings['general_primary_color'] : '' }}"
-                                        id="primary-color" placeholder="Masukan Kode Warna" autocomplete="off"
+                                        id="primary-color" placeholder="Enter Code Warna" autocomplete="off"
                                         data-parsley-required="true">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -173,7 +173,7 @@
                                 <div class="input-group colorpickerinput">
                                     <input type="text" class="form-control" name="general_background_color"
                                         value="{{ array_key_exists('general_background_color', $settings) ? $settings['general_background_color'] : '' }}"
-                                        id="background-color" placeholder="Masukan Kode Warna" autocomplete="off"
+                                        id="background-color" placeholder="Enter Code Warna" autocomplete="off"
                                         data-parsley-required="true">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -192,7 +192,7 @@
                                 <div class="input-group colorpickerinput">
                                     <input type="text" class="form-control" name="general_counter_color"
                                         value="{{ array_key_exists('general_counter_color', $settings) ? $settings['general_counter_color'] : '' }}"
-                                        id="counter-color" placeholder="Masukan Kode Warna" autocomplete="off"
+                                        id="counter-color" placeholder="Enter Code Warna" autocomplete="off"
                                         data-parsley-required="true">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -211,7 +211,7 @@
                                 <div class="input-group colorpickerinput">
                                     <input type="text" class="form-control" name="general_service_item_icon_color"
                                         value="{{ array_key_exists('general_service_item_icon_color', $settings) ? $settings['general_service_item_icon_color'] : '' }}"
-                                        id="service-item-icon-color" placeholder="Masukan Kode Warna" autocomplete="off"
+                                        id="service-item-icon-color" placeholder="Enter Code Warna" autocomplete="off"
                                         data-parsley-required="true">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -228,7 +228,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary mx-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -246,7 +246,7 @@
             <div class="form-group">
                 <label for="inputNamaSosmed_0" class="form-label">Sosial Media</label>
                 <input type="text" name="nama_sosmed_0" class="form-control" id="inputNamaSosmed_0" data-parsley-required="true"
-                    placeholder="Masukan Nama Sosial Media" autocomplete="off">
+                    placeholder="Enter Nama Sosial Media" autocomplete="off">
             </div>
         </div>
         <div class="col-md-6 col-11">
@@ -344,12 +344,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ini?',
+                    title: 'Are you sure you want to delete this data??',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -366,7 +366,7 @@
                                 success: function() {
                                     deleteSosmedList(sosmedList, index);
                                     swalWithBootstrapButtons.fire({
-                                        title: 'Berhasil!',
+                                        title: 'Succeed!',
                                         text: 'Data berhasil dihapus.',
                                         icon: 'success',
                                         timer: 1500, // 2 detik
@@ -377,7 +377,7 @@
                         } else {
                             deleteSosmedList(sosmedList, index);
                             swalWithBootstrapButtons.fire({
-                                title: 'Berhasil!',
+                                title: 'Succeed!',
                                 text: 'Data berhasil dihapus.',
                                 icon: 'success',
                                 timer: 1500, // 2 detik
@@ -415,12 +415,12 @@
         // Variabel untuk menyimpan array file
         let filesArray = [];
 
-        const gambarLainnyaInputFile = document.getElementById("gambarLainnyaInputFile");
-        const previewContainerGambarLainnya = document.querySelector(".fileinput-preview-image");
+        const otherPicturesInputFile = document.getElementById("otherPicturesInputFile");
+        const previewContainerotherPictures = document.querySelector(".fileinput-preview-image");
 
-        gambarLainnyaInputFile.addEventListener("change", function() {
-            // Hapus preview gambar sebelumnya
-            previewContainerGambarLainnya.innerHTML = '';
+        otherPicturesInputFile.addEventListener("change", function() {
+            // Wipe preview gambar sebelumnya
+            previewContainerotherPictures.innerHTML = '';
 
             const files = this.files;
 
@@ -442,7 +442,7 @@
                 img.src = URL.createObjectURL(file);
 
                 imgContainer.appendChild(img);
-                previewContainerGambarLainnya.appendChild(imgContainer);
+                previewContainerotherPictures.appendChild(imgContainer);
 
                 // Tambahkan file ke dalam array
                 filesArray.push(file);

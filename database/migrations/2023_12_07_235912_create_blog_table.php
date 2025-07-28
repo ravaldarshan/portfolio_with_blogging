@@ -16,11 +16,11 @@ class CreateBlogTable extends Migration
         Schema::create('blog', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('kategori_id');
-            $table->string('judul');
-            $table->text('isi');
+            $table->foreignId('category_id');
+            $table->string('title');
+            $table->text('contents');
             $table->text('img_url');
-            $table->date('tanggal_posting');
+            $table->date('posting_date');
             $table->integer('status');
             $table->timestamps();
             $table->softDeletes();

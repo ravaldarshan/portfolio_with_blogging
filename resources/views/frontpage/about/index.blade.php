@@ -73,8 +73,8 @@
                         </div>
                         <div class="about__text__desc" id="descriptionSection">
                             <p>Formed in 2006 by Matt Hobbs and Cael Jones, Videoprah is an award-winning, full-service
-                                production company specializing in commercial, broadcast, tourism & action sport video
-                                production services has been featured.</p>
+                                production company specializing in commercial, broadcast, tourism & action sports video
+                                production services have been featured.</p>
                         </div>
                     </div>
                 </div>
@@ -128,20 +128,20 @@
             },
             success: function(respon) {
                 const datas = respon.data;
-                let DeskripsiHtml = ''
+                let DescriptionHtml = ''
                 let imgJson = ''
                 let imgHtml = ''
 
                 for (let index = 0; index < datas.length; index++) {
                     const data = datas[index];
-                    if (data.name === 'deskripsi') {
-                        DeskripsiHtml += `<p>` + data.value + `</p>`
+                    if (data.name === 'description') {
+                        DescriptionHtml += `<p>` + data.value + `</p>`
                     } else if (data.name === 'image') {
                         imgJson += data.value;
                     }
                 }
                 $('#descriptionSection').html(
-                    DeskripsiHtml
+                    DescriptionHtml
                 )
 
                 const imgParse = JSON.parse(imgJson);

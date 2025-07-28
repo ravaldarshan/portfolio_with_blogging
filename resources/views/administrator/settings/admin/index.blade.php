@@ -25,7 +25,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="namaAppField" class="form-label">Nama App</label>
-                                <input type="text" id="namaAppField" class="form-control" placeholder="Masukan Nama App"
+                                <input type="text" id="namaAppField" class="form-control" placeholder="Enter Nama App"
                                     value="{{ array_key_exists('nama_app_admin', $settings) ? $settings['nama_app_admin'] : '' }}"
                                     name="nama_app_admin" autocomplete="off" data-parsley-required="true">
                             </div>
@@ -37,7 +37,7 @@
                             <div class="form-group mandatory">
                                 <label for="footerAppAdmin" class="form-label">Footer App Admin</label>
                                 <input type="text" id="footerAppAdmin" class="form-control"
-                                    placeholder="Masukan Footer App Admin"
+                                    placeholder="Enter Footer App Admin"
                                     value="{{ array_key_exists('footer_app_admin', $settings) ? $settings['footer_app_admin'] : '' }}"
                                     name="footer_app_admin" autocomplete="off" data-parsley-required="true">
                             </div>
@@ -92,7 +92,7 @@
                                 <div class="input-group colorpickerinput">
                                     <input type="text" class="form-control" name="admin_main_background_color"
                                         value="{{ array_key_exists('admin_main_background_color', $settings) ? $settings['admin_main_background_color'] : '' }}"
-                                        id="main-background-color" placeholder="Masukan Kode Warna" autocomplete="off"
+                                        id="main-background-color" placeholder="Enter Code Warna" autocomplete="off"
                                         data-parsley-required="true">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -109,7 +109,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary mx-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -140,7 +140,7 @@
         logoInputFile.addEventListener("change", function() {
             const files = this.files;
 
-            // Hapus gambar-gambar sebelumnya
+            // Wipe gambar-gambar sebelumnya
             previewContainerLogo.innerHTML = '';
 
             // Ambil satu file saja
@@ -167,7 +167,7 @@
         faviconInputFile.addEventListener("change", function() {
             const files = this.files;
 
-            // Hapus gambar-gambar sebelumnya
+            // Wipe gambar-gambar sebelumnya
             previewContainerFavicon.innerHTML = '';
 
             // Ambil satu file saja

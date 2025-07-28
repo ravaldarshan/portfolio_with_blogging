@@ -140,7 +140,7 @@ function createLog($module, $action, $data_id,$data)
     Log::create($log);
 }
 
-function isAllowed($modul, $modul_akses)
+function isAllowed($modul, $modul_access)
 {
 	$data_user = User::find(auth()->user()->id);
 	$grup_pengguna_id = $data_user->user_group_id;
@@ -153,12 +153,12 @@ function isAllowed($modul, $modul_akses)
         if ($group->status == 1) {
             $permission = getPermissionGroup($grup_pengguna_id);
             
-            if ($permission[$grup_pengguna_id][$modul][$modul_akses] == 1) {
-                return true; // Jika user group aktif dan memiliki izin, berikan akses
+            if ($permission[$grup_pengguna_id][$modul][$modul_access] == 1) {
+                return true; // Jika user group aktif dan memiliki izin, berikan access
             }
         }
     }
-    return false; // Default, jika tidak memenuhi syarat maka tidak diizinkan akses
+    return false; // Default, jika tidak memenuhi syarat maka tidak diizinkan access
 	
 }
 
@@ -174,11 +174,11 @@ function getDefaultPermission()
 				$join->on('user_group_permissions.module_access_id', '=', 'module_access.id');
 			}
 		);
-	$data_akses = $query->get();
+	$data_access = $query->get();
 	$data_grup_pengguna = UserGroup::all();
 	$permission = array();
 	foreach ($data_grup_pengguna as $val) {
-		foreach ($data_akses as $row) {
+		foreach ($data_access as $row) {
 			$permission[$val->id][$row->module_id][$row->id] = 0;
 		}
 	}
@@ -187,7 +187,7 @@ function getDefaultPermission()
 
 function getPermissionGroup($user_group_id)
 {
-	$data_akses = ModuleAccess::select(DB::raw('
+	$data_access = ModuleAccess::select(DB::raw('
     module.identifiers as module_identifiers,
     module_access.*,
     user_group_permissions.user_group_id,
@@ -204,7 +204,7 @@ function getPermissionGroup($user_group_id)
 	$permission = [];
 	$index = 0;
 
-	foreach ($data_akses as $row) {
+	foreach ($data_access as $row) {
 		if ($row->status == "") {
 			$status = 0;
 		} else {
@@ -219,7 +219,7 @@ function getPermissionGroup($user_group_id)
 
 function getPermissionGroup2($x)
 {
-	$data_akses = ModuleAccess::select(DB::raw('
+	$data_access = ModuleAccess::select(DB::raw('
     module.identifiers as module_identifiers,
     module_access.*,
     user_group_permissions.user_group_id,
@@ -236,7 +236,7 @@ function getPermissionGroup2($x)
         // dd($x);
 	$permission = [];
 	$index = 0;
-	foreach ($data_akses as $row) {
+	foreach ($data_access as $row) {
 		if ($row->status == "") {
 			$status = 0;
 		} else {
@@ -252,7 +252,7 @@ function getPermissionModuleGroup()
 {
 	$data_user = User::find(auth()->user()->id);
 	$grup_pengguna_id = $data_user->user_group_id;
-	$data_akses = ModuleAccess::select(DB::raw('
+	$data_access = ModuleAccess::select(DB::raw('
     module.identifiers as module_identifiers, 
     COUNT(user_group_permissions.id) as permission_given'))
 		->leftJoin(
@@ -270,7 +270,7 @@ function getPermissionModuleGroup()
 	$permission = [];
 	$index = 0;
 
-	foreach ($data_akses as $row) {
+	foreach ($data_access as $row) {
 		if ($row->permission_given > 0) {
 			$status = TRUE;
 		} else {

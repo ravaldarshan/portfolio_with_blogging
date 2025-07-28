@@ -20,8 +20,6 @@ class ServiceController extends Controller
         $service = Service::get()->toArray();
         
         $service = array_column($service, 'value', 'name');
-
-        // Ambil pengaturan dari database dan tampilkan di halaman
         return view('administrator.service.index', compact('service'));
     }
     
@@ -88,7 +86,7 @@ class ServiceController extends Controller
                 $set = Service::where('name', $key)->first();
                 $set->update($data);
 
-                $logs[] = ['---'.$key.'---' => ['Data Sebelumnya' => ['value' => $service[$key]], 'Data terbaru' => ['value' => $value]]];
+                $logs[] = ['---'.$key.'---' => ['Previous Data' => ['value' => $service[$key]], 'Data terbaru' => ['value' => $value]]];
             } else {
                 $data["name"] = $key;
                 $data["value"] = $value;
@@ -97,16 +95,10 @@ class ServiceController extends Controller
                 $logs[] = $set;
             }
         }
-
-        
-
-        // Setelah perulangan selesai, $logs akan berisi semua log untuk setiap data yang diproses.
-
-
         //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
-        return redirect(route('admin.service'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.service'))->with(['success' => 'Data updated successfully.']);
 
     }
 }

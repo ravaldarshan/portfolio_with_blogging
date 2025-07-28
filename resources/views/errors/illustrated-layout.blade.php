@@ -69,7 +69,7 @@
 
             button,
             input {
-                overflow: visible;
+                overflow: vcontentsble;
             }
 
             button {

@@ -18,7 +18,7 @@
                 <div class="card-header">
                     <div class="col-12" style="display: flex; justify-content: flex-end;">
                         @if (isallowed('gallery', 'add'))
-                            <a href="{{ route('admin.gallery.add') }}" class="btn btn-primary">Tambah Data</a>
+                            <a href="{{ route('admin.gallery.add') }}" class="btn btn-primary">Add Data</a>
                         @endif
                     </div>
                 </div>
@@ -86,12 +86,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ini',
+                    title: 'Are you sure you want to delete this data?',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -111,7 +111,7 @@
                                 // updateGallery();
                                 window.location.reload();
                                 swalWithBootstrapButtons.fire({
-                                    title: 'Berhasil!',
+                                    title: 'Succeed!',
                                     text: 'Data berhasil dihapus.',
                                     icon: 'success',
                                     timer: 1500, // 2 detik

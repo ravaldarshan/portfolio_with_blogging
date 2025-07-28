@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\admin\Project;
 use App\Http\Controllers\Controller;
-use App\Models\admin\KategoriProject;
+use App\Models\admin\CategoryProject;
 use Intervention\Image\Facades\Image;
 
 class ProjectController extends Controller
@@ -25,7 +25,7 @@ class ProjectController extends Controller
     }
     
     public function getData(Request $request){
-        $data = Project::query()->with('kategori_project');
+        $data = Project::query()->with('category_project');
 
         $data = $data->get();
 
@@ -71,8 +71,8 @@ class ProjectController extends Controller
 
         $rules = [
             'nama' => 'required|unique:project',
-            'kategori_project' => 'required',
-            'deskripsi' => 'required',
+            'category_project' => 'required',
+            'description' => 'required',
         ];
 
         $request->validate($rules);
@@ -87,9 +87,9 @@ class ProjectController extends Controller
             $slug = $slug . '-' . ($cekSlugCount + 1);
         }
 
-        $deskripsi = $request->deskripsi;
+        $description = $request->description;
         $dom = new \domdocument();
-        $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         
         $images = $dom->getelementsbytagname('img');
         foreach($images as $k => $img){
@@ -98,20 +98,20 @@ class ProjectController extends Controller
             list(, $datas)      = explode(',', $datas);
 
             $datas = base64_decode($datas);
-            $image_name= 'deskripsi_'.$slug.'-'.time().$k.'.png';
+            $image_name= 'description_'.$slug.'-'.time().$k.'.png';
             $path = public_path() .'/administrator/assets/media/project/'. $image_name;
             file_put_contents($path, $datas);
 
             $img->removeattribute('src');
             $img->setattribute('src', '/administrator/assets/media/project/'.$image_name);
         }
-        $deskripsi = $dom->saveHTML();
+        $description = $dom->saveHTML();
 
         $data = Project::create([
-            'kategori_project_id' => $request->kategori_project,
+            'category_project_id' => $request->category_project,
             'nama' => $request->nama,
             'slug' => $slug,
-            'deskripsi' => $deskripsi,
+            'description' => $description,
             'img_url' => '-',
             'created_by' => auth()->user()->id,
         ]);
@@ -129,9 +129,9 @@ class ProjectController extends Controller
         }
 
         // Log the data
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data yang disimpan' => $data]);
+        createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
 
-        return redirect()->route('admin.project')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('admin.project')->with('success', 'Data saved successfully.');
     }
     
     public function edit($id){
@@ -161,20 +161,20 @@ class ProjectController extends Controller
         $data = Project::find($id);
 
         $rules = [
-            'nama' => 'required|unique:kategori_project,nama,'.$id,
-            'kategori_project' => 'required',
-            'deskripsi' => 'required',
+            'nama' => 'required|unique:category_project,nama,'.$id,
+            'category_project' => 'required',
+            'description' => 'required',
         ];
 
         $request->validate($rules);
 
-        // Simpan data sebelum diupdate
+        // Simpan Data before updating
         $previousData = $data->toArray();
 
-        $data_deskripsi = $data->deskripsi;
+        $data_description = $data->description;
         $dom = new \domdocument();
         libxml_use_internal_errors(true);
-        $dom->loadHTML($data_deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML($data_description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $errors = libxml_get_errors();
         libxml_clear_errors();
         
@@ -197,10 +197,10 @@ class ProjectController extends Controller
             $slug = $slug . ($cekSlugCount + 1);
         }
 
-        $deskripsi = $request->deskripsi;
+        $description = $request->description;
         $dom = new \domdocument();
         libxml_use_internal_errors(true);
-        $dom->loadHTML($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $errors = libxml_get_errors();
         libxml_clear_errors();
         
@@ -212,7 +212,7 @@ class ProjectController extends Controller
                 list(, $datas)      = explode(',', $datas);
 
                 $datas = base64_decode($datas);
-                $image_name= 'deskripsi_'.$slug.'-'.time().$k.'.png';
+                $image_name= 'description_'.$slug.'-'.time().$k.'.png';
                 $path = public_path() .'/administrator/assets/media/project/'. $image_name;
                 file_put_contents($path, $datas);
 
@@ -220,13 +220,13 @@ class ProjectController extends Controller
                 $img->setattribute('src', '/administrator/assets/media/project/'.$image_name);
             }
         }
-        $deskripsi = $dom->saveHTML();
+        $description = $dom->saveHTML();
 
         $updates = [
-            'kategori_project_id' => $request->kategori_project,
+            'category_project_id' => $request->category_project,
             'nama' => $request->nama,
             'slug' => $slug,
-            'deskripsi' => $deskripsi,
+            'description' => $description,
             'img_url' => '-',
             'updated_by' => auth()->user()->id,
         ];
@@ -261,8 +261,8 @@ class ProjectController extends Controller
 
         $data->update($updates);
 
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data sebelum diupdate' => $previousData, 'Data sesudah diupdate' => $updatedData]);
-        return redirect()->route('admin.project')->with('success', 'Data berhasil diupdate.');
+        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => $updatedData]);
+        return redirect()->route('admin.project')->with('success', 'Data updated successfully.');
     }
     
     public function delete(Request $request)
@@ -283,7 +283,7 @@ class ProjectController extends Controller
         // Delete the data.
         $data->delete();
 
-        $projects = Project::where('kategori_project_id', $data->id)->get();
+        $projects = Project::where('category_project_id', $data->id)->get();
 
         // Delete related projects if any
         if ($projects->isNotEmpty()) {
@@ -293,17 +293,17 @@ class ProjectController extends Controller
         }
 
         // Write logs for soft delete
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang diarsip' => ['Kategori' => $deletedData, 'Project' => $projects]]);
+        createLog(static::$module, __FUNCTION__, $id, ['Archived data' => ['Category' => $deletedData, 'Project' => $projects]]);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah diarsipkan.',
+            'message' => 'Data has been archived.',
         ]);
     }
 
-    public function getDataKategoriProject(Request $request)
+    public function getDataCategoryProject(Request $request)
     {
-        $data = KategoriProject::query();
+        $data = CategoryProject::query();
 
         return DataTables::of($data)
             ->make(true);
@@ -325,7 +325,7 @@ class ProjectController extends Controller
         return response()->json([
             'data' => $data,
             'status' => 'success',
-            'message' => 'Sukses memuat detail data.',
+            'message' => 'Successfully loaded detailed data.',
         ]);
     }
     
@@ -339,7 +339,7 @@ class ProjectController extends Controller
     
             if($users->exists()){
                 return response()->json([
-                    'message' => 'Nama sudah dipakai',
+                    'message' => 'Name is already in use',
                     'valid' => false
                 ]);
             } else {
@@ -350,16 +350,16 @@ class ProjectController extends Controller
         }
     }
 
-    public function arsip(){
+    public function archives(){
         //Check permission
-        if (!isAllowed(static::$module, "arsip")) {
+        if (!isAllowed(static::$module, "archives")) {
             abort(403);
         }
 
-        return view('administrator.project.arsip');
+        return view('administrator.project.archives');
     }
 
-    public function getDataArsip(Request $request){
+    public function getDataArchives(Request $request){
         $data = Project::query()
                     ->onlyTrashed()
                     ->get();
@@ -398,7 +398,7 @@ class ProjectController extends Controller
         if (!$data) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Data tidak ditemukan.'
+                'message' => 'Data not found.'
             ], 404);
         }
 
@@ -414,7 +414,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah dipulihkan.'
+            'message' => 'Data has been restored.'
         ]);
     }
 
@@ -429,11 +429,11 @@ class ProjectController extends Controller
         
         $id = $request->id;
 
-        $data = Project::onlyTrashed()->with('komentar_project')->with('komentar_project_reply')->find($id);
+        $data = Project::onlyTrashed()->with('comment_project')->with('comment_project_reply')->find($id);
 
         // Check if data exists in the trash
         if (!$data) {
-            return redirect()->route('admin.project.arsip')->with('error', 'Data tidak ditemukan.');
+            return redirect()->route('admin.project.archives')->with('error', 'Data not found.');
         }
 
         $dataimgdecode = json_decode($data->img_url);
@@ -446,10 +446,10 @@ class ProjectController extends Controller
             }
         }
 
-        $deskripsi = $data->deskripsi;
+        $description = $data->description;
         $dom = new \domdocument();
         libxml_use_internal_errors(true);
-        $dom->loadHTML($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $errors = libxml_get_errors();
         libxml_clear_errors();
         
@@ -464,12 +464,12 @@ class ProjectController extends Controller
                     }
         }
 
-        if (!$data->komentar_project->isEmpty()) {
-            $data->komentar_project->each->delete();
+        if (!$data->comment_project->isEmpty()) {
+            $data->comment_project->each->delete();
         }
         
-        if (!$data->komentar_project_reply->isEmpty()) {
-            $data->komentar_project_reply->each->delete();
+        if (!$data->comment_project_reply->isEmpty()) {
+            $data->comment_project_reply->each->delete();
         }
         
         $data->forceDelete();
@@ -485,7 +485,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah dihapus secara permanent.',
+            'message' => 'Data has been permanently deleted.',
         ]);
     }
 

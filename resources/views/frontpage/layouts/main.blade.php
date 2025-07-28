@@ -45,13 +45,13 @@
         <div class="loader"></div>
     </div>
 
-    {{-- <div id="app"> --}}
+    <div id="app">
         @include('frontpage.layouts.header')
     
         @yield('content')
     
         @include('frontpage.layouts.footer')
-    {{-- </div> --}}
+    </div>
 
     <!-- Js Plugins -->
     <script src="{{ asset('jquery/dist/jquery.js') }}"></script>

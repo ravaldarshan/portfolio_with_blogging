@@ -51,7 +51,7 @@
             </div>
             <div class="card-wrap">
                 <div class="card-header">
-                    <h4>Total Visits</h4>
+                    <h4>Total Vcontentsts</h4>
                 </div>
                 <div class="card-body">
                     {{ count($Statistic) }}
@@ -113,7 +113,7 @@
                             {{ abs($dailyPercentageChange) }}%
                         </span>
                         <div class="detail-value">{{ $chartLabelsDaily[6] }}</div>
-                        <div class="detail-name">Today's Visits</div>
+                        <div class="detail-name">Today's Vcontentsts</div>
                     </div>
 
                     <div class="statistic-details-item">
@@ -128,7 +128,7 @@
                             {{ $weeklyPercentageChange }}%
                         </span>
                         <div class="detail-value">{{ $chartLabelsWeekly[6] }}</div>
-                        <div class="detail-name">This Week's Visits</div>
+                        <div class="detail-name">This Week's Vcontentsts</div>
                     </div>
 
                     <div class="statistic-details-item">
@@ -143,7 +143,7 @@
                             {{ $monthlyPercentageChange }}%
                         </span>
                         <div class="detail-value">{{ $chartLabelsMonthly[11] }}</div>
-                        <div class="detail-name">This Month's Visits</div>
+                        <div class="detail-name">This Month's Vcontentsts</div>
                     </div>
 
                     <div class="statistic-details-item">
@@ -158,7 +158,7 @@
                             {{ $yearlyPercentageChange }}%
                         </span>
                         <div class="detail-value">{{ $chartLabelsYearly[6] }}</div>
-                        <div class="detail-name">This Year's Visits</div>
+                        <div class="detail-name">This Year's Vcontentsts</div>
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@
     </div>
     
     <div class="row">
-        <div class="col-3">Tanggal:</div>
+        <div class="col-3">Date:</div>
         <div class="col-9">{{ $row->created_at ? $row->created_at : '' }}</div>
     </div>
     

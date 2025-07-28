@@ -27,11 +27,11 @@
 
             var modalBody = $('#detailLogSystemBody');
             modalBody.html('<div id="loadingSpinner" style="display: none;">' +
-                '<i class="fas fa-spinner fa-spin"></i> Sedang memuat...' +
+                '<i class="fas fa-spinner fa-spin"></i> Loading...' +
                 '</div>');
             var loadingSpinner = $('#loadingSpinner');
 
-            loadingSpinner.show(); // Tampilkan elemen animasi
+            loadingSpinner.show();
 
             $.ajax({
                 url: '{{ route('admin.logSystems.getDetail', ':id') }}'.replace(':id', id),
@@ -41,7 +41,7 @@
                     $dataArray = JSON.parse(data.data);
 
                     var dataJson = JSON.stringify($dataArray, null,
-                        4); // Mengubah objek JSON menjadi string dengan indentasi
+                        4);
 
                     modalBody.html(
                         '<div class="row">' +
@@ -82,7 +82,7 @@
 
                         '<div class="row">' +
                         '<div class="col-5">' +
-                        '<div class="title">Tanggal</div>' +
+                        '<div class="title">Date</div>' +
                         '</div>' +
                         '<div class="col-7">' +
                         '<div class="data">: ' + data.created_at + '</div>' +
@@ -135,10 +135,10 @@
                         '</div>' +
 
                         '<pre>Data JSON: ' + dataJson +
-                        '</pre>' // Gunakan <pre> untuk melestarikan format JSON
+                        '</pre>'
                     );
 
-                    loadingSpinner.hide(); // Sembunyikan elemen animasi setelah data dimuat
+                    loadingSpinner.hide();
                 }
             });
         });

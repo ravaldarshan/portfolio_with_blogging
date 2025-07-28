@@ -14,9 +14,9 @@ class ProfileController extends Controller
 {
     private static $module = "profile";
 
-    public function index($kode) {
+    public function index($code) {
         //Check permission
-        if (auth()->user()->kode != 'daysf-01' && $kode != auth()->user()->kode) {
+        if (auth()->user()->code != 'daysf-01' && $code != auth()->user()->code) {
             abort(403);
         }
 
@@ -25,7 +25,7 @@ class ProfileController extends Controller
         }
         
         $data = Profile::with('user')
-        ->where('user_kode',$kode)
+        ->where('user_code',$code)
         ->first();
         if (!$data) {
             # code...
@@ -38,19 +38,19 @@ class ProfileController extends Controller
             ];
             $sosmedJson = json_encode($sosmedData);
             $profile = Profile::create([
-                'user_kode' => auth()->user() ? auth()->user()->kode : '',
-                'sosial_media' => $sosmedJson,
+                'user_code' => auth()->user() ? auth()->user()->code : '',
+                'social_media' => $sosmedJson,
             ]);
 
             $profile->save();
             $sosmed = json_decode($sosmedJson, true); // Mengubah JSON menjadi array
         }else{
-            $sosmed = json_decode($data->sosial_media, true); // Mengubah JSON menjadi array
+            $sosmed = json_decode($data->social_media, true); // Mengubah JSON menjadi array
         }
         // dd($sosmed);
         // Jika data tidak ditemukan, tampilkan pesan kesalahan atau arahkan ke halaman lain
         if (!$data) {
-            return redirect()->route('admin.dashboard')->with('error', 'Data pengguna tidak ditemukan.');
+            return redirect()->route('admin.dashboard')->with('error', 'Data User not found.');
         }
     
         return view('administrator.profile.index', compact('data','sosmed'));
@@ -66,24 +66,24 @@ class ProfileController extends Controller
     
     public function update(Request $request)
     {
-        $kode = $request->kode;
+        $code = $request->code;
 
         // Check permission
-        if ($kode != auth()->user()->kode) {
+        if ($code != auth()->user()->code) {
             abort(403);
         }
 
-        $data = Profile::where('user_kode',$kode)->with('user')->first();
+        $data = Profile::where('user_code',$code)->with('user')->first();
 
         if (!$data) {
-            return redirect()->route('admin.profile',$kode)->with('error', 'Data tidak ditemukan.');
+            return redirect()->route('admin.profile',$code)->with('error', 'Data not found.');
         }
 
         $request->validate([
             'email' => 'unique:users,email,' . $data->user->id,
         ]);
 
-        // Simpan data sebelum diupdate
+        // Simpan Data before updating
         $previousData = $data->toArray();
 
         $updates = [];
@@ -91,22 +91,22 @@ class ProfileController extends Controller
         if ($request->filled('full_name')) {
             $updates['full_name'] = $request->full_name;
         }
-        if ($request->filled('no_telepon')) {
-            $updates['no_telepon'] = $request->no_telepon;
+        if ($request->filled('phone_number')) {
+            $updates['phone_number'] = $request->phone_number;
         }
-        if ($request->filled('pendidikan_terakhir')) {
-            $updates['pendidikan_terakhir'] = $request->pendidikan_terakhir;
+        if ($request->filled('last_education')) {
+            $updates['last_education'] = $request->last_education;
         }
-        if ($request->filled('tempat_lahir')) {
-            $updates['tempat_lahir'] = $request->tempat_lahir;
+        if ($request->filled('place_of_birth')) {
+            $updates['place_of_birth'] = $request->place_of_birth;
         }
-        if ($request->filled('tanggal_lahir')) {
-            $updates['tanggal_lahir'] = $request->tanggal_lahir;
+        if ($request->filled('date_of_birth')) {
+            $updates['date_of_birth'] = $request->date_of_birth;
         }
-        if ($request->filled('alamat')) {
-            $updates['alamat'] = $request->alamat;
+        if ($request->filled('address')) {
+            $updates['address'] = $request->address;
         }
-        if ($request->filled('sosmed_linkedin') || $request->filled('sosial_media') || $request->filled('sosial_media') || $request->filled('sosial_media')) {
+        if ($request->filled('sosmed_linkedin') || $request->filled('social_media') || $request->filled('social_media') || $request->filled('social_media')) {
             $sosmedData = [
                 'linkedin' => $request->sosmed_linkedin,
                 'twitter' => $request->sosmed_twitter,
@@ -115,30 +115,30 @@ class ProfileController extends Controller
             ];
             $sosmedJson = json_encode($sosmedData);
 
-            $updates['sosial_media'] = $sosmedJson;
+            $updates['social_media'] = $sosmedJson;
         }
-        if ($request->hasFile('foto_user_profile')) {
+        if ($request->hasFile('photo_user_profile')) {
 
-            if (!empty($data->foto)) {
-                $image_path = "./administrator/assets/media/profile/" . $data->foto;
+            if (!empty($data->photo)) {
+                $image_path = "./administrator/assets/media/profile/" . $data->photo;
                 if (File::exists($image_path)) {
                     File::delete($image_path);
                 }
             }
 
-            $image = $request->file('foto_user_profile');
-            $fileName = 'foto-profile_' . $data->user->name . '_' . date('Y-m-d-H-i-s') . '_' . uniqid(2) . '.' . $image->getClientOriginalExtension();
+            $image = $request->file('photo_user_profile');
+            $fileName = 'photo-profile_' . $data->user->name . '_' . date('Y-m-d-H-i-s') . '_' . uniqid(2) . '.' . $image->getClientOriginalExtension();
             $path = upload_path('profile') . $fileName;
             Image::make($image->getRealPath())->save($path, 100);
-            $updates['foto'] = $fileName;
+            $updates['photo'] = $fileName;
         }
         
         if ($request->filled('email')) {
-            $user = User::where('kode', $kode)->first();
+            $user = User::where('code', $code)->first();
             if ($user) {
                 $user->update(['email' => $request->email]);
             } else {
-                return redirect()->route('admin.profile',$kode)->with('error', 'User tidak ditemukan.');
+                return redirect()->route('admin.profile',$code)->with('error', 'User tidak ditemukan.');
             }
         }
 
@@ -151,23 +151,23 @@ class ProfileController extends Controller
         }
 
         // Kirim data yang diperbarui ke fungsi createLog
-        createLog(static::$module, __FUNCTION__, $kode, ['Data sebelum diupdate' => $previousData, 'Data sesudah diupdate' => ['data' => $updatedData, 'user' => $user]]);
+        createLog(static::$module, __FUNCTION__, $code, ['Data before updating' => $previousData, 'Data sesudah diupdate' => ['data' => $updatedData, 'user' => $user]]);
 
-        return redirect()->route('admin.profile',$kode)->with('success', 'Data berhasil diupdate.');
+        return redirect()->route('admin.profile',$code)->with('success', 'Data updated successfully.');
     }
 
 
 
 
     
-    public function getDetail($kode){
+    public function getDetail($code){
 
-        $data = Profile::with('user')->find($kode);
+        $data = Profile::with('user')->find($code);
 
         return response()->json([
             'data' => $data,
             'status' => 'success',
-            'message' => 'Sukses memuat detail user.',
+            'message' => 'Successfully loaded user details.',
         ]);
     }
 
@@ -175,13 +175,13 @@ class ProfileController extends Controller
         if($request->ajax()){
             $users = User::where('email', $request->email);
             
-            if(isset($request->kode)){
-                $users->where('kode', '!=', $request->kode);
+            if(isset($request->code)){
+                $users->where('code', '!=', $request->code);
             }
     
             if($users->exists()){
                 return response()->json([
-                    'message' => 'Email sudah dipakai',
+                    'message' => 'Email is already in use',
                     'valid' => false
                 ]);
             } else {

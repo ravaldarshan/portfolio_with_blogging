@@ -31,7 +31,7 @@ class UserGroupController extends Controller
         $data = UserGroup::query();
 
         if ($request->status != "") {
-            $status = $request->status == "Aktif" ? 1 : 0;
+            $status = $request->status == "Active" ? 1 : 0;
             $data->where("status", $status)->get();
         }
 
@@ -44,14 +44,14 @@ class UserGroupController extends Controller
                             name="status" checked="checked" id="status'.$row->id.'" />
                         <label class="tgl-btn" for="status'.$row->id.'"></label>
                     </div>';
-                        $status .= '<span class="badge bg-success">Aktif</span></div>';
+                        $status .= '<span class="badge bg-success">Active</span></div>';
                     } else {
                         $status = '<div class="d-flex"><div>
                         <input class="tgl tgl-ios h-20px w-30px changeStatus" data-ix="' . $row->id . '" type="checkbox" value="1"
                             name="status" id="status'.$row->id.'"/>
                             <label class="tgl-btn" for="status'.$row->id.'"></label>
                             </div>';
-                        $status .= '<span class="badge bg-danger">Tidak Aktif</span></div>';
+                        $status .= '<span class="badge bg-danger">Not Active</span></div>';
                     }
                     return $status;
                 endif;
@@ -88,7 +88,6 @@ class UserGroupController extends Controller
 
         $modules = Module::with("access")->get();
         return view("administrator.user_groups.add", compact("modules"));
-        // return view("administrator.user_groups.examplee.add", compact("modules"));
     }
 
     public function save(Request $request)
@@ -121,11 +120,11 @@ class UserGroupController extends Controller
             }
 
             if (array_key_exists($row['modul_id'], $permission_group)) {
-                $data_akses = $permission_group[$row['modul_id']];
-                foreach ($data_akses as $modul_akses => $status) {
+                $data_access = $permission_group[$row['modul_id']];
+                foreach ($data_access as $modul_access => $status) {
                     $data = [
                         "user_group_id"     => $user_group->id,
-                        "module_access_id"  => $modul_akses,
+                        "module_access_id"  => $modul_access,
                         "status"            => $status
                     ];
 
@@ -144,9 +143,9 @@ class UserGroupController extends Controller
 
 
         // Write log after all operations are complete
-        createLog(static::$module, __FUNCTION__, $user_group->id, ['data' => $data,'hak akses' => $permission]);
+        createLog(static::$module, __FUNCTION__, $user_group->id, ['data' => $data,'access rights' => $permission]);
 
-        return redirect(route('admin.user_groups'))->with(['success' => 'Data berhasil disimpan.']);
+        return redirect(route('admin.user_groups'))->with(['success' => 'Data saved successfully.']);
     }
 
     public function getDetail($id)
@@ -220,11 +219,11 @@ class UserGroupController extends Controller
             }
 
             if (array_key_exists($row['modul_id'], $permission_group)) {
-                $data_akses = $permission_group[$row['modul_id']];
-                foreach ($data_akses as $modul_akses => $status) {
+                $data_access = $permission_group[$row['modul_id']];
+                foreach ($data_access as $modul_access => $status) {
                     $data = array(
                         "user_group_id"     => $id,
-                        "module_access_id"  => $modul_akses,
+                        "module_access_id"  => $modul_access,
                         "status"            => $status
                     );
 
@@ -243,12 +242,12 @@ class UserGroupController extends Controller
         $permissionAfter = getPermissionGroup($user_group->id);
         //Write log
         createLog(static::$module, __FUNCTION__, $id, [
-            'Data Sebelum diupdate' => ['data' => $user_group], 
-            'Data Setelah diupdate' => ['data'=> $user_group_updated],
-            'hak akses' => $permissionAfter
+            'Data before updating' => ['data' => $user_group], 
+            'Data after updating' => ['data'=> $user_group_updated],
+            'access rights' => $permissionAfter
         ]);
 
-        return redirect(route('admin.user_groups'))->with(['success' => 'Data berhasil di update.']);
+        return redirect(route('admin.user_groups'))->with(['success' => 'Data updated successfully.']);
     }
 
     public function delete(Request $request)
@@ -257,9 +256,6 @@ class UserGroupController extends Controller
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
-        
-        // Pastikan Anda memiliki mekanisme otorisasi di sini sebelum melanjutkan menghapus data.
-
         $id = $request->id;
         
         // Temukan grup pengguna berdasarkan ID yang diberikan.
@@ -270,10 +266,10 @@ class UserGroupController extends Controller
         }
 
         $log = $user_group;
-        // Hapus semua entri hak akses (permissions) terkait dengan grup pengguna ini.
+        // Wipe semua entri access rights (permissions) terkait dengan grup pengguna ini.
         $user_group->permissions()->delete();
 
-        // Hapus grup pengguna.
+        // Wipe grup pengguna.
         $data = $user_group->delete();
 
         // Tulis log jika diperlukan.
@@ -290,7 +286,7 @@ class UserGroupController extends Controller
             abort(403);
         }
 
-        $data['status'] = $request->status == "Aktif" ? 1 : 0;
+        $data['status'] = $request->status == "Active" ? 1 : 0;
         $log = $request->status;
         $id = $request->ix;
         $user_group = UserGroup::where(["id" => $id])->first();
@@ -298,11 +294,11 @@ class UserGroupController extends Controller
 
 
         // Set a session flash message
-        Session::flash('success', 'Status telah diubah.');
+        Session::flash('success', 'Status has been changed.');
 
         //Write log
         createLog(static::$module, __FUNCTION__, $id,['User Group' => $user_group, 'Statusnya diubah menjadi' => $log]);
-        return response()->json(['success' => 'Status telah diubah.']);
+        return response()->json(['success' => 'Status has been changed.']);
     }
 
     public function checkName(Request $request){
@@ -315,7 +311,7 @@ class UserGroupController extends Controller
     
             if($userGroups->exists()){
                 return response()->json([
-                    'message' => 'Nama sudah ada dalam database',
+                    'message' => 'Name already exists in the database',
                     'valid' => false
                 ]);
             } else {

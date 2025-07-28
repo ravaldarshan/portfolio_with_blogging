@@ -361,7 +361,7 @@
     <!-- Latest Blog Section End -->
 
     <!-- Call To Action Section Begin -->
-    <section class="callto spad set-bg-color" id="sectionPromosi"
+    <section class="callto spad set-bg-color" id="sectionPromotion"
         data-setbgcolor="{{ $settings['general_breadcrumb_color'] ?? '#1e2a45' }}">
         <div class="container">
             <div class="row">
@@ -466,7 +466,7 @@
                             `<div class="work__item__hover">` +
                             `<h4>` + data.nama + `</h4>` +
                             `<ul>` +
-                            `<li>` + data.kategori_project.nama + `</li>` +
+                            `<li>` + data.category_project.nama + `</li>` +
                             `</ul>` +
                             `</div>` +
                             `</div>`;
@@ -498,8 +498,8 @@
                         const data = respon.data[i];
                         let imgJsonDecode = JSON.parse(data.img_url);
 
-                        // Assuming data.isi contains the text with HTML tags
-                        let contentWithHTML = data.isi;
+                        // Assuming data.contents contains the text with HTML tags
+                        let contentWithHTML = data.contents;
 
                         // Remove HTML tags
                         let contentWithoutHTML = contentWithHTML.replace(/<\/?[^>]+(>|$)/g, '');
@@ -514,10 +514,10 @@
                             `<div class="col-lg-4">` +
                             `<div class="blog__item latest__item set-bg-blog" data-setbg="{{ asset('administrator/assets/media/blog') }}/` +
                             imgJsonDecode[0] + `">` +
-                            `<h4>` + data.judul + `</h4>` +
+                            `<h4>` + data.title + `</h4>` +
                             `<ul>` +
-                            `<li>` + formatDate(data.tanggal_posting) + `</li>` +
-                            `<li>` + (data.komentar_blog.length + data.komentar_blog_reply.length) +
+                            `<li>` + formatDate(data.posting_date) + `</li>` +
+                            `<li>` + (data.blog_comments.length + data.blog_comments_reply.length) +
                             ` Comment</li>` +
                             `</ul>` +
                             `<p>` + truncatedContent + `</p>` +

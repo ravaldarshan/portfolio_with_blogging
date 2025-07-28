@@ -15,10 +15,10 @@ class CreateProjectTable extends Migration
     {
         Schema::create('project', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_project_id');
+            $table->foreignId('category_project_id');
             $table->string('nama');
             $table->text('slug');
-            $table->text('deskripsi');
+            $table->text('description');
             $table->text('img_url');
             $table->timestamps();
             $table->softDeletes();

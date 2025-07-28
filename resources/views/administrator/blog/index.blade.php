@@ -21,10 +21,10 @@
                     </div>
                     <div class="col-4" style="display: flex; justify-content: flex-end;">
                         @if (isallowed('blog', 'add'))
-                            <a href="{{ route('admin.blog.add') }}" class="btn btn-primary">Tambah Data</a>
+                            <a href="{{ route('admin.blog.add') }}" class="btn btn-primary">Add Data</a>
                         @endif
-                        @if (isallowed('blog', 'arsip'))
-                            <a href="{{ route('admin.blog.arsip') }}" class="btn btn-primary mx-3">Arsip</a>
+                        @if (isallowed('blog', 'archives'))
+                            <a href="{{ route('admin.blog.archives') }}" class="btn btn-primary mx-3">Archives</a>
                         @endif
                     </div>
                     
@@ -35,8 +35,8 @@
                             <thead>
                                 <tr>
                                     <th width="25">No</th>
-                                    <th width="200">Kategori</th>
-                                    <th width="100%">Judul</th>
+                                    <th width="200">Category</th>
+                                    <th width="100%">Title</th>
                                     <th width="100">Status</th>
                                     <th width="200">Action</th>
                                 </tr>
@@ -82,12 +82,12 @@
                         },
                     },
                     {
-                        data: 'kategori.nama',
-                        name: 'kategori.nama'
+                        data: 'category.nama',
+                        name: 'category.nama'
                     },
                     {
-                        data: 'judul',
-                        name: 'judul'
+                        data: 'title',
+                        name: 'title'
                     },
                     {
                         render: function(data, type, row, meta) {
@@ -120,12 +120,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ini',
+                    title: 'Are you sure you want to delete this data?',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -143,7 +143,7 @@
                                 //     .load();
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
-                                    title: 'Berhasil!',
+                                    title: 'Succeed!',
                                     text: 'Data berhasil dihapus.',
                                     icon: 'success',
                                     timer: 1500, // 2 detik

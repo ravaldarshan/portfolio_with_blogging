@@ -82,15 +82,9 @@
         <div class="footer__copyright">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     <p class="footer__copyright__text">
-                        {{-- <script>
-                            document.write(new Date().getFullYear());
-                        </script> --}}
                         {!! array_key_exists('text_frontpage_footer', $settings) ? $settings['text_frontpage_footer'] : '' !!}
-
                     </p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </div>
             </div>
         </div>

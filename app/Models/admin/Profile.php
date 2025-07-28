@@ -16,7 +16,7 @@ class Profile extends Model
     protected $guarded = ['id'];
 
     public function user(){
-        return $this->belongsTo(User::class, 'user_kode', 'kode');
+        return $this->belongsTo(User::class, 'user_code', 'code');
     }
     
 }

@@ -22,8 +22,8 @@
                     <div class="col-4" style="display: flex; justify-content: flex-end;">
                         @if (isallowed('log_system', 'clear'))
                             <a href="javascript:void(0)" class="btn btn-danger clear">
-                                <span class="indicator-label-kode">Clear Logs</span>
-                                <span class="indicator-progress-kode" style="display: none;">
+                                <span class="indicator-label-code">Clear Logs</span>
+                                <span class="indicator-progress-code" style="display: none;">
                                     <div class="d-flex">
                                         <span class="spinner-border spinner-border-sm align-middle ms-2 mt-1"></span>
                                     </div>
@@ -50,7 +50,7 @@
                                     <th width="200">User</th>
                                     <th width="100%">Module</th>
                                     <th width="100%">Action</th>
-                                    <th width="200">Tanggal</th>
+                                    <th width="200">Date</th>
                                 </tr>
                             </thead>
                         </table>
@@ -145,8 +145,8 @@
 
             $(document).on('click', '.clear', function(event) {
                 const button = $(this);
-                const label = button.find('.indicator-label-kode');
-                const progress = button.find('.indicator-progress-kode');
+                const label = button.find('.indicator-label-code');
+                const progress = button.find('.indicator-progress-code');
 
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
@@ -157,12 +157,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah anda yakin ingin menghapus data ini',
+                    title: 'Are you sure you want to delete this data?',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: 'Ya, Saya yakin!',
-                    cancelButtonText: 'Tidak, Batalkan!',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: 'No, Cancel!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -178,19 +178,17 @@
                                 "_method": "GET",
                             },
                             success: function() {
-                                // Menyembunyikan spinner dan mengembalikan label
                                 progress.hide();
                                 label.text('Clear Logs');
 
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire(
-                                    'Berhasil!',
-                                    'Data log yang lebih lama dari 7 hari berhasil dihapus.',
+                                    'Succeed!',
+                                    'Log data older than 7 days was successfully deleted.',
                                     'success'
                                 );
                             },
                             error: function() {
-                                // Menyembunyikan spinner dan mengembalikan label jika terjadi kesalahan
                                 progress.hide();
                                 label.text('Clear Logs');
 

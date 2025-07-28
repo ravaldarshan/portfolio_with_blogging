@@ -90,9 +90,9 @@ class ClientController extends Controller
         }
 
         // Log the data
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data yang disimpan' => $data]);
+        createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
 
-        return redirect()->route('admin.client')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('admin.client')->with('success', 'Data saved successfully.');
     }
     
     public function edit($id){
@@ -122,7 +122,7 @@ class ClientController extends Controller
 
         $request->validate($rules);
 
-        // Simpan data sebelum diupdate
+        // Simpan Data before updating
         $previousData = $data->toArray();
 
         $updates = [
@@ -151,8 +151,8 @@ class ClientController extends Controller
 
         $data->update($updates);
 
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data sebelum diupdate' => $previousData, 'Data sesudah diupdate' => $updatedData]);
-        return redirect()->route('admin.client')->with('success', 'Data berhasil diupdate.');
+        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => $updatedData]);
+        return redirect()->route('admin.client')->with('success', 'Data updated successfully.');
     }
     
     public function delete(Request $request)
@@ -183,7 +183,7 @@ class ClientController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Data telah dihapus.',
+            'message' => 'Data has been deleted.',
         ]);
     }
 

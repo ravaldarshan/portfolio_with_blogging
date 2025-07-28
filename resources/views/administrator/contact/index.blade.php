@@ -24,7 +24,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="inputAddress" class="form-label">Address</label>
-                                <input type="text" id="inputAddress" class="form-control" placeholder="Masukan Address"
+                                <input type="text" id="inputAddress" class="form-control" placeholder="Enter Address"
                                     value="{{ array_key_exists('address', $data) ? $data['address'] : '' }}"
                                     name="address" autocomplete="off">
                             </div>
@@ -34,8 +34,8 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
-                                <label for="inputTelepon" class="form-label">No Telepon</label>
-                                <input type="text" id="inputTelepon" class="form-control" placeholder="Masukan Nomor Telepon"
+                                <label for="inputTelephone" class="form-label">Telephone</label>
+                                <input type="text" id="inputTelephone" class="form-control" placeholder="Enter Phone number"
                                     value="{{ array_key_exists('telepon', $data) ? $data['telepon'] : '' }}"
                                     name="telepon" autocomplete="off">
                             </div>
@@ -46,7 +46,7 @@
                         <div class="col-md-6 col-12">
                             <div class="form-group mandatory">
                                 <label for="inputEmail" class="form-label">Email</label>
-                                <input type="text" id="inputEmail" class="form-control" placeholder="Masukan Footer text"
+                                <input type="text" id="inputEmail" class="form-control" placeholder="Enter Footer text"
                                     value="{{ array_key_exists('email', $data) ? $data['email'] : '' }}"
                                     name="email" autocomplete="off">
                             </div>
@@ -57,7 +57,7 @@
                         <div class="col-12">
                             <div class="form-group mandatory">
                                 <label for="inputLocation" class="form-label">Location <mark>Iframe g-map</mark></label>
-                                <textarea name="location" class="form-control" id="inputLocation" placeholder="Masukan Location Google Map" cols="30"
+                                <textarea name="location" class="form-control" id="inputLocation" placeholder="Enter Location Google Map" cols="30"
                                     rows="100" autocomplete="off" data-parsley-required="true">{{ array_key_exists('location', $data) ? $data['location'] : '' }}</textarea>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary mx-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>

@@ -22,9 +22,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mandatory">
-                                <label for="inputDeskripsi" class="form-label">Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control" id="inputDeskripsi" placeholder="Masukan Deskripsi" cols="30"
-                                    rows="100" autocomplete="off" data-parsley-required="true">{{ array_key_exists('deskripsi', $settings) ? $settings['deskripsi'] : '' }}</textarea>
+                                <label for="inputDescription" class="form-label">Description</label>
+                                <textarea name="description" class="form-control" id="inputDescription" placeholder="Enter Description" cols="30"
+                                    rows="100" autocomplete="off" data-parsley-required="true">{{ array_key_exists('description', $settings) ? $settings['description'] : '' }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -35,11 +35,9 @@
                                 <label for="inputImage" class="form-label">Image</label>
                                 <div class="row">
                                     <div class="col-8" style="padding-right: 0;">
-                                        <!-- Menggunakan col-8 agar input lebih lebar dan menghapus padding kanan -->
                                         <input type="text" name="image" class="form-control" value="{{ array_key_exists('image', $settings) ? $settings['image'] : '' }}" id="inputImage" readonly>
                                     </div>
                                     <div class="col-4" style="padding-left: 0;">
-                                        <!-- Menggunakan col-4 agar tombol "Search" lebih kecil dan menghapus padding kiri -->
                                         <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalGallery">
                                             Search
                                         </a>
@@ -54,7 +52,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary me-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -71,13 +69,11 @@
 @endsection
 
 @push('js')
-    <!-- Tambahkan FileInput JavaScript -->
     <script src="{{ asset_administrator('assets/plugins/form-jasnyupload/fileinput.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
 
-            //validate parsley form
             const form = document.getElementById("form");
             const validator = $(form).parsley();
 

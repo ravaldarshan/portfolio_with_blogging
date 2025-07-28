@@ -12,7 +12,7 @@
     @push('section_title')
         User Group
     @endpush
-    
+
     <div class="card">
         <div class="card-content">
             <div class="card-body">
@@ -25,7 +25,7 @@
                             <div class="form-group mandatory">
                                 <label for="first-name-column" class="form-label">Nama</label>
                                 <input type="text" id="first-name-column" class="form-control"
-                                    placeholder="Masukan Nama User Group" name="name" autocomplete="off"
+                                    placeholder="Enter Nama User Group" name="name" autocomplete="off"
                                     data-parsley-required="true">
                                 <div class="" style="color: red" id="accessErrorName"></div>
                             </div>
@@ -52,7 +52,7 @@
                                                     value="<?php echo $module->id; ?>">
                                             </td>
                                             <td>
-                                                <span class="akses">
+                                                <span class="access">
                                                     <label>
                                                         <input class="check_all check_all_<?php echo $index; ?>"
                                                             data-key_all="<?php echo $index; ?>" value="<?php echo $index; ?>"
@@ -64,28 +64,28 @@
                                                 <?php
                                                 $ind = 0;
                                                 foreach ($module->access as $row) {
-                                                    $kode_akses = explode('_', $row->identifiers);
+                                                    $code_access = explode('_', $row->identifiers);
                                                     $checked = '';
                                                 
-                                                    echo '<span class="akses">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <input class="access_' .
+                                                    echo '<span class="access">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <label>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <input class="access_' .
                                                         $index .
                                                         '"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         type="checkbox"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         name="access[' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         type="checkbox"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         name="access[' .
                                                         $index .
                                                         '][module_access][' .
                                                         $row->id .
                                                         ']"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         value="1" ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         value="1" ' .
                                                         $checked .
                                                         '>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ' .
                                                         $row->name .
                                                         '
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </span>';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </label>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </span>';
                                                     $ind++;
                                                 }
                                                 ?>
@@ -114,7 +114,7 @@
                                         <input class="form-check-input" type="radio" name="status" value="1"
                                             id="flexRadioDefault1" checked data-parsley-required="true">
                                         <label class="form-check-label form-label" for="flexRadioDefault1">
-                                            Aktif
+                                            Active
                                         </label>
                                     </div>
                                 </fieldset>
@@ -126,7 +126,7 @@
                             <button type="submit" id="formSubmit" class="btn btn-primary me-1 mb-1">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress" style="display: none;">
-                                    Tunggu Sebentar...
+                                    Wait a moment...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -168,7 +168,7 @@
                     accessErrorName.addClass('invalid-feedback');
                     firstNameColumn.addClass('is-invalid');
 
-                    accessErrorName.text('Nama sudah dipakai');
+                    accessErrorName.text('Name is already in use');
 
                     return;
                 } else {
@@ -184,7 +184,7 @@
                 if ($('input[name^="access["]:checked').length === 0) {
                     $("#table-permissions").addClass('table-invalid'); // Add this line
                     document.getElementById("accessError").textContent =
-                        "Pilih setidaknya salah satu modul akses";
+                        "Choose setidaknya salah satu modul access";
                     return;
                 } else {
                     $("#table-permissions").removeClass('table-invalid'); // Add this line

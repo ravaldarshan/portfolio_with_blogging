@@ -27,7 +27,7 @@
 
         var modalBody = $('#detailUserGroupsBody');
         modalBody.html('<div id="loadingSpinner" style="display: none;">' +
-            '<i class="fas fa-spinner fa-spin"></i> Sedang memuat...' +
+            '<i class="fas fa-spinner fa-spin"></i> Loading...' +
             '</div>');
         var loadingSpinner = $('#loadingSpinner');
 
@@ -105,7 +105,7 @@
                 modalBody.html(
                     '<p>ID: ' + data.id + '</p>' +
                     '<p>Nama User Group: ' + data.name + '</p>' +
-                    '<p>Status: ' + (data.status === '1' ? 'Aktif' : 'Tidak Aktif') + '</p>' +
+                    '<p>Status: ' + (data.status === '1' ? 'Active' : 'Not Active') + '</p>' +
                     '<p><strong>Permission:</strong></p>' + (hasAccessColumn ? permissionTableHTML : 'No access permissions for any module')
                 );
 

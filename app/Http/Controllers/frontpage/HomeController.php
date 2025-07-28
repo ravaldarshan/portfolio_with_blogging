@@ -26,7 +26,7 @@ class HomeController extends Controller
     }
     
     public function getProject(){
-        $data = Project::with('kategori_project')->limit(8)->orderBy('created_at','desc')->get();
+        $data = Project::with('category_project')->limit(8)->orderBy('created_at','desc')->get();
 
         return response()->json([
             'data' => $data,
@@ -34,7 +34,7 @@ class HomeController extends Controller
     }
     
     public function getBlog(){
-        $data = Blog::with('kategori')->with('komentar_blog')->with('komentar_blog_reply')->where('status', 1)->orderBy('created_at', 'desc')->get();
+        $data = Blog::with('category')->with('blog_comments')->with('blog_comments_reply')->where('status', 1)->orderBy('created_at', 'desc')->get();
 
         return response()->json([
             'data' => $data,

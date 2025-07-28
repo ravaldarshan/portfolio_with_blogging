@@ -27,7 +27,7 @@
                                 <div class="form-group mandatory">
                                     <label for="first-name-column" class="form-label">Nama</label>
                                     <input type="text" id="first-name-column" class="form-control"
-                                        placeholder="Masukan Nama User Group" name="name" value="{{ $edit->name }}"
+                                        placeholder="Enter Nama User Group" name="name" value="{{ $edit->name }}"
                                         autocomplete="off" data-parsley-required="true">
                                     <div class="" style="color: red" id="accessErrorName"></div>
                                 </div>
@@ -57,7 +57,7 @@
                                                 <td>
                                                     <?php
                                                     echo '
-                                                                                                                                                                                                            <span class="akses">
+                                                                                                                                                                                                            <span class="access">
                                                                                                                                                                                                                 <label>
                                                                                                                                                                                                                     <input class="check_all check_all_' .
                                                         $index .
@@ -74,11 +74,11 @@
                                                     <?php
                                                     $ind = 0;
                                                     foreach ($module->access as $row) {
-                                                        $kode_akses = explode('_', $row->identifiers);
+                                                        $code_access = explode('_', $row->identifiers);
                                                     
                                                         $checked = $permission[$edit->id][$module->identifiers][$row->identifiers] == 1 ? 'checked' : '';
                                                     
-                                                        echo '<span class="akses">
+                                                        echo '<span class="access">
                                                                                                                                                                                                                                                                     <label>
                                                                                                                                                                                                                                                                     <input class="access_' .
                                                             $index .
@@ -121,7 +121,7 @@
                                             <input class="form-check-input" type="radio" name="status" value="1"
                                                 id="flexRadioDefault1" {{ $edit->status ? 'checked' : '' }}>
                                             <label class="form-check-label form-label" for="flexRadioDefault1">
-                                                Aktif
+                                                Active
                                             </label>
                                         </div>
                                     </fieldset>
@@ -133,7 +133,7 @@
                                 <button type="submit" id="formSubmit" class="btn btn-primary me-1 mb-1">
                                     <span class="indicator-label">Submit</span>
                                     <span class="indicator-progress" style="display: none;">
-                                        Tunggu Sebentar...
+                                        Wait a moment...
                                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                     </span>
                                 </button>
@@ -195,7 +195,7 @@
                 if ($('input[name^="access["]:checked').length === 0) {
                     $("#table-permissions").addClass('table-invalid'); // Add this line
                     document.getElementById("accessError").textContent =
-                        "Pilih setidaknya salah satu modul akses";
+                        "Choose setidaknya salah satu modul access";
                     return;
                 } else {
                     $("#table-permissions").removeClass('table-invalid'); // Add this line
