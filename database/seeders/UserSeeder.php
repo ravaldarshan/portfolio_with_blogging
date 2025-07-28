@@ -36,7 +36,8 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678'),
             'status' => 1,
-            'user_group_id' => $user_group->id,
+            // 'user_group_id' => $user_group->id,
+            'user_group_id' => 0,
             'remember_token' => Str::random(60),
         ]);
     }
