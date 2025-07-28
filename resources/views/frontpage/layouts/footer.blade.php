@@ -35,18 +35,18 @@
                         <h5>About us</h5>
                         <p>{{ array_key_exists('about_frontpage_footer', $settings) ? $settings['about_frontpage_footer'] : '' }}
                         </p>
-                        <a href="{{ route('web.about') }}" class="read__more">Read more <span
-                                class="arrow_right"></span></a>
+                        <a href="{{ route('web.about') }}" class="read__more">See more about us 
+                            <span class="arrow_right"></span></a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-3">
                     <div class="footer__option__item">
-                        <h5>Who I`AM</h5>
+                        <h5>Who we are</h5>
                         <ul>
-                            <li><a href="{{ route('web.index') }}">Gallery</a></li>
                             <li><a href="{{ route('web.project') }}">Project</a></li>
-                            <li><a href="{{ route('web.contact') }}">Contact us</a></li>
                             <li><a href="{{ route('web.service') }}">Service</a></li>
+                            <li><a href="{{ route('web.blog') }}">Blog</a></li>
+                            <li><a href="{{ route('web.contact') }}">Contact us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -73,8 +73,18 @@
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__option__item">
-                        <h5>Have a Question?</h5>
-                        <p>Feel free to ask us anything. We're here to help!</p>
+                        <h5>Subscribe Now</h5>
+                        <form action="{{ route('web.subscribe') }}" method="POST">
+                            @csrf
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="email" placeholder="Enter your email address" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary btn-sm btn-icon" type="submit" id="button-addon2">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

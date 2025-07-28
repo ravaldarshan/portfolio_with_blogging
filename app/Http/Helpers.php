@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\admin\UserGroup;
 use App\Models\admin\ModuleAccess;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 function asset_administrator($url)
 {
@@ -64,7 +65,12 @@ function upload_path($type = '', $file = '')
 			break;
 	}
 
-	return Str::finish('administrator/assets/media/' . $target_folder, '/') . $file;
+	$uploadDir = public_path("administrator/assets/media/" . $target_folder . "/");
+	if (!File::exists($uploadDir)) {
+		File::makeDirectory($uploadDir, 0755, true);
+	}
+	return  $uploadDir. $file;
+	// return Str::finish('administrator/assets/media/' . $target_folder, '/') . $file;
 }
 
 function img_src($image = '', $img_type = '')

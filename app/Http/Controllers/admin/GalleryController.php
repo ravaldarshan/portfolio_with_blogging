@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-use File;
 use DataTables;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\admin\Gallery;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class GalleryController extends Controller
@@ -45,7 +45,7 @@ class GalleryController extends Controller
 
         $rules = [
             'img' => 'required|array',
-            'img.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048', // Adjust the allowed image types and maximum file size as needed
+            'img.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
         ];
         
         $request->validate($rules);

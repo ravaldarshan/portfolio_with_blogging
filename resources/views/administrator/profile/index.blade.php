@@ -29,7 +29,7 @@
                                     <p class="text-muted font-size-sm">
                                         {{ $data->address ? $data->address : '' }}</p>
                                     <a href="javascript:void(0)" class="btn btn-outline-primary" data-toggle="modal"
-                                        data-target="#fileinput-preview-profile">Ubah photo Profile</a>
+                                        data-target="#fileinput-preview-profile">Change profile photo</a>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">No Telephone</h6>
+                                        <h6 class="mb-0">Phone Number</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input autocomplete="off" type="text" class="form-control" name="phone_number"
@@ -136,26 +136,26 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Pendidikan Terakhir</h6>
+                                        <h6 class="mb-0">Last Education</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <select class="form-control" name="last_education"
                                             id="pendidikanTerakhirField">
-                                            <option value="">Choose Pendidikan Terakhir</option>
-                                            <option value="SD"
-                                                {{ $data->last_education == 'SD' ? 'selected' : '' }}>
-                                                SD</option>
-                                            <option value="SMP"
-                                                {{ $data->last_education == 'SMP' ? 'selected' : '' }}>SMP</option>
-                                            <option value="SMA"
-                                                {{ $data->last_education == 'SMA' ? 'selected' : '' }}>SMA</option>
+                                            <option value="">Choose Last Education</option>
+                                            <option value="Elementary School" {{ $data->last_education == 'Elementary School' ? 'selected' : '' }}>Elementary School</option>
+                                            <option value="Junior High School"
+                                                {{ $data->last_education == 'Junior High School' ? 'selected' : '' }}>Junior High School</option>
+                                            <option value="Senior High School"
+                                                {{ $data->last_education == 'Senior High School' ? 'selected' : '' }}>Senior High School</option>
                                             <option value="Diploma"
                                                 {{ $data->last_education == 'Diploma' ? 'selected' : '' }}>Diploma
                                             </option>
-                                            <option value="Sarjana"
-                                                {{ $data->last_education == 'Sarjana' ? 'selected' : '' }}>Sarjana
+                                            <option value="Graduate"
+                                                {{ $data->last_education == 'Graduate' ? 'selected' : '' }}>Graduate
                                             </option>
-                                            <!-- Tambahkan opsi lain sesuai kebutuhan -->
+                                            <option value="Post Graduate"
+                                                {{ $data->last_education == 'Post Graduate' ? 'selected' : '' }}>Post Graduate
+                                            </option>
                                         </select>
                                     </div>
                                 </div>

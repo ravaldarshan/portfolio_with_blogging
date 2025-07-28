@@ -132,7 +132,7 @@
 
                         '<div class="row">' +
                         '<div class="col-5">' +
-                        '<div class="title">No Telephone</div>' +
+                        '<div class="title">Phone Number</div>' +
                         '</div>' +
                         '<div class="col-7">' +
                         '<div class="data">: ' + data.profile.phone_number + '</div>' +
@@ -141,7 +141,7 @@
 
                         '<div class="row">' +
                         '<div class="col-5">' +
-                        '<div class="title">Pendidikan Terakhir</div>' +
+                        '<div class="title">Last Education</div>' +
                         '</div>' +
                         '<div class="col-7">' +
                         '<div class="data">: ' + data.profile.last_education + '</div>' +

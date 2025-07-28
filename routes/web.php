@@ -63,3 +63,5 @@ Route::post('/blog/{slug}/comment/reply', [BlogController::class, 'reply'])->nam
 Route::get('/blog/fetchData/comment', [BlogController::class, 'fetchDataComment'])->name('web.blog.fetchData.comment');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('web.contact');
+Route::post('/subscribe', [ContactController::class, 'subscribe'])->name('web.subscribe');
+Route::post('/unsubscribe', [ContactController::class, 'unsubscribe'])->name('web.unsubscribe');

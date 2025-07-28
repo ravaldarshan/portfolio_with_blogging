@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\admin;
 
-use File;
 use App\Models\admin\Banner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class BannerController extends Controller
@@ -56,6 +56,12 @@ class BannerController extends Controller
                 $image = $request->file('icon_' . $i);
                 $fileName = 'icon_' . $i . '.' . $image->getClientOriginalExtension();
                 $path = upload_path('banner') . $fileName;
+
+                // dd([
+                //     'path' => $path,
+                //     'is_writable' => is_writable(dirname($path)),
+                //     'exists' => file_exists(dirname($path))
+                // ]);
                 
                 // Save the uploaded file
                 try {
@@ -63,6 +69,7 @@ class BannerController extends Controller
                     $img_url = $fileName;
                 } catch (\Exception $e) {
                     // Handle file upload error
+                    // dd($e);
                     // Log or return an error response
                     return response()->json(['error' => 'File upload failed'], 500);
                 }
@@ -70,8 +77,6 @@ class BannerController extends Controller
 
             $data_banner['banner_'.$i] = json_encode(['title' => $title, 'body' => $body, 'img_url' => ($request->hasFile('icon_' . $i) ? $img_url : (array_key_exists('banner_'.$i, $banner) ? (json_decode($banner['banner_'.$i])->img_url) : ''))]);
         }
-        
-        
 
         $logs = []; // Buat array kosong untuk menyimpan log
 

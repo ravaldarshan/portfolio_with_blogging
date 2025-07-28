@@ -5,8 +5,8 @@
         <div class="hero__slider owl-carousel" id="bannerSection">
             <div class="hero__item set-bg" data-setbg="https://i.giphy.com/XfDiixCqdH7OrEBg5z.webp">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
+                    <div class="row text-center">
+                        <div class="col-lg-12">
                             <div class="hero__text">
                                 <span>For website and video editing</span>
                                 <h2>Videographer’s Portfolio</h2>
@@ -18,8 +18,8 @@
             </div>
             <div class="hero__item set-bg" data-setbg="https://i.giphy.com/XfDiixCqdH7OrEBg5z.webp">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
+                    <div class="row text-center">
+                        <div class="col-lg-12">
                             <div class="hero__text">
                                 <span>For website and video editing</span>
                                 <h2>Videographer’s Portfolio</h2>
@@ -31,8 +31,8 @@
             </div>
             <div class="hero__item set-bg" data-setbg="https://i.giphy.com/XfDiixCqdH7OrEBg5z.webp">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
+                    <div class="row text-center">
+                        <div class="col-lg-12">
                             <div class="hero__text">
                                 <span>For website and video editing</span>
                                 <h2>Videographer’s Portfolio</h2>
@@ -645,14 +645,14 @@
                     if (respon.data.length !== 0) {
                         for (let i = 0; i < respon.data.length; i++) {
                             const data = respon.data[i];
-    
+
                             let bannerJsonDecode = JSON.parse(data.value);
                             bannerHtml +=
                                 `<div class="hero__item set-bg-banner" data-setbg="{{ asset('administrator/assets/media/banner') }}/` +
                                 bannerJsonDecode.img_url + `">` +
                                 `<div class="container">` +
-                                `<div class="row">` +
-                                `<div class="col-lg-6">` +
+                                `<div class="row text-center">` +
+                                `<div class="col-lg-12">` +
                                 `<div class="hero__text">` +
                                 `<span>` + bannerJsonDecode.title + `</span>` +
                                 `<h2>` + bannerJsonDecode.body + `</h2>` +
@@ -666,12 +666,12 @@
                         $('#bannerSection').html(
                             bannerHtml
                         )
-    
+
                         $('.set-bg-banner').each(function() {
                             var bg = $(this).data('setbg');
                             $(this).css('background-image', 'url(' + bg + ')');
                         });
-    
+
                         $('#bannerSection').owlCarousel('destroy');
                         initcarousel();
                     }

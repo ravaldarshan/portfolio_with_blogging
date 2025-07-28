@@ -124,7 +124,7 @@
     <!-- Logo Begin -->
     <div class="logo spad">
         <div class="container">
-            <div class="logo__carousel owl-carousel" id="clientSection">
+            <div class="logo__carousel owl-carousel" >
                 <a href="#" class="logo__item"><img src="{{ template_frontpage('img/logo/logo-1.png') }}"
                         alt=""></a>
                 <a href="#" class="logo__item"><img src="{{ template_frontpage('img/logo/logo-2.png') }}"
@@ -140,6 +140,26 @@
             </div>
         </div>
     </div>
+    <!-- Logo End -->
+    <!-- Logo Begin -->
+    {{-- <div class="logo spad">
+        <div class="container">
+            <div class="logo__carousel owl-carousel" id="clientSection">
+                <a href="#" class="logo__item"><img src="{{ template_frontpage('img/logo/logo-1.png') }}"
+                        alt=""></a>
+                <a href="#" class="logo__item"><img src="{{ template_frontpage('img/logo/logo-2.png') }}"
+                        alt=""></a>
+                <a href="#" class="logo__item"><img src="{{ template_frontpage('img/logo/logo-3.png') }}"
+                        alt=""></a>
+                <a href="#" class="logo__item"><img src="{{ template_frontpage('img/logo/logo-4.png') }}"
+                        alt=""></a>
+                <a href="#" class="logo__item"><img src="{{ template_frontpage('img/logo/logo-5.png') }}"
+                        alt=""></a>
+                <a href="#" class="logo__item"><img src="{{ template_frontpage('img/logo/logo-6.png') }}"
+                        alt=""></a>
+            </div>
+        </div>
+    </div> --}}
     <!-- Logo End -->
 @endsection
 
@@ -207,32 +227,32 @@
         });
 
         // Client
-        $.ajax({
-            type: "GET",
-            url: "{{ route('web.service.getClient') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "_method": "GET",
-            },
-            success: function(respon) {
-                let clientHtml = ''
+        // $.ajax({
+        //     type: "GET",
+        //     url: "{{ route('web.service.getClient') }}",
+        //     data: {
+        //         "_token": "{{ csrf_token() }}",
+        //         "_method": "GET",
+        //     },
+        //     success: function(respon) {
+        //         let clientHtml = ''
 
-                for (let i = 0; i < respon.data.length; i++) {
-                    const data = respon.data[i];
+        //         for (let i = 0; i < respon.data.length; i++) {
+        //             const data = respon.data[i];
 
-                    clientHtml += `<a href="` + data.website_url +
-                        `" target="_blank" class="logo__item"><img class="client-logo" src="{{ asset_administrator('assets/media/client') }}/` +
-                        data.img_url + `" alt=""></a>`;
-                }
-                $('#clientSection').html(
-                    clientHtml
-                );
+        //             clientHtml += `<a href="` + data.website_url +
+        //                 `" target="_blank" class="logo__item"><img class="client-logo" src="{{ asset_administrator('assets/media/client') }}/` +
+        //                 data.img_url + `" alt=""></a>`;
+        //         }
+        //         $('#clientSection').html(
+        //             clientHtml
+        //         );
 
-                // Destroy and reinitialize Owl Carousel after updating content
-                $('.logo__carousel').owlCarousel('destroy');
-                initOwlCarousel();
-            }
-        });
+        //         // Destroy and reinitialize Owl Carousel after updating content
+        //         $('.logo__carousel').owlCarousel('destroy');
+        //         initOwlCarousel();
+        //     }
+        // });
 
         // Initial Owl Carousel initialization
         initOwlCarousel();
