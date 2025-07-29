@@ -26,7 +26,7 @@
                 <div class="col-lg-4 col-md-6 col-md-6 col-md-3">
                     <div class="contact__widget__item">
                         <div class="contact__widget__item__icon">
-                            <i class="fa fa-map-marker"></i>
+                            <i class="fa-solid fa-location-dot"></i>
                         </div>
                         <div class="contact__widget__item__text">
                             <h4>Address</h4>
@@ -48,7 +48,7 @@
                 <div class="col-lg-4 col-md-6 col-md-6 col-md-3">
                     <div class="contact__widget__item">
                         <div class="contact__widget__item__icon">
-                            <i class="fa fa-map-marker"></i>
+                            <i class="fa-solid fa-envelope"></i>
                         </div>
                         <div class="contact__widget__item__text">
                             <h4>Email</h4>
@@ -73,12 +73,13 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="contact__form">
                         <h3>Get in touch</h3>
-                        <form action="#">
+                        <form action="#" class="text-center">
                             <input type="text" placeholder="Name">
                             <input type="text" placeholder="Email">
                             <input type="text" placeholder="Website">
                             <textarea placeholder="Message"></textarea>
-                            <button type="submit" class="site-btn">Send Message</button>
+
+                            <a class="primary-btn" href="#" onclick="event.preventDefault(); this.closest('form').submit();">Send Message</a>
                         </form>
                     </div>
                 </div>

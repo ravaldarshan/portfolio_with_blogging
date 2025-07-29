@@ -272,8 +272,6 @@ class SettingController extends Controller
             abort(403);
         }
 
-        
-
         $settings = Setting::get()->toArray();
         $settings = array_column($settings, 'value', 'name');
         

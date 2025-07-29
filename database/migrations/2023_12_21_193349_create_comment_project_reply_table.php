@@ -15,9 +15,9 @@ class CreateCommentProjectReplyTable extends Migration
     {
         Schema::create('comment_project_reply', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('project_id');
-            $table->foreignId('comment_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('comment_id');
             $table->text('contents');
             $table->timestamps();
         });

@@ -17,9 +17,9 @@ class CreateServiceTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('value');
-            $table->string('created_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
-            $table->string('updated_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

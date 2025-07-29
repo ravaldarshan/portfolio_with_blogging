@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\admin;
 
-use DataTables;
-use File;
+use App\Models\Team;
 use App\Models\admin\User;
 use Illuminate\Http\Request;
-use App\Models\admin\Profile;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use Yajra\DataTables\Facades\DataTables;
 
-class ProfileController extends Controller
+class TeamController extends Controller
 {
-    private static $module = "profile";
+    private static $module = "team";
 
     public function index($user_id) {
         //Check permission
@@ -24,9 +24,10 @@ class ProfileController extends Controller
             abort(403);
         }
         
-        $data = Profile::with('user')
+        $data = Team::with('user')
         ->where('user_id',$user_id)
         ->first();
+
         if (!$data) {
             $sosmedData = [
                 'linkedin' => '',
@@ -35,7 +36,7 @@ class ProfileController extends Controller
                 'facebook' => '',
             ];
             $sosmedJson = json_encode($sosmedData);
-            $profile = Profile::create([
+            $profile = Team::create([
                 'user_id' => auth()->user() ? auth()->user()->id : '',
                 'social_media' => $sosmedJson,
             ]);
@@ -45,8 +46,6 @@ class ProfileController extends Controller
         }else{
             $sosmed = json_decode($data->social_media, true); // Mengubah JSON menjadi array
         }
-        // dd($sosmed);
-        // Jika data tidak ditemukan, tampilkan pesan kesalahan atau arahkan ke halaman lain
         if (!$data) {
             return redirect()->route('admin.dashboard')->with('error', 'Data User not found.');
         }
@@ -56,7 +55,7 @@ class ProfileController extends Controller
     
 
     public function getData(Request $request){
-        $data = Profile::with('user')->get();
+        $data = Team::with('user')->get();
 
         return DataTables::of($data)
             ->make(true);
@@ -71,7 +70,7 @@ class ProfileController extends Controller
             abort(403);
         }
 
-        $data = Profile::where('user_id',$user_id)->with('user')->first();
+        $data = Team::where('user_id',$user_id)->with('user')->first();
 
         if (!$data) {
             return redirect()->route('admin.profile',$user_id)->with('error', 'Data not found.');
@@ -153,15 +152,9 @@ class ProfileController extends Controller
 
         return redirect()->route('admin.profile',$user_id)->with('success', 'Data updated successfully.');
     }
-
-
-
-
     
     public function getDetail($user_id){
-
-        $data = Profile::with('user')->find($user_id);
-
+        $data = Team::with('user')->find($user_id);
         return response()->json([
             'data' => $data,
             'status' => 'success',

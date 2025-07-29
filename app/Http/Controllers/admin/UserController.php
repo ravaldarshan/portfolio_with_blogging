@@ -123,7 +123,7 @@ class UserController extends Controller
         ]);
 
         $profile = Profile::create([
-            'user_code' => $data['code'],
+            'user_id' => $data['id'],
             'social_media' => '{
                 "linkedin": "",
                 "twitter": "",
@@ -203,13 +203,13 @@ class UserController extends Controller
         }
 
         // Check if a profile exists for the user
-        $profile = Profile::where('user_code', $data->code)->firstOrNew([
-            'user_code' => $data->code,
+        $profile = Profile::where('user_id', $data->id)->firstOrNew([
+            'user_id' => $data->id,
             'social_media' => '{"linkedin":"","twitter":"","instagram":"","facebook":""}',
         ]);
 
         // Update the profile data
-        $profile->user_code = $updates['code'];
+        $profile->user_id = $updates['code'];
         $profile->save();
 
         // Filter only the updated data
@@ -257,7 +257,7 @@ class UserController extends Controller
         // Delete the user.
         $user->delete();
 
-        $profile = Profile::where('user_code', $user->code)->first();
+        $profile = Profile::where('user_id', $user->id)->first();
 
         if ($profile) {
             // Check if the profile is being force-deleted
@@ -452,7 +452,7 @@ class UserController extends Controller
         
         $id = $request->id;
         $data = User::withTrashed()->find($id);
-        $profile = Profile::withTrashed()->where('user_code', $data->code)->first();
+        $profile = Profile::withTrashed()->where('user_id', $data->id)->first();
 
         if (!$data) {
             return response()->json([
@@ -463,7 +463,7 @@ class UserController extends Controller
 
         if (!$profile) {
             $profile = Profile::create([
-                'user_code' => $data->code,
+                'user_id' => $data->id,
             ]);
             $userProfiletoarray = '';
         } else {
@@ -503,7 +503,7 @@ class UserController extends Controller
         $id = $request->id;
 
         $data = User::withTrashed()->find($id);
-        $profile = Profile::withTrashed()->where('user_code',$data->code)->first();
+        $profile = Profile::withTrashed()->where('user_id',$data->id)->first();
 
         if (!$data) {
             return redirect()->route('admin.users.archives')->with('error', 'Data not found.');

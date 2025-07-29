@@ -22,6 +22,7 @@ use App\Http\Controllers\admin\CategoryBlogController;
 use App\Http\Controllers\admin\CommentBlogController;
 use App\Http\Controllers\admin\CategoryProjectController;
 use App\Http\Controllers\admin\CommentProjectController;
+use App\Http\Controllers\admin\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -250,5 +251,13 @@ Route::prefix('admin')->group(function () {
         Route::get('contact', [ContactController::class, 'index'])->name('admin.contact');
         Route::put('contact/update', [ContactController::class, 'update'])->name('admin.contact.update');
 
+
+        //Teams
+        Route::get('teams/{code}', [TeamController::class, 'index'])->name('admin.teams');
+        Route::get('teams/getData', [TeamController::class, 'getData'])->name('admin.teams.getData');
+        Route::put('teams/update', [TeamController::class, 'update'])->name('admin.teams.update');
+        Route::get('teams/getDetail-{code}', [TeamController::class, 'getDetail'])->name('admin.teams.getDetail');
+        Route::post('teams/checkEmail',[TeamController::class, 'checkEmail'])->name('admin.teams.checkEmail');
+        
     });
 });

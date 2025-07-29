@@ -17,7 +17,11 @@ class Blog extends Model
 
     protected $guarded = ['id'];
 
-    // relasi
+    public function userProfile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'user_id');
+    }
+
     public function category(){
         return $this->belongsTo(CategoryBlog::class, 'category_id');
     }

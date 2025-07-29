@@ -6,7 +6,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="footer__top__logo">
                         <a href="#">
-                            <h2>{{ $settings['general_nama_app'] ?? '' }}</h2>
+                            <h2 class="text-white">{{ $settings['general_nama_app'] ?? '' }}</h2>
                         </a>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="email" placeholder="Enter your email address" aria-label="Recipient's username" aria-describedby="button-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-secondary btn-sm btn-icon" type="submit" id="button-addon2">
+                                    <button class="btn btn-outline-primary btn-sm" type="submit" id="button-addon2">
                                         <i class="fa-solid fa-paper-plane"></i>
                                     </button>
                                 </div>

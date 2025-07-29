@@ -15,14 +15,14 @@ class CreateLogSystemsTable extends Migration
     {
         Schema::create('log_systems', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('ip_address');
             $table->text('device');
             $table->string('browser_name');
             $table->string('browser_version');
             $table->string('module');
             $table->string('action');
-            $table->string('data_id');
+            $table->unsignedBigInteger('data_id');
             $table->longtext('data');
             $table->timestamp('created_at');
         });

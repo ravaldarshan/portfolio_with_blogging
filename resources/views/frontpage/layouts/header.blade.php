@@ -4,8 +4,11 @@
         <div class="row">
             <div class="col-lg-2">
                 <div class="header__logo">
+                    {{-- <a aria-label="Go to homepage" href="{{ route('web.index') }}">
+                        <img src="{{ array_key_exists('general_frontpage_favicon', $settings) ? img_src($settings['general_frontpage_favicon'], 'settings') : '' }}" alt="" height="21">
+                    </a> --}}
                     <a href="{{ route('web.index') }}">
-                        <h2>{{ $settings['general_nama_app'] ?? '' }}</h2>
+                        <h4 class="text-white">{{ $settings['general_nama_app'] ?? '' }}</h4>
                     </a>
                 </div>
             </div>

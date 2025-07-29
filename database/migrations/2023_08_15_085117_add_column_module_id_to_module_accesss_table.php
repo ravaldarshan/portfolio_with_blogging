@@ -14,7 +14,7 @@ class AddColumnModuleIdToModuleAccesssTable extends Migration
     public function up()
     {
         Schema::table('module_access', function (Blueprint $table) {
-            $table->string('module_id');
+            $table->unsignedBigInteger('module_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnModuleIdToModuleAccesssTable extends Migration
     public function down()
     {
         Schema::table('module_access', function (Blueprint $table) {
-            $table->string('module_id');
+            $table->unsignedBigInteger('module_id');
         });
     }
 }

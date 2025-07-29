@@ -13,7 +13,6 @@ class BlogController extends Controller
     public function index()
     {
         $data = Blog::with('blog_comments', 'blog_comments_reply')->where('status', 1)->paginate(9);
-
         return view('frontpage.blog.index', compact('data'));
     }
 
@@ -22,13 +21,12 @@ class BlogController extends Controller
     {
         if ($request->ajax()) {
             $data = Blog::with('blog_comments', 'blog_comments_reply')->where('status', 1)->paginate(9);
-
             return view('frontpage.blog.fetchData.index', compact('data'))->render();
         }
     }
 
     public function detail($slug){
-        $data = Blog::with('category')->where('slug', $slug)->first();
+        $data = Blog::with('category', 'userProfile')->where('slug', $slug)->first();
 
         if (!$data) {
             abort(404);

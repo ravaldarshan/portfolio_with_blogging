@@ -8,8 +8,8 @@
                     <div class="row text-center">
                         <div class="col-lg-12">
                             <div class="hero__text">
-                                <span>For website and video editing</span>
-                                <h2>Videographer’s Portfolio</h2>
+                                <span>Website and video editing services</span>
+                                <h2>Portfolio</h2>
                                 <a href="#" class="primary-btn">See more about us</a>
                             </div>
                         </div>
@@ -21,8 +21,8 @@
                     <div class="row text-center">
                         <div class="col-lg-12">
                             <div class="hero__text">
-                                <span>For website and video editing</span>
-                                <h2>Videographer’s Portfolio</h2>
+                                <span>Website and video editing services</span>
+                                <h2>Portfolio</h2>
                                 <a href="#" class="primary-btn">See more about us</a>
                             </div>
                         </div>
@@ -34,8 +34,8 @@
                     <div class="row text-center">
                         <div class="col-lg-12">
                             <div class="hero__text">
-                                <span>For website and video editing</span>
-                                <h2>Videographer’s Portfolio</h2>
+                                <span>Website and video editing services</span>
+                                <h2>Portfolio</h2>
                                 <a href="#" class="primary-btn">See more about us</a>
                             </div>
                         </div>
@@ -71,64 +71,20 @@
     <!-- Services Section End -->
 
     <!-- Work Section Begin -->
-    <section class="work">
-        <div class="work__gallery">
-            <div class="grid-sizer"></div>
-            <div id="projectSection">
-                <div class="work__item wide__item set-bg" data-setbg="http://placehold.it/500x500?text=Not Found">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                            class="fa fa-play"></i></a>
-                    <div class="work__item__hover">
-                        <h4>VIP Auto Tires & Service</h4>
-                        <ul>
-                            <li>eCommerce</li>
-                            <li>Magento</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="work__item small__item set-bg" data-setbg="http://placehold.it/500x500?text=Not Found">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                            class="fa fa-play"></i></a>
-                </div>
-                <div class="work__item small__item set-bg" data-setbg="http://placehold.it/500x500?text=Not Found">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                            class="fa fa-play"></i></a>
-                </div>
-                <div class="work__item large__item set-bg" data-setbg="http://placehold.it/500x500?text=Not Found">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                            class="fa fa-play"></i></a>
-                    <div class="work__item__hover">
-                        <h4>VIP Auto Tires & Service</h4>
-                        <ul>
-                            <li>eCommerce</li>
-                            <li>Magento</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="work__item small__item set-bg" data-setbg="http://placehold.it/500x500?text=Not Found">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                            class="fa fa-play"></i></a>
-                </div>
-                <div class="work__item small__item set-bg" data-setbg="http://placehold.it/500x500?text=Not Found">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                            class="fa fa-play"></i></a>
-                </div>
-                <div class="work__item wide__item set-bg" data-setbg="http://placehold.it/500x500?text=Not Found">
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="play-btn video-popup"><i
-                            class="fa fa-play"></i></a>
-                    <div class="work__item__hover">
-                        <h4>VIP Auto Tires & Service</h4>
-                        <ul>
-                            <li>eCommerce</li>
-                            <li>Magento</li>
-                        </ul>
+    <section class="team spad set-bg-color" data-setbgcolor="{{ $settings['general_breadcrumb_color'] ?? '#1e2a45' }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title team__title">
+                        <span>Our Work</span>
+                        <h2>Live projects</h2>
                     </div>
                 </div>
             </div>
+            <div id="projectSection" class="row latest__slider owl-carousel">
+            </div>
         </div>
     </section>
-    <!-- Work Section End -->
-
     <!-- Counter Section Begin -->
     <section class="counter">
         <div class="container">
@@ -176,6 +132,7 @@
     </section>
     <!-- Counter Section End -->
 
+    
     <!-- Team Section Begin -->
     <section class="team spad set-bg-color" data-setbgcolor="{{ $settings['general_breadcrumb_color'] ?? '#1e2a45' }}">
         <div class="container">
@@ -183,73 +140,45 @@
                 <div class="col-lg-12">
                     <div class="section-title team__title">
                         <span>Nice to meet</span>
-                        <h2>Gallery</h2>
+                        <h2>OUR Team</h2>
                     </div>
                 </div>
             </div>
-            <div class="row" id="gallerySection">
+            <div class="row justify-content-around">
                 <div class="col-lg-3 col-md-6 col-sm-6 p-0">
-                    <div class="team__item set-bg" data-setbg="http://placehold.it/500x500?text=Not Found">
+                    <div class="team__item set-bg"
+                        data-setbg="https://elitecodder.com/images/teams/1748694308-683af52449191.webp"
+                        style="background-image: url(&quot;https://elitecodder.com/images/teams/1748694308-683af52449191.webp&quot;);">
                         <div class="team__item__text">
-                            <h4>AMANDA STONE</h4>
-                            <p>Videographer</p>
+                            <div class="team-owner-name">Yash Patel</div>
+                            <p>Full-stack developer</p>
                             <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a target="_blank" aria-label="Visit LinkedIn Profile"
+                                    href="https://linkedin.com/in/yashpatel53"><i class="fa fa-linkedin"></i></a>
+                                <a target="_blank" aria-label="Visit Website Profile" href=""><i
+                                        class="fa fa-dribbble"></i></a>
+                                <a aria-label="Visit Instagram Profile" target="_blank"
+                                    href="https://www.instagram.com/yashpatel.05_"><i class="fa fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 p-0">
-                    <div class="team__item team__item--second set-bg"
-                        data-setbg="http://placehold.it/500x500?text=Not Found">
+                    <div class="team__item set-bg"
+                        data-setbg="https://elitecodder.com/images/teams/1753274713-6880d959a1ba7.webp"
+                        style="background-image: url(&quot;https://elitecodder.com/images/teams/1753274713-6880d959a1ba7.webp&quot;);">
                         <div class="team__item__text">
-                            <h4>AMANDA STONE</h4>
-                            <p>Videographer</p>
+                            <div class="team-owner-name">Prince Patel</div>
+                            <p>Full-stack developer</p>
                             <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a target="_blank" aria-label="Visit LinkedIn Profile"
+                                    href="https://www.linkedin.com/in/princepatel312/"><i class="fa fa-linkedin"></i></a>
+                                <a target="_blank" aria-label="Visit Website Profile" href=""><i
+                                        class="fa fa-dribbble"></i></a>
+                                <a aria-label="Visit Instagram Profile" target="_blank"
+                                    href="https://www.instagram.com/prince312__"><i class="fa fa-instagram"></i></a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 p-0">
-                    <div class="team__item team__item--third set-bg"
-                        data-setbg="http://placehold.it/500x500?text=Not Found">
-                        <div class="team__item__text">
-                            <h4>AMANDA STONE</h4>
-                            <p>Videographer</p>
-                            <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 p-0">
-                    <div class="team__item team__item--four set-bg"
-                        data-setbg="http://placehold.it/500x500?text=Not Found">
-                        <div class="team__item__text">
-                            <h4>AMANDA STONE</h4>
-                            <p>Videographer</p>
-                            <div class="team__item__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12 p-0">
-                    <div class="team__btn">
-                        <a href="#" class="primary-btn">Meet Our Team</a>
                     </div>
                 </div>
             </div>
@@ -270,90 +199,6 @@
             </div>
             <div class="row">
                 <div class="latest__slider owl-carousel" id="blogSection">
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>Bumper Ads: How to Tell a Story in 6 Seconds</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>Bumper Ads: How to Tell a Story in 6 Seconds</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog__item latest__item">
-                            <h4>What Makes Users Want to Share a Video on Social Media?</h4>
-                            <ul>
-                                <li>Jan 03, 2020</li>
-                                <li>05 Comment</li>
-                            </ul>
-                            <p>We recently launched a new website for a Vital client and wanted to share some of the
-                                cool features we were able...</p>
-                            <a href="#">Read more <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -362,15 +207,14 @@
 
     <!-- Call To Action Section Begin -->
     <section class="callto spad set-bg-color" id="sectionPromotion"
-        data-setbgcolor="{{ $settings['general_breadcrumb_color'] ?? '#1e2a45' }}">
+        data-setbgcolor="{{ $settings['general_breadcrumb_color'] ?? '#1e2a45' }}" style="background-image: url({{ template_frontpage('img/callto-bg.png') }});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="callto__text">
                         <h2>{{ $settings['title_promosi_frontpage_homepage'] ?? '' }}</h2>
                         <p>{{ $settings['body_promosi_frontpage_homepage'] ?? '' }}</p>
-                        <a
-                            href="{{ $settings['url_button_promosi_frontpage_homepage'] ?? '' }}">{{ $settings['text_button_promosi_frontpage_homepage'] ?? '' }}</a>
+                        <a class="primary-btn" style="background-color: unset;" href="{{ $settings['url_button_promosi_frontpage_homepage'] ?? '' }}">{{ $settings['text_button_promosi_frontpage_homepage'] ?? '' }}</a>
                     </div>
                 </div>
             </div>
@@ -443,35 +287,28 @@
                     for (let i = 0; i < respon.data.length; i++) {
                         const data = respon.data[i];
                         let imgJsonDecode = JSON.parse(data.img_url);
+                        let postUrl = data.url || '#';
+                        let title = data.title || data.nama || 'Untitled';
+                        let imageUrl = imgJsonDecode[0] ?
+                            "{{ asset('administrator/assets/media/project') }}/" + imgJsonDecode[0] :
+                            'https://via.placeholder.com/382x271';
+                        let date = data.date || data.created_at || '';
+                        let alt = title;
 
-                        let className = '';
-                        if (i == 0 || i == 5 || i == 3 || i == 6) {
-                            className = 'wide__item';
-                        } else {
-                            className = 'small__item';
-                        }
-
-                        // for (let key = 0; key < array.length; key++) {
-                        //     const element = array[key];
-
-                        // }
-
-                        projectHtml +=
-                            `<div class="work__item ` + className +
-                            ` set-bg" data-setbg="{{ asset('administrator/assets/media/project') }}/` +
-                            imgJsonDecode[0] + `">` +
-                            `<a href="" class="play-btn video-popup">` +
-                            `<i class="fa fa-arrow-right"></i>` +
-                            `</a>` +
-                            `<div class="work__item__hover">` +
-                            `<h4>` + data.nama + `</h4>` +
-                            `<ul>` +
-                            `<li>` + data.category_project.nama + `</li>` +
-                            `</ul>` +
-                            `</div>` +
-                            `</div>`;
-
-
+                        projectHtml += `
+                        <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                            <a href="${postUrl}" class="text-decoration-none text-dark" title="${data.nama}">
+                                <div class="blog__item position-relative" style="aspect-ratio: 382 / 271; overflow: hidden;">
+                                    <img loading="lazy" src="${imageUrl}"
+                                        alt="${alt}"
+                                        class="w-100 h-100 object-fit-cover" style="border-radius: 5px;" />
+                                </div>
+                                <div class="mt-2">
+                                    <h4 class="fw-bold mb-1 text-white">${data.nama}</h4>
+                                    <h6 class="text-muted mb-1">${data.category_project.nama}</h6>
+                                </div>
+                            </a>
+                        </div>`;
                     }
                     $('#projectSection').html(
                         projectHtml
@@ -510,23 +347,28 @@
                             contentWithoutHTML.substring(0, maxLength) + '...' :
                             contentWithoutHTML;
 
-                        blogHtml +=
-                            `<div class="col-lg-4">` +
-                            `<div class="blog__item latest__item set-bg-blog" data-setbg="{{ asset('administrator/assets/media/blog') }}/` +
-                            imgJsonDecode[0] + `">` +
-                            `<h4>` + data.title + `</h4>` +
-                            `<ul>` +
-                            `<li>` + formatDate(data.posting_date) + `</li>` +
-                            `<li>` + (data.blog_comments.length + data.blog_comments_reply.length) +
-                            ` Comment</li>` +
-                            `</ul>` +
-                            `<p>` + truncatedContent + `</p>` +
-                            `<a href="/blog/` + data.slug +
-                            `">Read more <span class="arrow_right"></span></a>` +
-                            `</div>` +
-                            `</div>`;
+                        blogHtml += `
+                            <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                                <a href="/blog/${data.slug}"
+                                    class="text-decoration-none text-dark"
+                                    title="${data.title}">
+                                    <div class="blog__item position-relative"
+                                        style="aspect-ratio: 382 / 271; overflow: hidden;">
+                                        <img loading="lazy"
+                                            src="{{ asset('administrator/assets/media/blog') }}/${imgJsonDecode[0]}"
+                                            alt="${data.title}"
+                                            class="w-100 h-100 object-fit-cover"
+                                            style="border-radius: 5px;" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <h4 class="fw-bold mb-1 text-white">${data.title}</h4>
+                                        <h6 class="text-muted mb-1"></h6>
+                                        <small class="text-secondary">${formatDate(data.posting_date)}</small>
+                                    </div>
+                                </a>
+                            </div>
+                        `;
                     }
-
                     // Move this line inside the success callback
                     $('#blogSection').html(blogHtml);
 
@@ -534,15 +376,11 @@
                         function() {
                             var bg = $(this).data('setbg');
                             $(this).css('background-image', 'url(' + bg + ')');
-                            // },
-                            // function() {
-                            //     // Reset the background image on hover out if needed
-                            //     $(this).css('background-image', '');
                         }
                     );
 
                     $(".latest__slider").owlCarousel({
-                        loop: true,
+                        // loop: true,
                         margin: 0,
                         items: 3,
                         dots: true,
@@ -561,47 +399,6 @@
                                 items: 1
                             }
                         }
-                    });
-                }
-            });
-            $.ajax({
-                type: "GET",
-                url: "{{ route('web.getGallery') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "_method": "GET",
-                },
-                success: function(respon) {
-                    let galleryHtml = '';
-
-                    for (let i = 0; i < respon.data.length; i++) {
-                        const data = respon.data[i];
-                        let classGallery = ''; // Declare it here
-
-                        if (i === 1) {
-                            classGallery = '--second';
-                        } else if (i === 2) {
-                            classGallery = '--third';
-                        } else if (i === 3) {
-                            classGallery = '--four';
-                        }
-
-                        let imgParse = JSON.parse(data.img_url);
-
-                        galleryHtml += `<div class="col-lg-3 col-md-6 col-sm-6 p-0">` +
-                            `<div class="team__item team__item${classGallery} set-bg-gallery" data-setbg="{{ asset_administrator('assets/media/gallery') }}/` +
-                            imgParse[0] + `">` +
-                            `<div class="team__item__text">` +
-                            `</div>` +
-                            `</div>` +
-                            `</div>`;
-                    }
-
-                    $('#gallerySection').html(galleryHtml);
-
-                    $('.set-bg-gallery').each(function() {
-                        var bg = $(this).data('setbg');
-                        $(this).css('background-image', 'url(' + bg + ')');
                     });
                 }
             });

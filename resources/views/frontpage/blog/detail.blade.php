@@ -173,6 +173,39 @@
                         <div class="blog__details__desc">
                             {!! $data->contents !!}
                         </div>
+                        {{-- @dd($data) --}}
+                        @if ($data->userProfile)
+                        <div class="blog__details__quote">
+                            <div class="row justify-content-center">
+                                <div class="col-6 col-md-2 py-3">
+                                    <img src="{{ img_src($data->userProfile->photo, 'profile') }}" alt="profile image" class="rounded-circle mr-1">
+                                    <h6 class="mt-2 text-center">{{ $data->userProfile->full_name ?? 'User' }}</h6>
+                                </div>
+                                <div class="col-10">
+                                    <p>{{ $data->userProfile->description ?? 
+                                    "I’m someone who enjoys writing about what I discover in the world of technology. Whether it’s a new tool, a clever solution, or just a random idea, I love putting thoughts into words. I spend time exploring, learning, and sharing things that spark my curiosity. For me, blogging is a way to document my journey and connect with others who enjoy tech and creativity." }}</p>
+                                    <div class="social-links">
+                                        @php
+                                           $links = json_decode($data->userProfile->social_media);
+                                        @endphp
+                                        @if ($links->linkedin)
+                                            <a href="{{ $links->linkedin }}"><i  style="position: unset;"  class="fa-brands fa-linkedin"></i></a>
+                                        @endif
+                                         @if ($links->twitter)
+                                            <a href="{{ $links->twitter }}"><i  style="position: unset;"  class="fa-brands fa-twitter"></i></a>
+                                        @endif
+                                        @if ($links->instagram)
+                                            <a href="{{ $links->instagram }}"><i  style="position: unset;"  class="fa-brands fa-instagram"></i></a>
+                                        @endif
+                                        @if ($links->facebook)
+                                            <a href="{{ $links->facebook }}"><i  style="position: unset;"  class="fa-brands fa-facebook"></i></a>
+                                        @endif
+                                    </div>
+                                </div>
+                                <i class="fa fa-quote-right"></i>
+                            </div>
+                        </div>
+                        @endif
                         <div class="blog__details__tags">
                             <span><i class="fa fa-tag"></i> Tag:</span>
                             <a href="#">{{ $data->category->nama }}</a>

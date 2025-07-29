@@ -65,3 +65,7 @@ Route::get('/blog/fetchData/comment', [BlogController::class, 'fetchDataComment'
 Route::get('/contact', [ContactController::class, 'index'])->name('web.contact');
 Route::post('/subscribe', [ContactController::class, 'subscribe'])->name('web.subscribe');
 Route::post('/unsubscribe', [ContactController::class, 'unsubscribe'])->name('web.unsubscribe');
+
+Route::fallback(function () {
+    return redirect()->route('web.home');
+});

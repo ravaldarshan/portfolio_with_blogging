@@ -15,15 +15,15 @@ class CreateProjectTable extends Migration
     {
         Schema::create('project', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_project_id');
+            $table->unsignedBigInteger('category_project_id');
             $table->string('nama');
             $table->text('slug');
             $table->text('description');
             $table->text('img_url');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreignId('created_by')->nullable();
-            $table->foreignId('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

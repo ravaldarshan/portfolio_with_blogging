@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Models\admin;
+namespace App\Models;
 
 use App\Models\admin\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class Team extends Model
 {
-    use HasFactory, SoftDeletes;
-
-    protected $table = 'profile';
-
+    use HasFactory;
     protected $guarded = ['id'];
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    
 }
