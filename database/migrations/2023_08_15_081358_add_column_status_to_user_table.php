@@ -26,7 +26,7 @@ class AddColumnStatusToUserTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            Schema::dropIfExists('status');
         });
     }
 }

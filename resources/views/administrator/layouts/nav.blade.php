@@ -74,7 +74,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Logged in 5 min ago</div>
-                <a href="{{route('admin.profile',(auth()->user() ? auth()->user()->code : ""))}}" class="dropdown-item has-icon">
+                <a href="{{route('admin.profile',(auth()->user() ? auth()->user()->id : ""))}}" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
                 <a href="{{route('admin.logSystems')}}" class="dropdown-item has-icon">

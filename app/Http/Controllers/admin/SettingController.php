@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use DB;
-use File;
+use Illuminate\Support\Facades\File;
 use DataTables;
 use Illuminate\Http\Request;
 use App\Models\admin\Setting;
@@ -285,21 +285,21 @@ class SettingController extends Controller
         $data_settings["general_counter_color"] = $request->general_counter_color;
         $data_settings["general_service_item_icon_color"] = $request->general_service_item_icon_color;
 
-        $data_sosmed = [];
-        for ($i = 0; $i < $request->jumlah_sosmed; $i++) {
-            if ($request->{'nama_sosmed_' . $i} || $request->{'icon_sosmed_' . $i}) {
-                $data_sosmed[] = [
-                    'nama_sosmed' => $request->{'nama_sosmed_' . $i},
-                    'icon_sosmed' => $request->{'icon_sosmed_' . $i},
+        $data_socialMedia = [];
+        for ($i = 0; $i < $request->jumlah_socialMedia; $i++) {
+            if ($request->{'nama_socialMedia_' . $i} || $request->{'icon_socialMedia_' . $i}) {
+                $data_socialMedia[] = [
+                    'nama_socialMedia' => $request->{'nama_socialMedia_' . $i},
+                    'icon_socialMedia' => $request->{'icon_socialMedia_' . $i},
                 ];
             }
         }
 
         // Encode the array to JSON
-        $json_encoded_sosmed = json_encode($data_sosmed);
+        $json_encoded_socialMedia = json_encode($data_socialMedia);
 
-        if (!empty($data_sosmed)) {
-            $data_settings["general_sosmed"] = $json_encoded_sosmed;
+        if (!empty($data_socialMedia)) {
+            $data_settings["general_socialMedia"] = $json_encoded_socialMedia;
         }
 
 
@@ -349,32 +349,32 @@ class SettingController extends Controller
 
     }
 
-    public function frontpage_general_deleteSosmed(Request $request)
+    public function frontpage_general_deleteSocialMedia(Request $request)
     {
-        $nama_sosmed = $request->nama_sosmed;
+        $nama_socialMedia = $request->nama_socialMedia;
         $index = $request->index;
 
         // Get the settings
         $settings = Setting::get()->toArray();
         $settings = array_column($settings, 'value', 'name');
 
-        $jsonParse = json_decode($settings['general_sosmed']);
-        $dataSosmed = [];
+        $jsonParse = json_decode($settings['general_socialMedia']);
+        $dataSocialMedia = [];
 
         foreach ($jsonParse as $key => $value) {
             if ($key != intVal($index)) {
-                $dataSosmed[] = [
-                    'nama_sosmed' => $value->nama_sosmed,
-                    'icon_sosmed' => $value->icon_sosmed,
+                $dataSocialMedia[] = [
+                    'nama_socialMedia' => $value->nama_socialMedia,
+                    'icon_socialMedia' => $value->icon_socialMedia,
                 ];
             }
         }
 
         // Encode the array to JSON
-        $jsonEncodedData = json_encode($dataSosmed);
+        $jsonEncodedData = json_encode($dataSocialMedia);
 
         // Update the database record
-        $set = Setting::where('name', 'general_sosmed')->first();
+        $set = Setting::where('name', 'general_socialMedia')->first();
         $set->update(['value' => $jsonEncodedData]);
     }
 

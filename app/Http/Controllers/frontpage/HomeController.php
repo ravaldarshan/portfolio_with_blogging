@@ -10,6 +10,7 @@ use App\Models\admin\Gallery;
 use App\Models\admin\Project;
 use App\Models\admin\Service;
 use App\Http\Controllers\Controller;
+use App\Models\Team;
 
 class HomeController extends Controller
 {
@@ -51,6 +52,14 @@ class HomeController extends Controller
     
     public function getBanner(){
         $data = Banner::all();
+
+        return response()->json([
+            'data' => $data,
+        ], 200);
+    }
+
+    public function getTeams(){
+        $data = Team::all();
 
         return response()->json([
             'data' => $data,

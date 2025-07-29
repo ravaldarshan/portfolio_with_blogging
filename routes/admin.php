@@ -114,7 +114,7 @@ Route::prefix('admin')->group(function () {
         //Setting Frontpage General
         Route::get('settings/frontpage/general', [SettingController::class, 'frontpage_general_index'])->name('admin.settings.frontpage.general');
         Route::put('settings/frontpage/general/update', [SettingController::class, 'frontpage_general_update'])->name('admin.settings.frontpage.general.update');
-        Route::get('settings/frontpage/general/deleteSosmed', [SettingController::class, 'frontpage_general_deleteSosmed'])->name('admin.settings.frontpage.general.deleteSosmed');
+        Route::get('settings/frontpage/general/deleteSocialMedia', [SettingController::class, 'frontpage_general_deleteSocialMedia'])->name('admin.settings.frontpage.general.deleteSocialMedia');
         
         //Setting Frontpage Homepage
         Route::get('settings/frontpage/homepage', [SettingController::class, 'frontpage_homepage_index'])->name('admin.settings.frontpage.homepage');
@@ -251,13 +251,19 @@ Route::prefix('admin')->group(function () {
         Route::get('contact', [ContactController::class, 'index'])->name('admin.contact');
         Route::put('contact/update', [ContactController::class, 'update'])->name('admin.contact.update');
 
-
         //Teams
-        Route::get('teams/{code}', [TeamController::class, 'index'])->name('admin.teams');
+        Route::get('teams', [TeamController::class, 'index'])->name('admin.teams');
         Route::get('teams/getData', [TeamController::class, 'getData'])->name('admin.teams.getData');
+        Route::get('teams/add', [TeamController::class, 'add'])->name('admin.teams.add');
+        Route::post('teams/save', [TeamController::class, 'save'])->name('admin.teams.save');
+        Route::get('teams/edit/{id}', [TeamController::class, 'edit'])->name('admin.teams.edit');
         Route::put('teams/update', [TeamController::class, 'update'])->name('admin.teams.update');
-        Route::get('teams/getDetail-{code}', [TeamController::class, 'getDetail'])->name('admin.teams.getDetail');
-        Route::post('teams/checkEmail',[TeamController::class, 'checkEmail'])->name('admin.teams.checkEmail');
-        
+        Route::get('teams/delete', [TeamController::class, 'delete'])->name('admin.teams.delete');
+        Route::get('teams/deleteImage', [TeamController::class, 'deleteImage'])->name('admin.teams.deleteImage');
+        Route::get('teams/detail/{id}', [TeamController::class, 'detail'])->name('admin.teams.detail');
     });
+});
+
+Route::fallback(function () {
+    return redirect()->route('admin.dashboard');
 });

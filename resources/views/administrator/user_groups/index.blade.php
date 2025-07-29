@@ -132,7 +132,7 @@
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
                                     title: 'Succeed!',
-                                    text: 'Data berhasil dihapus.',
+                                    text: 'Data deleted successfully.',
                                     icon: 'success',
                                     timer: 1500, // 2 detik
                                     showConfirmButton: false

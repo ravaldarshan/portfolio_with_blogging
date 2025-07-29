@@ -26,7 +26,7 @@ class AddColumnTimestampToModuleTable extends Migration
     public function down()
     {
         Schema::table('module', function (Blueprint $table) {
-            //
+             
         });
     }
 }

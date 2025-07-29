@@ -23,9 +23,9 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             'name' => 'dev',
-            'code' => 'daysf',
-            'email' => 'dev@daysf.com',
-            'password' => Hash::make('ikhsannwwi'),
+            'code' => 'dev',
+            'email' => 'darshan@dev.com',
+            'password' => Hash::make('admin@123'),
             'status' => 1,
             'user_group_id' => 0,
             'remember_token' => Str::random(60),
@@ -34,9 +34,8 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'code' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('admin@123'),
             'status' => 1,
-            // 'user_group_id' => $user_group->id,
             'user_group_id' => 0,
             'remember_token' => Str::random(60),
         ]);

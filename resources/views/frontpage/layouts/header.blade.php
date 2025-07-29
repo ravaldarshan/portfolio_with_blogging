@@ -32,14 +32,14 @@
                     </nav>
                     <div class="header__nav__social">
                         @php
-                            $sosmed = array_key_exists('general_sosmed', $settings) ? json_decode($settings['general_sosmed']) : null;
+                            $socialMedia = array_key_exists('general_socialMedia', $settings) ? json_decode($settings['general_socialMedia']) : null;
                         @endphp
 
-                        @if (!empty($sosmed))
-                            @foreach ($sosmed as $key => $item)
+                        @if (!empty($socialMedia))
+                            @foreach ($socialMedia as $key => $item)
                                 @if (!empty($item))
-                                    <a href="{{ $item->nama_sosmed }}" target="_blank">
-                                        <i class="{{ $item->icon_sosmed }}"></i>
+                                    <a href="{{ $item->nama_socialMedia }}" target="_blank">
+                                        <i class="{{ $item->icon_socialMedia }}"></i>
                                     </a>
                                 @endif
                             @endforeach

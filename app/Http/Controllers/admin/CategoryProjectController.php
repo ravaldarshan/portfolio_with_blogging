@@ -141,7 +141,7 @@ class CategoryProjectController extends Controller
 
         $data->update($updates);
 
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => $updatedData]);
+        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data after updating' => $updatedData]);
         return redirect()->route('admin.category_project')->with('success', 'Data updated successfully.');
     }
     

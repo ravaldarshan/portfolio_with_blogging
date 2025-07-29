@@ -17,7 +17,7 @@ class CreateModuleTable extends Migration
             $table->id();
             $table->string('identifiers');
             $table->string('name');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

@@ -38,6 +38,7 @@ Route::get('/getProject', [HomeController::class, 'getProject'])->name('web.getP
 Route::get('/getBlog', [HomeController::class, 'getBlog'])->name('web.getBlog');
 Route::get('/getGallery', [HomeController::class, 'getGallery'])->name('web.getGallery');
 Route::get('/getBanner', [HomeController::class, 'getBanner'])->name('web.getBanner');
+Route::get('/getTeams', [HomeController::class, 'getTeams'])->name('web.getTeams');
 Route::get('/count', [HomeController::class, 'count'])->name('web.count');
 
 Route::get('/project', [ProjectController::class, 'index'])->name('web.project');
@@ -67,5 +68,5 @@ Route::post('/subscribe', [ContactController::class, 'subscribe'])->name('web.su
 Route::post('/unsubscribe', [ContactController::class, 'unsubscribe'])->name('web.unsubscribe');
 
 Route::fallback(function () {
-    return redirect()->route('web.home');
+    return redirect()->route('web.index');
 });

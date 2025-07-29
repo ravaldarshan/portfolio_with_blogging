@@ -56,56 +56,56 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-12">
-                            <div id="sosmed">
+                            <div id="socialMedia">
                                 @php
-                                    $sosmed = array_key_exists('general_sosmed', $settings) ? json_decode($settings['general_sosmed']) : '';
-                                    if (!empty($sosmed)) {
-                                        $jumlah_sosmed = count($sosmed);
+                                    $socialMedia = array_key_exists('general_socialMedia', $settings) ? json_decode($settings['general_socialMedia']) : '';
+                                    if (!empty($socialMedia)) {
+                                        $jumlah_socialMedia = count($socialMedia);
                                     }else {
-                                        $jumlah_sosmed = 1;
+                                        $jumlah_socialMedia = 1;
                                     }
                                 @endphp
-                                <div class="sosmed-list" index-element="{{ $jumlah_sosmed - 1 }}">
-                                    @if (!empty($sosmed))
-                                    @foreach ($sosmed as $i => $row)
-                                        <div class="row rowSosmed_{{ $i }}">
-                                            {{-- {{dd($sosmed)}} --}}
+                                <div class="socialMedia-list" index-element="{{ $jumlah_socialMedia - 1 }}">
+                                    @if (!empty($socialMedia))
+                                    @foreach ($socialMedia as $i => $row)
+                                        <div class="row rowSocialMedia_{{ $i }}">
+                                            {{-- {{dd($socialMedia)}} --}}
                                             <div class="col-md-5 col-11">
                                                 <div class="form-group">
-                                                    <label for="inputNamaSosmed_{{ $i }}"
+                                                    <label for="inputNamaSocialMedia_{{ $i }}"
                                                         class="form-label">Sosial Media (url)</label>
-                                                    <input type="text" name="nama_sosmed_{{ $i }}"
-                                                        value="{{ $row->nama_sosmed }}" class="form-control"
-                                                        id="inputNamaSosmed_{{ $i }}" data-parsley-required="true"
+                                                    <input type="text" name="nama_socialMedia_{{ $i }}"
+                                                        value="{{ $row->nama_socialMedia }}" class="form-control"
+                                                        id="inputNamaSocialMedia_{{ $i }}" data-parsley-required="true"
                                                         placeholder="Enter Nama Sosial Media" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-11">
                                                 <div class="form-group">
-                                                    <label for="inputFontAawesomeSosmed_{{ $i }}"
+                                                    <label for="inputFontAawesomeSocialMedia_{{ $i }}"
                                                         class="form-label">Icon Sosial
                                                         Media (fontawesome 4)</label>
-                                                    <input type="text" name="icon_sosmed_{{ $i }}"
-                                                        value="{{ $row->icon_sosmed }}" class="form-control"
-                                                        id="inputFontAawesomeSosmed_{{ $i }}" data-parsley-required="true"
+                                                    <input type="text" name="icon_socialMedia_{{ $i }}"
+                                                        value="{{ $row->icon_socialMedia }}" class="form-control"
+                                                        id="inputFontAawesomeSocialMedia_{{ $i }}" data-parsley-required="true"
                                                         placeholder="Enter Icon Sosial Media (contoh 'fa fa-instagram')" autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="col-md-1 col-1">
-                                                <button class="btn btn-danger btn-sm delete-sosmed"
+                                                <button class="btn btn-danger btn-sm delete-socialMedia"
                                                     @if ($i === 0) style="display: none" @endif
-                                                    data-sosmed="{{$row->nama_sosmed}}" data-index="{{ $i }}" type="button"><i
+                                                    data-socialMedia="{{$row->nama_socialMedia}}" data-index="{{ $i }}" type="button"><i
                                                         class="fa fa-trash"></i></button>
                                             </div>
                                         </div>
                                     @endforeach
                                     @endif
                                 </div>
-                                <input type="hidden" name="jumlah_sosmed" value="{{ $jumlah_sosmed }}" id="jumlah_sosmed">
-                                <!-- Cloned sosmed-list will be inserted here -->
+                                <input type="hidden" name="jumlah_socialMedia" value="{{ $jumlah_socialMedia }}" id="jumlah_socialMedia">
+                                <!-- Cloned socialMedia-list will be inserted here -->
                             </div>
-                            <button class="more-sosmed btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> Add
-                                more sosmed</button>
+                            <button class="more-socialMedia btn btn-primary btn-sm" type="button"><i class="fa fa-plus"></i> Add
+                                more socialMedia</button>
                         </div>
                     </div>
 
@@ -241,24 +241,24 @@
         </div>
     </div>
 
-    <div class="template-sosmed d-none">
+    <div class="template-socialMedia d-none">
         <div class="col-md-5 col-11">
             <div class="form-group">
-                <label for="inputNamaSosmed_0" class="form-label">Sosial Media</label>
-                <input type="text" name="nama_sosmed_0" class="form-control" id="inputNamaSosmed_0" data-parsley-required="true"
+                <label for="inputNamaSocialMedia_0" class="form-label">Sosial Media</label>
+                <input type="text" name="nama_socialMedia_0" class="form-control" id="inputNamaSocialMedia_0" data-parsley-required="true"
                     placeholder="Enter Nama Sosial Media" autocomplete="off">
             </div>
         </div>
         <div class="col-md-6 col-11">
             <div class="form-group">
-                <label for="inputFontAawesomeSosmed_0" class="form-label">Icon Sosial
+                <label for="inputFontAawesomeSocialMedia_0" class="form-label">Icon Sosial
                     Media</label>
-                <input type="text" name="icon_sosmed_0" class="form-control" id="inputFontAawesomeSosmed_0" data-parsley-required="true"
+                <input type="text" name="icon_socialMedia_0" class="form-control" id="inputFontAawesomeSocialMedia_0" data-parsley-required="true"
                     placeholder="contoh = 'fa fa-instagram'" autocomplete="off">
             </div>
         </div>
         <div class="col-md-1 col-1">
-            <button class="btn btn-danger btn-sm delete-sosmed" style="display: none" data-index="0" data-sosmed=""
+            <button class="btn btn-danger btn-sm delete-socialMedia" style="display: none" data-index="0" data-socialMedia=""
                 type="button"><i class="fa fa-trash"></i></button>
         </div>
     </div>
@@ -275,65 +275,65 @@
 
     <script>
         $(document).ready(function() {
-            function addSosmedList() {
+            function addSocialMediaList() {
                 // Use a class selector to get the count of cloned elements
-                var currentIndex = $(".sosmed-list").find('.row').length;
-                $('#jumlah_sosmed').val((currentIndex + 1));
+                var currentIndex = $(".socialMedia-list").find('.row').length;
+                $('#jumlah_socialMedia').val((currentIndex + 1));
 
-                // Clone the template-sosmed
-                var clonedElement = $(".template-sosmed").clone();
-                clonedElement.addClass("row rowSosmed_" + currentIndex);
-                clonedElement.removeClass("template-sosmed");
+                // Clone the template-socialMedia
+                var clonedElement = $(".template-socialMedia").clone();
+                clonedElement.addClass("row rowSocialMedia_" + currentIndex);
+                clonedElement.removeClass("template-socialMedia");
                 clonedElement.removeClass("d-none");
 
                 // Set the index-element attribute on the cloned element
                 clonedElement.attr("index-element", currentIndex);
 
                 // Update IDs and "for" attributes of cloned elements
-                clonedElement.find("[id^='inputNamaSosmed_']").attr("id", "inputNamaSosmed_" + currentIndex);
-                clonedElement.find("[id^='inputFontAawesomeSosmed_']").attr("id", "inputFontAawesomeSosmed_" +
+                clonedElement.find("[id^='inputNamaSocialMedia_']").attr("id", "inputNamaSocialMedia_" + currentIndex);
+                clonedElement.find("[id^='inputFontAawesomeSocialMedia_']").attr("id", "inputFontAawesomeSocialMedia_" +
                     currentIndex);
 
-                clonedElement.find("[for^='inputNamaSosmed_']").attr("for", "inputNamaSosmed_" + currentIndex);
-                clonedElement.find("[for^='inputFontAawesomeSosmed_']").attr("for", "inputFontAawesomeSosmed_" +
+                clonedElement.find("[for^='inputNamaSocialMedia_']").attr("for", "inputNamaSocialMedia_" + currentIndex);
+                clonedElement.find("[for^='inputFontAawesomeSocialMedia_']").attr("for", "inputFontAawesomeSocialMedia_" +
                     currentIndex);
 
                 // Update name attributes of cloned input elements
-                clonedElement.find("[name^='nama_sosmed_']").attr("name", "nama_sosmed_" + currentIndex);
-                clonedElement.find("[name^='icon_sosmed_']").attr("name", "icon_sosmed_" + currentIndex);
+                clonedElement.find("[name^='nama_socialMedia_']").attr("name", "nama_socialMedia_" + currentIndex);
+                clonedElement.find("[name^='icon_socialMedia_']").attr("name", "icon_socialMedia_" + currentIndex);
 
-                clonedElement.find(".delete-sosmed").attr("data-index", currentIndex);
+                clonedElement.find(".delete-socialMedia").attr("data-index", currentIndex);
 
                 // Append the cloned element to the container
-                $(".sosmed-list").append(clonedElement);
+                $(".socialMedia-list").append(clonedElement);
 
                 // Show delete button for the new row, hide for the initial row
-                $(".sosmed-list .delete-sosmed").show();
-                $(".sosmed-list .rowSosmed_0 .delete-sosmed").hide();
+                $(".socialMedia-list .delete-socialMedia").show();
+                $(".socialMedia-list .rowSocialMedia_0 .delete-socialMedia").hide();
             }
 
-            // Function to handle deleting sosmed-list
-            function deleteSosmedList(element, index) {
-                var sosmedList = $(element).find(".rowSosmed_" + index);
+            // Function to handle deleting socialMedia-list
+            function deleteSocialMediaList(element, index) {
+                var socialMediaList = $(element).find(".rowSocialMedia_" + index);
 
                 // Check if it is not the first row before deleting
-                if (sosmedList.attr("index-element") !== "0") {
-                    sosmedList.remove();
-                    const jmlah = parseInt($('#jumlah_sosmed').val()) - 1;
-                    $('#jumlah_sosmed').val(jmlah);
+                if (socialMediaList.attr("index-element") !== "0") {
+                    socialMediaList.remove();
+                    const jmlah = parseInt($('#jumlah_socialMedia').val()) - 1;
+                    $('#jumlah_socialMedia').val(jmlah);
                 }
             }
 
-            // Event listener for "Add more sosmed" button
-            $(".more-sosmed").click(function() {
-                addSosmedList();
+            // Event listener for "Add more socialMedia" button
+            $(".more-socialMedia").click(function() {
+                addSocialMediaList();
             });
 
             // Event listener for "Delete" button
-            $("#sosmed").on("click", ".delete-sosmed", function() {
+            $("#socialMedia").on("click", ".delete-socialMedia", function() {
                 let index = $(this).data('index');
-                let sosmed = $(this).data('sosmed');
-                let sosmedList = $(this).closest(".sosmed-list");
+                let socialMedia = $(this).data('socialMedia');
+                let socialMediaList = $(this).closest(".socialMedia-list");
 
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
@@ -353,21 +353,21 @@
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        if (sosmed !== '') {
+                        if (socialMedia !== '') {
                             $.ajax({
                                 type: "GET",
-                                url: "{{ route('admin.settings.frontpage.general.deleteSosmed') }}",
+                                url: "{{ route('admin.settings.frontpage.general.deleteSocialMedia') }}",
                                 data: {
                                     "_token": "{{ csrf_token() }}",
                                     "_method": "GET",
                                     "index": index, // Make sure you define the variable 'id' to be deleted
-                                    "sosmed": sosmed, // Make sure you define the variable 'id' to be deleted
+                                    "socialMedia": socialMedia, // Make sure you define the variable 'id' to be deleted
                                 },
                                 success: function() {
-                                    deleteSosmedList(sosmedList, index);
+                                    deleteSocialMediaList(socialMediaList, index);
                                     swalWithBootstrapButtons.fire({
                                         title: 'Succeed!',
-                                        text: 'Data berhasil dihapus.',
+                                        text: 'Data deleted successfully.',
                                         icon: 'success',
                                         timer: 1500, // 2 detik
                                         showConfirmButton: false,
@@ -375,10 +375,10 @@
                                 }
                             });
                         } else {
-                            deleteSosmedList(sosmedList, index);
+                            deleteSocialMediaList(socialMediaList, index);
                             swalWithBootstrapButtons.fire({
                                 title: 'Succeed!',
-                                text: 'Data berhasil dihapus.',
+                                text: 'Data deleted successfully.',
                                 icon: 'success',
                                 timer: 1500, // 2 detik
                                 showConfirmButton: false,
@@ -389,7 +389,7 @@
             });
 
             // Hide delete button for the initial row
-            $(".sosmed-list[index-element='0'] .delete-sosmed").hide();
+            $(".socialMedia-list[index-element='0'] .delete-socialMedia").hide();
         });
     </script>
 

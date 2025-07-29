@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
-use File;
+use Illuminate\Support\Facades\File;
 use DataTables;
 use App\Models\admin\Blog;
 use Illuminate\Support\Str;
@@ -273,7 +273,7 @@ class BlogController extends Controller
 
         $data->update($updates);
 
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => $updatedData]);
+        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data after updating' => $updatedData]);
         return redirect()->route('admin.blog')->with('success', 'Data updated successfully.');
     }
     

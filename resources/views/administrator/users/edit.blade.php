@@ -20,7 +20,7 @@
                         class="form" id="form" data-parsley-validate>
                         @csrf
                         @method('PUT')
-                        <input type="hidden" id="inputId" name="id" value="{{ $data->id }}">
+                        <input type="hidden" id="inputId" name="user_id" value="{{ $data->user_id }}">
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="form-group mandatory">
@@ -60,8 +60,8 @@
                                     <div class="row">
                                         <div class="col-8">
                                             <input type="text" id="codeField" class="form-control"
-                                                placeholder="Enter Code" name="code" autocomplete="off"
-                                                data-parsley-required="true" value="{{ $data->code }}">
+                                                placeholder="Enter Code" name="id" autocomplete="off"
+                                                data-parsley-required="true" value="{{ $data->id }}">
                                             <div class="" style="color: #dc3545" id="accessErrorCode"></div>
                                         </div>
                                         <div class="col-2">
@@ -420,7 +420,7 @@
 
             var loadingSpinner = $('#loadingSpinner');
 
-            loadingSpinner.show(); // Tampilkan elemen animasi
+            loadingSpinner.show();
 
             $.ajax({
                 url: '{{ route('admin.users.getUserGroup') }}',

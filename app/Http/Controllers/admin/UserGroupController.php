@@ -273,7 +273,7 @@ class UserGroupController extends Controller
         $data = $user_group->delete();
 
         // Tulis log jika diperlukan.
-        createLog(static::$module, __FUNCTION__, $id,['Data yang dihapus' => $log]);
+        createLog(static::$module, __FUNCTION__, $id,['Deleted data' => $log]);
 
         return response()->json(['message' => 'User group deleted successfully']);
     }

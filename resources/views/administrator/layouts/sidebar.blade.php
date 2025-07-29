@@ -34,6 +34,8 @@
                             href="{{ route('admin.category_project') }}">Category Project</a></li>
                     <li class="{{ Route::is('admin.category_blog*') ? 'active' : '' }}"><a class="nav-link"
                             href="{{ route('admin.category_blog') }}">Category Blog</a></li>
+                    <li class="{{ Route::is('admin.teams*') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('admin.teams') }}">Teams</a></li>
                 </ul>
             </li>
             <li class="dropdown {{ Route::is('admin.project*', 'admin.comment_project*') ? 'active' : '' }}">
@@ -81,7 +83,7 @@
                 </ul>
             </li>
             <li class="{{ Route::is('admin.profile*') ? 'active' : '' }}"><a class="nav-link"
-                    href="{{ route('admin.profile', auth()->user() ? auth()->user()->code : '') }}"><i
+                    href="{{ route('admin.profile', auth()->user() ? auth()->user()->id : '') }}"><i
                         class="fas fa-solid fa-user"></i> <span>Profile</span></a></li>
             <li class="dropdown {{ Route::is('admin.settings*', 'admin.module*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-cogs"></i> <span>Settings</span></a>

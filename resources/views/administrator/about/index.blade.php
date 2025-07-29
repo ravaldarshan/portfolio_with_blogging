@@ -79,22 +79,13 @@
 
             const submitButton = document.getElementById("formSubmit");
 
-            // form.addEventListener('keydown', function(e) {
-            //     if (e.key === 'Enter') {
-            //         e.preventDefault();
-            //     }
-            // });
-
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
                 indicatorBlock();
-                // Validate the form using Parsley
                 if ($(form).parsley().validate()) {
                     indicatorSubmit();
-                    // Submit the form
                     form.submit();
                 } else {
-                    // Handle validation errors
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -126,7 +117,6 @@
             }
 
             function indicatorBlock() {
-                // Disable the submit button and show the "Please wait..." message
                 submitButton.disabled = true;
                 submitButton.querySelector('.indicator-label').style.display = 'none';
                 submitButton.querySelector('.indicator-progress').style.display =

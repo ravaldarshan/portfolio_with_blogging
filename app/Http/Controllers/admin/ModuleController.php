@@ -159,7 +159,7 @@ class ModuleController extends Controller
 
         createLog(static::$module, __FUNCTION__, $module->id, [
             'Data before updating' => ['Modul' => $log_module_before, 'Modul Akses' => $log_module_access_after],
-            'Data sesudah diupdate' => ['Modul' => $module, 'Modul Akses' => $log_module_access],
+            'Data after updating' => ['Modul' => $module, 'Modul Akses' => $log_module_access],
         ]);
 
         return redirect()->route('admin.module')->with('success', 'Data updated successfully.');
@@ -201,7 +201,7 @@ class ModuleController extends Controller
         }
 
         // Write logs only for soft delete (not force delete)
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dihapus' => ['Module' => $data, 'Module Access' => $logAccess]]);
+        createLog(static::$module, __FUNCTION__, $id, ['Deleted data' => ['Module' => $data, 'Module Access' => $logAccess]]);
 
         return response()->json([
             'status' => 'success',

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
-use File;
+use Illuminate\Support\Facades\File;
 use DataTables;
 use Illuminate\Support\Str;
 use App\Models\admin\Client;
@@ -151,7 +151,7 @@ class ClientController extends Controller
 
         $data->update($updates);
 
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => $updatedData]);
+        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data after updating' => $updatedData]);
         return redirect()->route('admin.client')->with('success', 'Data updated successfully.');
     }
     
@@ -179,7 +179,7 @@ class ClientController extends Controller
         $data->delete();
 
         // Write logs for soft delete
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dihapus' => $deletedData]);
+        createLog(static::$module, __FUNCTION__, $id, ['Deleted data' => $deletedData]);
 
         return response()->json([
             'status' => 'success',

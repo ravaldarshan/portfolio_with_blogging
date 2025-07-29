@@ -15,7 +15,8 @@ class UserController extends Controller
 {
     private static $module = "user";
 
-    public function index(){
+    public function index()
+    {
         //Check permission
         if (!isAllowed(static::$module, "view")) {
             abort(403);
@@ -23,11 +24,12 @@ class UserController extends Controller
 
         return view('administrator.users.index');
     }
-    
-    public function getData(Request $request){
+
+    public function getData(Request $request)
+    {
         $data = User::query()
-                    ->with('user_group')
-                    ->where('email', '!=', 'dev@daysf.com');
+            ->with('user_group')
+            ->where('email', '!=', 'dev@daysf.com');
 
         if ($request->status || $request->usergroup) {
             $data = $data->where(function ($query) use ($request) {
@@ -50,15 +52,15 @@ class UserController extends Controller
                     if ($row->status) {
                         $status = '<div class="d-flex"><div>
                         <input class="tgl tgl-ios changeStatus" data-ix="' . $row->id . '" type="checkbox" value="1"
-                            name="status" checked="checked"  id="status'.$row->id.'"/>
-                        <label class="tgl-btn" for="status'.$row->id.'"></label>
+                            name="status" checked="checked"  id="status' . $row->id . '"/>
+                        <label class="tgl-btn" for="status' . $row->id . '"></label>
                     </div>';
                         $status .= '<span class="badge bg-success">Active</span></div>';
                     } else {
                         $status = '<div class="d-flex"><div>
                         <input class="tgl tgl-ios changeStatus" data-ix="' . $row->id . '" type="checkbox" value="1"
-                            name="status" id="status'.$row->id.'"/>
-                            <label class="tgl-btn" for="status'.$row->id.'"></label>
+                            name="status" id="status' . $row->id . '"/>
+                            <label class="tgl-btn" for="status' . $row->id . '"></label>
                             </div>';
                         $status .= '<span class="badge bg-danger">Not Active</span></div>';
                     }
@@ -73,7 +75,7 @@ class UserController extends Controller
                 </a>';
                 endif;
                 if (isAllowed(static::$module, "edit")) : //Check permission
-                    $btn .= '<a href="'.route('admin.users.edit',$row->id).'" class="btn btn-primary btn-sm mx-3 ">
+                    $btn .= '<a href="' . route('admin.users.edit', $row->id) . '" class="btn btn-primary btn-sm mx-3 ">
                     Edit
                 </a>';
                 endif;
@@ -87,8 +89,9 @@ class UserController extends Controller
             ->rawColumns(['status', 'action'])
             ->make(true);
     }
-    
-    public function add(){
+
+    public function add()
+    {
         //Check permission
         if (!isAllowed(static::$module, "add")) {
             abort(403);
@@ -96,8 +99,9 @@ class UserController extends Controller
 
         return view('administrator.users.add');
     }
-    
-    public function save(Request $request){
+
+    public function save(Request $request)
+    {
         //Check permission
         if (!isAllowed(static::$module, "add")) {
             abort(403);
@@ -111,14 +115,13 @@ class UserController extends Controller
             'user_group' => 'required',
             'status' => 'required',
         ]);
-    
+
         $data = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'user_group_id' => $request->user_group,
             'status' => $request->status,
-            'code' => $request->code,
             'remember_token' => Str::random(60),
         ]);
 
@@ -131,13 +134,14 @@ class UserController extends Controller
                 "facebook": ""
               }',
         ]);
-    
+
         createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
         return redirect()->route('admin.users')->with('success', 'Data saved successfully.');
     }
-    
-    
-    public function edit($id){
+
+
+    public function edit($id)
+    {
         //Check permission
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
@@ -152,16 +156,9 @@ class UserController extends Controller
             ], 404);
         }
 
-        if ($id == 1) {
-            if (auth()->user()->code != 'daysf') {
-                // dd(auth()->user()->code);
-                return view('administrator.users.index');
-            }
-        }
-
-        return view('administrator.users.edit',compact('data'));
+        return view('administrator.users.edit', compact('data'));
     }
-    
+
     public function update(Request $request)
     {
         // Check permission
@@ -174,9 +171,9 @@ class UserController extends Controller
 
         $rules = [
             'name' => 'required',
-            'email' => 'required|unique:users,email,'.$id,
+            'email' => 'required|unique:users,email,' . $id,
             'user_group' => 'required',
-            'code' => 'required|unique:users,code,'.$id,
+            'code' => 'required|unique:users,code,' . $id,
         ];
 
         if ($request->password) {
@@ -194,7 +191,6 @@ class UserController extends Controller
             'email' => $request->email,
             'user_group_id' => $request->user_group,
             'status' => $request->status,
-            'code' => $request->code,
             'remember_token' => Str::random(60),
         ];
 
@@ -217,13 +213,13 @@ class UserController extends Controller
 
         $data->update($updates);
 
-        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => $updatedData]);
+        createLog(static::$module, __FUNCTION__, $data->id, ['Data before updating' => $previousData, 'Data after updating' => $updatedData]);
         return redirect()->route('admin.users')->with('success', 'Data updated successfully.');
     }
 
-    
-    
-    
+
+
+
     public function delete(Request $request)
     {
         // Check permission
@@ -242,15 +238,6 @@ class UserController extends Controller
             ], 404);
         }
 
-        if ($id == 1) {
-            if (auth()->user()->code != 'daysf') {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'User not found'
-                ], 404);
-            }
-        }
-
         // Store the data to be logged before deletion
         $deletedData = $user->toArray();
 
@@ -265,7 +252,7 @@ class UserController extends Controller
         }
 
         // Write logs only for soft delete (not force delete)
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dihapus' => ['User' => $deletedData, 'User Profile' => $profile]]);
+        createLog(static::$module, __FUNCTION__, $id, ['Deleted data' => ['User' => $deletedData, 'User Profile' => $profile]]);
 
         return response()->json([
             'status' => 'success',
@@ -273,9 +260,10 @@ class UserController extends Controller
         ]);
     }
 
-    
-    
-    public function getDetail($id){
+
+
+    public function getDetail($id)
+    {
         //Check permission
         if (!isAllowed(static::$module, "detail")) {
             abort(403);
@@ -296,7 +284,7 @@ class UserController extends Controller
         if (!isAllowed(static::$module, "status")) {
             abort(403);
         }
-        
+
         $data['status'] = $request->status == "Active" ? 1 : 0;
         $log = $request->status;
         $id = $request->ix;
@@ -306,38 +294,41 @@ class UserController extends Controller
         $updates->update($data);
 
         //Write log
-        createLog(static::$module, __FUNCTION__, $id, ['Data User' => $previousData,'Statusnya diubah menjadi' => $log]);
+        createLog(static::$module, __FUNCTION__, $id, ['Data User' => $previousData, 'Statusnya diubah menjadi' => $log]);
         return response()->json([
             'status' => 'success',
             'message' => 'Status has been changed.',
         ]);
     }
-    
-    public function getUserGroup(){
+
+    public function getUserGroup()
+    {
         $usergroup = UserGroup::all();
 
         return response()->json([
             'usergroup' => $usergroup,
         ]);
     }
-    
-    public function generateCode(){
+
+    public function generateCode()
+    {
         $generateCode = 'webits-' . substr(uniqid(), -5);
 
         return response()->json([
             'generateCode' => $generateCode,
         ]);
     }
-    
-    public function checkEmail(Request $request){
-        if($request->ajax()){
+
+    public function checkEmail(Request $request)
+    {
+        if ($request->ajax()) {
             $users = User::where('email', $request->email)->withTrashed();
-            
-            if(isset($request->id)){
+
+            if (isset($request->id)) {
                 $users->where('id', '!=', $request->id);
             }
-    
-            if($users->exists()){
+
+            if ($users->exists()) {
                 return response()->json([
                     'message' => 'Email is already in use',
                     'valid' => false
@@ -349,16 +340,17 @@ class UserController extends Controller
             }
         }
     }
-    
-    public function checkCode(Request $request){
-        if($request->ajax()){
+
+    public function checkCode(Request $request)
+    {
+        if ($request->ajax()) {
             $users = User::where('code', $request->code)->withTrashed();
-            
-            if(isset($request->id)){
+
+            if (isset($request->id)) {
                 $users->where('id', '!=', $request->id);
             }
-    
-            if($users->exists()){
+
+            if ($users->exists()) {
                 return response()->json([
                     'message' => 'Code has been used',
                     'valid' => false
@@ -372,7 +364,8 @@ class UserController extends Controller
     }
 
 
-    public function archives(){
+    public function archives()
+    {
         //Check permission
         if (!isAllowed(static::$module, "archives")) {
             abort(403);
@@ -381,11 +374,12 @@ class UserController extends Controller
         return view('administrator.users.archives');
     }
 
-    public function getDataArchives(Request $request){
+    public function getDataArchives(Request $request)
+    {
         $data = User::query()
-                    ->with('user_group')
-                    ->onlyTrashed()
-                    ->where('email', '!=', 'dev@daysf.com');
+            ->with('user_group')
+            ->onlyTrashed()
+            ->where('email', '!=', 'dev@daysf.com');
 
         if ($request->status || $request->usergroup) {
             $data = $data->where(function ($query) use ($request) {
@@ -449,7 +443,7 @@ class UserController extends Controller
         if (!isAllowed(static::$module, "restore")) {
             abort(403);
         }
-        
+
         $id = $request->id;
         $data = User::withTrashed()->find($id);
         $profile = Profile::withTrashed()->where('user_id', $data->id)->first();
@@ -499,22 +493,13 @@ class UserController extends Controller
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
-        
-        $id = $request->id;
 
+        $id = $request->id;
         $data = User::withTrashed()->find($id);
-        $profile = Profile::withTrashed()->where('user_id',$data->id)->first();
+        $profile = Profile::withTrashed()->where('user_id', $data->id)->first();
 
         if (!$data) {
             return redirect()->route('admin.users.archives')->with('error', 'Data not found.');
-        }
-        if ($id == 1) {
-            if (auth()->user()->code != 'daysf') {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'User not found'
-                ], 404);
-            }
         }
 
         $data->forceDelete();
@@ -526,16 +511,16 @@ class UserController extends Controller
         }
 
         $dataJson = [
-            $data,$dataJsonProfile
+            $data,
+            $dataJsonProfile
         ];
 
         // Write logs if needed.
         createLog(static::$module, __FUNCTION__, $id, $dataJson);
-    
+
         return response()->json([
             'status' => 'success',
             'message' => 'Data has been permanently deleted.',
         ]);
     }
-
 }

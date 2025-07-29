@@ -3,23 +3,19 @@
 namespace App\Http\Controllers\admin;
 
 use DataTables;
-use File;
 use App\Models\admin\User;
 use Illuminate\Http\Request;
 use App\Models\admin\Profile;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
     private static $module = "profile";
 
-    public function index($user_id) {
-        //Check permission
-        if (auth()->user()->id != 'daysf-01' && $user_id != auth()->user()->id) {
-            abort(403);
-        }
-
+    public function index() {
+        $user_id = auth()->user()->id;
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -28,30 +24,28 @@ class ProfileController extends Controller
         ->where('user_id',$user_id)
         ->first();
         if (!$data) {
-            $sosmedData = [
+            $socialMediaData = [
                 'linkedin' => '',
                 'twitter' => '',
                 'instagram' => '',
                 'facebook' => '',
             ];
-            $sosmedJson = json_encode($sosmedData);
+            $socialMediaJson = json_encode($socialMediaData);
             $profile = Profile::create([
                 'user_id' => auth()->user() ? auth()->user()->id : '',
-                'social_media' => $sosmedJson,
+                'social_media' => $socialMediaJson,
             ]);
 
             $profile->save();
-            $sosmed = json_decode($sosmedJson, true); // Mengubah JSON menjadi array
+            $socialMedia = json_decode($socialMediaJson, true); 
         }else{
-            $sosmed = json_decode($data->social_media, true); // Mengubah JSON menjadi array
+            $socialMedia = json_decode($data->social_media, true);
         }
-        // dd($sosmed);
-        // Jika data tidak ditemukan, tampilkan pesan kesalahan atau arahkan ke halaman lain
         if (!$data) {
             return redirect()->route('admin.dashboard')->with('error', 'Data User not found.');
         }
     
-        return view('administrator.profile.index', compact('data','sosmed'));
+        return view('administrator.profile.index', compact('data','socialMedia'));
     }
     
 
@@ -64,13 +58,7 @@ class ProfileController extends Controller
     
     public function update(Request $request)
     {
-        $user_id = $request->user_id;
-
-        // Check permission
-        if ($user_id != auth()->user()->id) {
-            abort(403);
-        }
-
+        $user_id = auth()->user()->id;
         $data = Profile::where('user_id',$user_id)->with('user')->first();
 
         if (!$data) {
@@ -81,9 +69,7 @@ class ProfileController extends Controller
             'email' => 'unique:users,email,' . $data->user->id,
         ]);
 
-        // Simpan Data before updating
         $previousData = $data->toArray();
-
         $updates = [];
 
         if ($request->filled('full_name')) {
@@ -104,16 +90,16 @@ class ProfileController extends Controller
         if ($request->filled('address')) {
             $updates['address'] = $request->address;
         }
-        if ($request->filled('sosmed_linkedin') || $request->filled('social_media') || $request->filled('social_media') || $request->filled('social_media')) {
-            $sosmedData = [
-                'linkedin' => $request->sosmed_linkedin,
-                'twitter' => $request->sosmed_twitter,
-                'instagram' => $request->sosmed_instagram,
-                'facebook' => $request->sosmed_facebook,
+        if ($request->filled('socialMedia_linkedin') || $request->filled('social_media') || $request->filled('social_media') || $request->filled('social_media')) {
+            $socialMediaData = [
+                'linkedin' => $request->socialMedia_linkedin,
+                'twitter' => $request->socialMedia_twitter,
+                'instagram' => $request->socialMedia_instagram,
+                'facebook' => $request->socialMedia_facebook,
             ];
-            $sosmedJson = json_encode($sosmedData);
+            $socialMediaJson = json_encode($socialMediaData);
 
-            $updates['social_media'] = $sosmedJson;
+            $updates['social_media'] = $socialMediaJson;
         }
         if ($request->hasFile('photo_user_profile')) {
 
@@ -136,32 +122,23 @@ class ProfileController extends Controller
             if ($user) {
                 $user->update(['email' => $request->email]);
             } else {
-                return redirect()->route('admin.profile',$user_id)->with('error', 'User tidak ditemukan.');
+                return redirect()->route('admin.profile',$user_id)->with('error', 'User not found.');
             }
         }
 
         $data->update($updates);
-
-        // Kumpulkan data yang diperbarui dalam array
         $updatedData = [];
         foreach ($updates as $key => $value) {
             $updatedData[$key] = $data->$key;
         }
-
-        // Kirim data yang diperbarui ke fungsi createLog
-        createLog(static::$module, __FUNCTION__, $user_id, ['Data before updating' => $previousData, 'Data sesudah diupdate' => ['data' => $updatedData, 'user' => $user]]);
+        createLog(static::$module, __FUNCTION__, $user_id, ['Data before updating' => $previousData, 'Data after updating' => ['data' => $updatedData, 'user' => $user]]);
 
         return redirect()->route('admin.profile',$user_id)->with('success', 'Data updated successfully.');
     }
 
-
-
-
-    
     public function getDetail($user_id){
 
         $data = Profile::with('user')->find($user_id);
-
         return response()->json([
             'data' => $data,
             'status' => 'success',
@@ -172,11 +149,9 @@ class ProfileController extends Controller
     public function checkEmail(Request $request){
         if($request->ajax()){
             $users = User::where('email', $request->email);
-            
-            if(isset($request->code)){
-                $users->where('code', '!=', $request->code);
+            if(isset($request->id)){
+                $users->where('id', '!=', $request->id);
             }
-    
             if($users->exists()){
                 return response()->json([
                     'message' => 'Email is already in use',

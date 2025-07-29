@@ -74,7 +74,7 @@ class CommentBlogController extends Controller
         $data->delete();
 
         // Write logs for soft delete
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dihapus' => $dataJson]);
+        createLog(static::$module, __FUNCTION__, $id, ['Deleted data' => $dataJson]);
 
         return response()->json([
             'status' => 'success',
@@ -142,7 +142,7 @@ class CommentBlogController extends Controller
         $data->delete();
 
         // Write logs for soft delete
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dihapus' => $dataJson]);
+        createLog(static::$module, __FUNCTION__, $id, ['Deleted data' => $dataJson]);
 
         return response()->json([
             'status' => 'success',

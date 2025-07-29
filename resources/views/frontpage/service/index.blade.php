@@ -165,7 +165,6 @@
 
 @push('js')
     <script type="text/javascript">
-        // Function to initialize Owl Carousel
         function initOwlCarousel() {
             $(".logo__carousel").owlCarousel({
                 loop: true,

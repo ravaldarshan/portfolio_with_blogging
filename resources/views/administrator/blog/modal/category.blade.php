@@ -33,7 +33,6 @@
         $('#modalCategory').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var inputcategoryProject = $("#category_id").val();
-            // Now, you can initialize a new DataTable on the same table.
             $("#datatableModalCategory").DataTable().destroy();
             $('#datatableModalCategory tbody').remove();
             var data_table_modal_category = $('#datatableModalCategory').DataTable({

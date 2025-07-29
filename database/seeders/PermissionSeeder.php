@@ -430,6 +430,36 @@ class PermissionSeeder extends Seeder
                     ],
                 ]
             ],
+            [
+                "identifiers"   => "team",
+                "name"          => "Team",
+                "access"        => [
+                    [
+                        "identifiers" => "view",
+                        "name"        => "View",
+                    ],
+                    [
+                        "identifiers" => "add",
+                        "name"        => "Add",
+                    ],
+                    [
+                        "identifiers" => "edit",
+                        "name"        => "Edit",
+                    ],
+                    [
+                        "identifiers" => "delete",
+                        "name"        => "Delete",
+                    ],
+                    [
+                        "identifiers" => "detail",
+                        "name"        => "Detail",
+                    ],
+                    [
+                        "identifiers" => "restore",
+                        "name"        => "Restore",
+                    ],
+                ]
+            ],
         ];
 
 

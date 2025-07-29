@@ -132,7 +132,7 @@
     </section>
     <!-- Counter Section End -->
 
-    
+
     <!-- Team Section Begin -->
     <section class="team spad set-bg-color" data-setbgcolor="{{ $settings['general_breadcrumb_color'] ?? '#1e2a45' }}">
         <div class="container">
@@ -144,43 +144,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-around">
-                <div class="col-lg-3 col-md-6 col-sm-6 p-0">
-                    <div class="team__item set-bg"
-                        data-setbg="https://elitecodder.com/images/teams/1748694308-683af52449191.webp"
-                        style="background-image: url(&quot;https://elitecodder.com/images/teams/1748694308-683af52449191.webp&quot;);">
-                        <div class="team__item__text">
-                            <div class="team-owner-name">Yash Patel</div>
-                            <p>Full-stack developer</p>
-                            <div class="team__item__social">
-                                <a target="_blank" aria-label="Visit LinkedIn Profile"
-                                    href="https://linkedin.com/in/yashpatel53"><i class="fa fa-linkedin"></i></a>
-                                <a target="_blank" aria-label="Visit Website Profile" href=""><i
-                                        class="fa fa-dribbble"></i></a>
-                                <a aria-label="Visit Instagram Profile" target="_blank"
-                                    href="https://www.instagram.com/yashpatel.05_"><i class="fa fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 p-0">
-                    <div class="team__item set-bg"
-                        data-setbg="https://elitecodder.com/images/teams/1753274713-6880d959a1ba7.webp"
-                        style="background-image: url(&quot;https://elitecodder.com/images/teams/1753274713-6880d959a1ba7.webp&quot;);">
-                        <div class="team__item__text">
-                            <div class="team-owner-name">Prince Patel</div>
-                            <p>Full-stack developer</p>
-                            <div class="team__item__social">
-                                <a target="_blank" aria-label="Visit LinkedIn Profile"
-                                    href="https://www.linkedin.com/in/princepatel312/"><i class="fa fa-linkedin"></i></a>
-                                <a target="_blank" aria-label="Visit Website Profile" href=""><i
-                                        class="fa fa-dribbble"></i></a>
-                                <a aria-label="Visit Instagram Profile" target="_blank"
-                                    href="https://www.instagram.com/prince312__"><i class="fa fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row justify-content-around" id="teamsSection">
             </div>
         </div>
     </section>
@@ -207,14 +171,16 @@
 
     <!-- Call To Action Section Begin -->
     <section class="callto spad set-bg-color" id="sectionPromotion"
-        data-setbgcolor="{{ $settings['general_breadcrumb_color'] ?? '#1e2a45' }}" style="background-image: url({{ template_frontpage('img/callto-bg.png') }});">
+        data-setbgcolor="{{ $settings['general_breadcrumb_color'] ?? '#1e2a45' }}"
+        style="background-image: url({{ template_frontpage('img/callto-bg.png') }});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="callto__text">
                         <h2>{{ $settings['title_promosi_frontpage_homepage'] ?? '' }}</h2>
                         <p>{{ $settings['body_promosi_frontpage_homepage'] ?? '' }}</p>
-                        <a class="primary-btn" style="background-color: unset;" href="{{ $settings['url_button_promosi_frontpage_homepage'] ?? '' }}">{{ $settings['text_button_promosi_frontpage_homepage'] ?? '' }}</a>
+                        <a class="primary-btn" style="background-color: unset;"
+                            href="{{ $settings['url_button_promosi_frontpage_homepage'] ?? '' }}">{{ $settings['text_button_promosi_frontpage_homepage'] ?? '' }}</a>
                     </div>
                 </div>
             </div>
@@ -240,6 +206,31 @@
 
                 return `${month} ${day}, ${year}`;
             }
+
+            function initOwlCarousel() {
+                $(".logo__carousel").owlCarousel({
+                    // loop: true,
+                    margin: 0,
+                    items: 3,
+                    dots: true,
+                    dotsEach: 2,
+                    smartSpeed: 1200,
+                    autoHeight: false,
+                    autoplay: true,
+                    responsive: {
+                        992: {
+                            items: 3
+                        },
+                        768: {
+                            items: 2
+                        },
+                        320: {
+                            items: 1
+                        }
+                    }
+                });
+            }
+
 
             //Service
             $.ajax({
@@ -378,28 +369,7 @@
                             $(this).css('background-image', 'url(' + bg + ')');
                         }
                     );
-
-                    $(".latest__slider").owlCarousel({
-                        // loop: true,
-                        margin: 0,
-                        items: 3,
-                        dots: true,
-                        dotsEach: 2,
-                        smartSpeed: 1200,
-                        autoHeight: false,
-                        autoplay: true,
-                        responsive: {
-                            992: {
-                                items: 3
-                            },
-                            768: {
-                                items: 2
-                            },
-                            320: {
-                                items: 1
-                            }
-                        }
-                    });
+                    initOwlCarousel();
                 }
             });
 
@@ -475,6 +445,46 @@
                 }
             });
             initcarousel();
+
+            $.ajax({
+                type: "GET",
+                url: "{{ route('web.getTeams') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "_method": "GET",
+                },
+                success: function(respon) {
+                    let clientHtml = ''
+                    for (let i = 0; i < respon.data.length; i++) {
+                        const data = respon.data[i];
+                        let social_media = JSON.parse(data.social_media);
+                        clientHtml += `
+                            <div class="col-lg-3 col-md-6 col-sm-6 p-0">
+                                <div class="team__item set-bg" data-setbg="{{ asset('administrator/assets/media/profile') }}/${data.photo}" style="background-image: url('{{ asset('administrator/assets/media/profile') }}/${data.photo}');">
+                                    <div class="team__item__text">
+                                        <div class="team-owner-name">${data.full_name}</div>
+                                        <p>${data.designation ?? '-'}</p>
+                                        <div class="team__item__social">
+                                            ${social_media.linkedin != '' ? `<a target="_blank" aria-label="Visit LinkedIn Profile" href="${social_media.linkedin}"><i class="fa-brands fa-linkedin"></i></a>` : ''}
+                                            ${social_media.twitter != '' ? `<a target="_blank" aria-label="Visit Twitter Profile" href="${social_media.twitter}"><i class="fa-brands fa-twitter"></i></a>` : ''}
+                                            ${social_media.facebook != '' ? `<a target="_blank" aria-label="Visit Facebook Profile" href="${social_media.facebook}"><i class="fa-brands fa-facebook"></i></a>` : ''}
+                                            ${social_media.instagram != '' ? `<a aria-label="Visit Instagram Profile" target="_blank" href="${social_media.instagram}"><i class="fa-brands fa-instagram"></i></a>` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                    }
+                    $('#teamsSection').html(
+                        clientHtml
+                    );
+
+                    // Destroy and reinitialize Owl Carousel after updating content
+                    $('.logo__carousel').owlCarousel('destroy');
+                    initOwlCarousel();
+                }
+            });
 
 
             //Count

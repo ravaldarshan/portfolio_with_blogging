@@ -17,12 +17,14 @@ class CreateTeamsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('full_name')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->string('designation')->nullable();
+            $table->string('email')->nullable();
             $table->string('photo')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('social_media')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->timestamps();
             $table->unsignedBigInteger('updated_by')->nullable();
+            $table->timestamps();
         });
     }
 

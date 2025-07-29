@@ -31,7 +31,7 @@
                 '</div>');
             var loadingSpinner = $('#loadingSpinner');
 
-            loadingSpinner.show(); // Tampilkan elemen animasi
+            loadingSpinner.show(); 
 
             $.ajax({
                 url: '{{ route('admin.about.getDataGallery') }}',
@@ -47,7 +47,7 @@
                         for (let index = 0; index < img.length; index++) {
                             const img_url = img[index];
                             const checkboxId =
-                                `checkbox_${i}_${index}`; // Atribut unik untuk setiap checkbox
+                                `checkbox_${i}_${index}`; 
                             body += `<div class="col-6 col-sm-4">` +
                                 `<label class="imagecheck mb-4">` +
                                 `<input name="imagecheck" id="${checkboxId}" type="checkbox" value="${img_url}" class="imagecheck-input" />` +

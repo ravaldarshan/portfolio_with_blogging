@@ -13,7 +13,7 @@
                 <form action="{{ route('admin.profile.update') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="code" value="{{ $data->user->code ? $data->user->code : '' }}">
+                    <input type="hidden" name="id" value="{{ $data->id ? $data->id : '' }}">
                     <input type="hidden" name="email" value="{{ $data->user->email ? $data->user->email : '' }}">
                     <div class="d-flex flex-column align-items-center text-center">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
