@@ -37,7 +37,7 @@ class AuthController extends Controller
     
             if (!$user) {
                 return response()->json([
-                    'message' => 'Email tidak ditemukan',
+                    'message' => 'Email not found!',
                     'valid' => false
                 ]);
             }
@@ -48,7 +48,7 @@ class AuthController extends Controller
                 ]);
             } else {
                 return response()->json([
-                    'message' => 'Password tidak sesuai',
+                    'message' => 'Password is incorrect!',
                     'valid' => false
                 ]);
             }
@@ -70,6 +70,11 @@ class AuthController extends Controller
         //     return back()->withErrors($validator)->withInput();
         // }
         // dd($request->email,$request->password);
+        $user = User::where('email', $request->email)->first();
+        if($user){
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
 
         $credentials = $request->only('email', 'password');
 
