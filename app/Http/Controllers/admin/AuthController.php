@@ -41,6 +41,9 @@ class AuthController extends Controller
                     'valid' => false
                 ]);
             }
+             return response()->json([
+                    'valid' => true
+                ]);
     
             if (Hash::check($request->password, $user->password)) {
                 return response()->json([
