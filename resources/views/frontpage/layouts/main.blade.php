@@ -46,6 +46,8 @@
     @stack('css')
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6699751802277868"
      crossorigin="anonymous"></script>
+
+     <script type='text/javascript' src='//pl27587825.revenuecpmgate.com/fa/bc/cb/fabccb6e809541309c6581619a09462f.js'></script>
 </head>
 
 <body>
