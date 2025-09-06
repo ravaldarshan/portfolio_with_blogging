@@ -44,6 +44,8 @@
     <link rel="stylesheet" href="{{ template_frontpage('css/style.css') }}" type="text/css">
 
     @stack('css')
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6699751802277868"
+     crossorigin="anonymous"></script>
 </head>
 
 <body>
