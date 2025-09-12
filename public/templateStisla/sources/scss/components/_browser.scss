@@ -12,10 +12,19 @@
   &.browser-internet-explorer {
     background-image: url('../img/browsers/internet-explorer.png');
   }
+  &.browser-edge {
+    background-image: url('../img/browsers/microsoftedge.png');
+  }
   &.browser-opera {
     background-image: url('../img/browsers/opera.png');
   }
   &.browser-safari {
     background-image: url('../img/browsers/safari.png');
+  }
+  &.browser-0 {
+    background-image: url('../img/browsers/browser.png');
+  }
+  &.browser-vivaldi {
+    background-image: url('../img/browsers/vivaldi.png');
   }
 }

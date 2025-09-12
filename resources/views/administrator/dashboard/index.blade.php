@@ -10,7 +10,7 @@
     @push('section_title')
         Dashboard
         <a href="javascript:void(0)" class="btn" style="float: right; background-color:var(--main-background-color);"
-            id="triggerRefresh"><i class="fas fa-sync-alt"></i></a>
+            id="triggerRefresh"><i class="fas fa-sync-alt text-white"></i></a>
     @endpush
 
     <div id="sectionPage">
