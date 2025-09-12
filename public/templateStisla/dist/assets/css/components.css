@@ -297,6 +297,9 @@
   .browser.browser-vivaldi {
     background-image: url('../img/browsers/vivaldi.png');
   }
+  .browser.browser-mozilla {
+    background-image: url('../img/browsers/mozilla.png');
+  }
 
 /* 1.5 Chat */
 .chat-box .chat-content {

@@ -250,6 +250,9 @@
   .browser.browser-vivaldi {
     background-image: url('../img/browsers/vivaldi.png');
   }
+.browser.browser-mozilla {
+    background-image: url('../img/browsers/mozilla.png');
+  }
 
 .chat-box .chat-content {
     background-color: #f9f9f9 !important;
