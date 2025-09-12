@@ -230,17 +230,17 @@
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
 
-                // Perform remote validation
+                
                 const remoteValidationResult = await validateRemoteEmail();
                 const emailField = $("#emailField");
                 const accessErrorEmail = $("#accessErrorEmail");
                 if (!remoteValidationResult.valid) {
-                    // Remote validation failed, display the error message
+                    
                     accessErrorEmail.addClass('invalid-feedback');
                     emailField.addClass('is-invalid');
 
                     accessErrorEmail.text(remoteValidationResult
-                        .errorMessage); // Set the error message from the response
+                        .errorMessage); 
 
                     return;
                 } else {
@@ -250,27 +250,27 @@
                 }
 
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
-                    // Disable the submit button and show the "Please wait..." message
+                    
                     submitButton.querySelector('.indicator-label').style.display = 'none';
                     submitButton.querySelector('.indicator-progress').style.display =
                         'inline-block';
 
-                    // Perform your asynchronous form submission here
-                    // Simulating a 2-second delay for demonstration
+                    
+                    
                     setTimeout(function() {
-                        // Re-enable the submit button and hide the "Please wait..." message
+                        
                         submitButton.querySelector('.indicator-label').style.display =
                             'inline-block';
                         submitButton.querySelector('.indicator-progress').style.display =
                             'none';
 
-                        // Submit the form
+                        
                         form.submit();
                     }, 2000);
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -302,7 +302,7 @@
                         }
                     });
 
-                    // Assuming the response is JSON and contains a "valid" key
+                    
                     return {
                         valid: response.valid === true,
                         errorMessage: response.message
@@ -316,9 +316,9 @@
                 }
             }
 
-            // Ambil data date dari database (gantilah ini dengan logika pengambilan data sesuai dengan aplikasi Anda)
+            
             const dateDariDatabase =
-                "{{ $data->date_of_birth ? $data->date_of_birth : '2023-09-01' }}"; // Contents ini dengan date dari database jika tersedia atau null jika tidak tersedia
+                "{{ $data->date_of_birth ? $data->date_of_birth : '2023-09-01' }}"; 
 
 
             const options = {
@@ -338,25 +338,25 @@
                     prevCentury: 'Previous Century',
                     nextCentury: 'Next Century'
                 },
-                accentColor: '#0090FC', // You can customize the accent color
-                isDark: true, // You can enable/disable dark mode
-                zIndex: 9999, // You can set z-index, default is 1000
-                customClass: ['font-poppins'], // You can add custom class to the calendarify element
+                accentColor: '#0090FC', 
+                isDark: true, 
+                zIndex: 9999, 
+                customClass: ['font-poppins'], 
                 onChange: (calendarify) => console.log(
                     calendarify
-                ), // You can trigger whatever function in this callback property (e.g. to fetch data with passed date parameter)
-                quickActions: false, // You can enable/disable quick action (Today, Tomorrow, In 2 Days) buttons
-                locale: { // You can set locale for calendar
-                    format: "YYYY-MM-DD", // Set Custom Format with Moment JS
+                ), 
+                quickActions: false, 
+                locale: { 
+                    format: "YYYY-MM-DD", 
                     lang: {
-                        code: 'id', // Set country code (e.g. "en", "id", etc)
+                        code: 'id', 
                         months: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus',
                             'September', 'Oktober', 'November', 'Desember'
-                        ], // Or you can use locale moment.months instead
+                        ], 
                         weekdays: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat',
                             'Sabtu'
-                        ], // Or you can use locale moment.weekdays instead
-                        ui: { // You can set locale text for quick action buttons
+                        ], 
+                        ui: { 
                             quickActions: {
                                 today: "Hari Ini",
                                 tomorrow: "Besok",

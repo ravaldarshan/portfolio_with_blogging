@@ -64,7 +64,7 @@
                 order: [
                     [0, 'asc']
                 ],
-                scrollX: true, // Enable horizontal scrolling
+                scrollX: true, 
                 ajax: {
                     url: '{{ route('admin.teams.getData') }}',
                     dataType: "JSON",

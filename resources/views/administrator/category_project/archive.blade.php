@@ -60,7 +60,7 @@
             order: [
                 [0, 'asc']
             ],
-            scrollX: true, // Enable horizontal scrolling
+            scrollX: true, 
             ajax: {
                 url: '{{ route('admin.category_project.getDataArchives') }}',
                 dataType: "JSON",
@@ -122,9 +122,9 @@
                             "id": id,
                         },
                         success: function() {
-                            // data_table.ajax.url(
-                            //         '{{ route('admin.category_project.getData') }}')
-                            //     .load();
+                            
+                            
+                            
                             data_table.ajax.reload(null, false);
                             swalWithBootstrapButtons.fire(
                                 'Succeed!',
@@ -132,8 +132,8 @@
                                 'success'
                             );
 
-                            // Remove the deleted row from the DataTable without reloading the page
-                            // data_table.row($(this).parents('tr')).remove().draw();
+                            
+                            
                         }
                     });
                 }
@@ -169,9 +169,9 @@
                             "id": id,
                         },
                         success: function() {
-                            // data_table.ajax.url(
-                            //         '{{ route('admin.category_project.getData') }}')
-                            //     .load();
+                            
+                            
+                            
                             data_table.ajax.reload(null, false);
                             swalWithBootstrapButtons.fire(
                                 'Succeed!',
@@ -179,8 +179,8 @@
                                 'success'
                             );
 
-                            // Remove the PUT row from the DataTable without reloading the page
-                            // data_table.row($(this).parents('tr')).remove().draw();
+                            
+                            
                         }
                     });
                 }

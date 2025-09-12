@@ -31,7 +31,7 @@
             '</div>');
         var loadingSpinner = $('#loadingSpinner');
 
-        loadingSpinner.show(); // Tampilkan elemen animasi
+        loadingSpinner.show(); 
 
         $.ajax({
             url: '{{ route('admin.user_groups.getDetail', ':id') }}'.replace(':id', id),
@@ -48,7 +48,7 @@
                     '<th style="width:50px">No</th>' +
                     '<th>Module</th>';
 
-                var hasAccessColumn = false; // To track if there is at least one module with access
+                var hasAccessColumn = false; 
 
                 for (var i = 0; i < modules.length; i++) {
                     var module = modules[i];
@@ -65,7 +65,7 @@
 
                     if (hasAccess) {
                         permissionTableHTML += '<th>Access</th>';
-                        break; // Only need one column
+                        break; 
                     }
                 }
 
@@ -109,7 +109,7 @@
                     '<p><strong>Permission:</strong></p>' + (hasAccessColumn ? permissionTableHTML : 'No access permissions for any module')
                 );
 
-                loadingSpinner.hide(); // Sembunyikan elemen animasi setelah data dimuat
+                loadingSpinner.hide(); 
             }
         });
     });

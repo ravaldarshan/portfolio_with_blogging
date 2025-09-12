@@ -276,20 +276,20 @@
     <script>
         $(document).ready(function() {
             function addSocialMediaList() {
-                // Use a class selector to get the count of cloned elements
+                
                 var currentIndex = $(".socialMedia-list").find('.row').length;
                 $('#jumlah_socialMedia').val((currentIndex + 1));
 
-                // Clone the template-socialMedia
+                
                 var clonedElement = $(".template-socialMedia").clone();
                 clonedElement.addClass("row rowSocialMedia_" + currentIndex);
                 clonedElement.removeClass("template-socialMedia");
                 clonedElement.removeClass("d-none");
 
-                // Set the index-element attribute on the cloned element
+                
                 clonedElement.attr("index-element", currentIndex);
 
-                // Update IDs and "for" attributes of cloned elements
+                
                 clonedElement.find("[id^='inputNamaSocialMedia_']").attr("id", "inputNamaSocialMedia_" + currentIndex);
                 clonedElement.find("[id^='inputFontAawesomeSocialMedia_']").attr("id", "inputFontAawesomeSocialMedia_" +
                     currentIndex);
@@ -298,25 +298,25 @@
                 clonedElement.find("[for^='inputFontAawesomeSocialMedia_']").attr("for", "inputFontAawesomeSocialMedia_" +
                     currentIndex);
 
-                // Update name attributes of cloned input elements
+                
                 clonedElement.find("[name^='nama_socialMedia_']").attr("name", "nama_socialMedia_" + currentIndex);
                 clonedElement.find("[name^='icon_socialMedia_']").attr("name", "icon_socialMedia_" + currentIndex);
 
                 clonedElement.find(".delete-socialMedia").attr("data-index", currentIndex);
 
-                // Append the cloned element to the container
+                
                 $(".socialMedia-list").append(clonedElement);
 
-                // Show delete button for the new row, hide for the initial row
+                
                 $(".socialMedia-list .delete-socialMedia").show();
                 $(".socialMedia-list .rowSocialMedia_0 .delete-socialMedia").hide();
             }
 
-            // Function to handle deleting socialMedia-list
+            
             function deleteSocialMediaList(element, index) {
                 var socialMediaList = $(element).find(".rowSocialMedia_" + index);
 
-                // Check if it is not the first row before deleting
+                
                 if (socialMediaList.attr("index-element") !== "0") {
                     socialMediaList.remove();
                     const jmlah = parseInt($('#jumlah_socialMedia').val()) - 1;
@@ -324,12 +324,12 @@
                 }
             }
 
-            // Event listener for "Add more socialMedia" button
+            
             $(".more-socialMedia").click(function() {
                 addSocialMediaList();
             });
 
-            // Event listener for "Delete" button
+            
             $("#socialMedia").on("click", ".delete-socialMedia", function() {
                 let index = $(this).data('index');
                 let socialMedia = $(this).data('socialMedia');
@@ -360,8 +360,8 @@
                                 data: {
                                     "_token": "{{ csrf_token() }}",
                                     "_method": "GET",
-                                    "index": index, // Make sure you define the variable 'id' to be deleted
-                                    "socialMedia": socialMedia, // Make sure you define the variable 'id' to be deleted
+                                    "index": index, 
+                                    "socialMedia": socialMedia, 
                                 },
                                 success: function() {
                                     deleteSocialMediaList(socialMediaList, index);
@@ -369,7 +369,7 @@
                                         title: 'Succeed!',
                                         text: 'Data deleted successfully.',
                                         icon: 'success',
-                                        timer: 1500, // 2 detik
+                                        timer: 1500, 
                                         showConfirmButton: false,
                                     });
                                 }
@@ -380,7 +380,7 @@
                                 title: 'Succeed!',
                                 text: 'Data deleted successfully.',
                                 icon: 'success',
-                                timer: 1500, // 2 detik
+                                timer: 1500, 
                                 showConfirmButton: false,
                             });
                         }
@@ -388,43 +388,43 @@
                 });
             });
 
-            // Hide delete button for the initial row
+            
             $(".socialMedia-list[index-element='0'] .delete-socialMedia").hide();
         });
     </script>
 
     <script>
-        // Fungsi untuk menangani perubahan pada file input
+        
         function handleFileInputChange() {
-            const newInput = this; // 'this' mengacu pada elemen file input yang dipicu oleh perubahan
+            const newInput = this; 
 
-            // Mendapatkan file yang baru dipilih
+            
             const newFiles = newInput.files;
 
-            // Lakukan sesuatu dengan file yang baru dipilih
+            
             for (let i = 0; i < newFiles.length; i++) {
                 const newFile = newFiles[i];
 
-                // Lakukan sesuatu dengan setiap file, misalnya, tampilkan informasi di konsol
+                
                 console.log(`File Baru: ${newFile.name}, Tipe: ${newFile.type}, Ukuran: ${newFile.size} bytes`);
             }
 
-            // Anda dapat menambahkan logika lain sesuai kebutuhan Anda di sini
+            
         }
 
-        // Variabel untuk menyimpan array file
+        
         let filesArray = [];
 
         const otherPicturesInputFile = document.getElementById("otherPicturesInputFile");
         const previewContainerotherPictures = document.querySelector(".fileinput-preview-image");
 
         otherPicturesInputFile.addEventListener("change", function() {
-            // Wipe preview gambar sebelumnya
+            
             previewContainerotherPictures.innerHTML = '';
 
             const files = this.files;
 
-            // Loop melalui semua file yang dipilih
+            
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 const imageType = /^image\//;
@@ -438,13 +438,13 @@
 
                 const img = document.createElement("img");
                 img.classList.add("img-thumbnail");
-                img.width = 200; // Sesuaikan ukuran gambar sesuai kebutuhan
+                img.width = 200; 
                 img.src = URL.createObjectURL(file);
 
                 imgContainer.appendChild(img);
                 previewContainerotherPictures.appendChild(imgContainer);
 
-                // Tambahkan file ke dalam array
+                
                 filesArray.push(file);
             }
         });
@@ -468,13 +468,13 @@
                 e.preventDefault();
                 indicatorBlock();
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
                     indicatorSubmit();
-                        // Submit the form
+                        
                         form.submit();
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -506,7 +506,7 @@
             }
 
             function indicatorBlock() {
-                // Disable the submit button and show the "Please wait..." message
+                
                 submitButton.disabled = true;
                 submitButton.querySelector('.indicator-label').style.display = 'none';
                 submitButton.querySelector('.indicator-progress').style.display =

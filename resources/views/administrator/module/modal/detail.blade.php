@@ -31,7 +31,7 @@
                 '</div>');
             var loadingSpinner = $('#loadingSpinner');
 
-            loadingSpinner.show(); // Tampilkan elemen animasi
+            loadingSpinner.show(); 
 
             $.ajax({
                 url: '{{ route('admin.module.getDetail', ':id') }}'.replace(':id', id),

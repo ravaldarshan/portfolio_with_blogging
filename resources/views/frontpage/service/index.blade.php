@@ -191,7 +191,7 @@
             });
         }
 
-        // Service
+        
         $.ajax({
             type: "GET",
             url: "{{ route('web.service.getService') }}",
@@ -225,35 +225,35 @@
             }
         });
 
-        // Client
-        // $.ajax({
-        //     type: "GET",
-        //     url: "{{ route('web.service.getClient') }}",
-        //     data: {
-        //         "_token": "{{ csrf_token() }}",
-        //         "_method": "GET",
-        //     },
-        //     success: function(respon) {
-        //         let clientHtml = ''
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
-        //         for (let i = 0; i < respon.data.length; i++) {
-        //             const data = respon.data[i];
+        
+        
 
-        //             clientHtml += `<a href="` + data.website_url +
-        //                 `" target="_blank" class="logo__item"><img class="client-logo" src="{{ asset_administrator('assets/media/client') }}/` +
-        //                 data.img_url + `" alt=""></a>`;
-        //         }
-        //         $('#clientSection').html(
-        //             clientHtml
-        //         );
+        
+        
+        
+        
+        
+        
+        
 
-        //         // Destroy and reinitialize Owl Carousel after updating content
-        //         $('.logo__carousel').owlCarousel('destroy');
-        //         initOwlCarousel();
-        //     }
-        // });
+        
+        
+        
+        
+        
 
-        // Initial Owl Carousel initialization
+        
         initOwlCarousel();
     </script>
 @endpush

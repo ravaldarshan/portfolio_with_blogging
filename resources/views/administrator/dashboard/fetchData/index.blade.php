@@ -290,7 +290,7 @@
 
         var statistics_chart = document.getElementById("myChart").getContext('2d');
 
-        // Initial chart data
+        
         var initialData = {
             labels: @json($chartLabelsDaily),
             datasets: [{
@@ -350,13 +350,13 @@
         });
 
         function updateChartData(timeRange) {
-            // Remove 'btn-primary' class from all buttons
+            
             document.getElementById('triggerDaily').classList.remove('btn-primary');
             document.getElementById('triggerWeekly').classList.remove('btn-primary');
             document.getElementById('triggerMonthly').classList.remove('btn-primary');
             document.getElementById('triggerYearly').classList.remove('btn-primary');
 
-            // Add 'btn-primary' class to the clicked button
+            
             if (timeRange === 'daily') {
                 document.getElementById('triggerDaily').classList.add('btn-primary');
             } else if (timeRange === 'weekly') {

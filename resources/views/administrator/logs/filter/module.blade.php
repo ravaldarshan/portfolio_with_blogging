@@ -49,7 +49,7 @@
         $('#filterModuleLogSystem').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
 
-            // Now, you can initialize a new DataTable on the same table.
+            
             $("#datatableModuleModal").DataTable().destroy();
             $('#datatableModuleModal tbody').remove();
             var data_table_module = $('#datatableModuleModal').DataTable({
@@ -66,7 +66,7 @@
                 order: [
                     [0, 'asc']
                 ],
-                // scrollX: true, // Enable horizontal scrolling
+                
                 ajax: {
                     url: '{{ route('admin.logSystems.getDataModule') }}',
                     dataType: "JSON",

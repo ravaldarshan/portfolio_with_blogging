@@ -201,7 +201,7 @@
             });
         });
 
-        // Fungsi untuk menangani perubahan pada file input
+        
         function handleFileInputChange() {
             const newInput = this; 
             const newFiles = newInput.files;

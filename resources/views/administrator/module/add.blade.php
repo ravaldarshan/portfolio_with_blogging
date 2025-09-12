@@ -123,7 +123,7 @@
             });
             resetData();
 
-            // Menggunakan event delegate untuk mengikuti klik pada tombol "Delete"
+            
             $("#modul_access").on("click", ".removeData", function() {
                 var rowToDelete = $(this).closest(".modul_access-list");
 
@@ -136,8 +136,8 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Apakah Anda yakin ingin menghapus baris ini?',
-                    text: 'Tindakan ini hanya akan menghapus baris yang ditampilkan, tidak akan menghapus data permanen.',
+                    title: 'Are you sure you want to delete this row?',
+                    text: 'This action will only delete the displayed row, it will not delete permanent data.',
                     icon: 'warning',
                     buttonsStyling: false,
                     showCancelButton: true,
@@ -146,33 +146,26 @@
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Wipe baris dari tampilan
                         deleteRow(rowToDelete);
-                        // Tampilkan pesan sukses selama 2 detik dan kemudian otomatis tutup
                         swalWithBootstrapButtons.fire({
                             title: 'Succeed!',
-                            text: 'Baris telah dihapus.',
+                            text: 'The row has been deleted.',
                             icon: 'success',
-                            timer: 1500, // 2 detik
+                            timer: 1500, 
                             showConfirmButton: false
                         });
                     }
                 });
             });
-
-            // Fungsi untuk menghapus baris
             function deleteRow(element) {
                 $(element).remove();
                 resetData();
             }
 
 
-            //validate parsley form
             const form = document.getElementById("form");
             const validator = $(form).parsley();
-
             const submitButton = document.getElementById("formSubmit");
-
             form.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -181,28 +174,18 @@
 
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
-
-                // Validate the form using Parsley
                 if ($(form).parsley().validate()) {
-                    // Disable the submit button and show the "Please wait..." message
                     submitButton.querySelector('.indicator-label').style.display = 'none';
                     submitButton.querySelector('.indicator-progress').style.display =
                         'inline-block';
-
-                    // Perform your asynchronous form submission here
-                    // Simulating a 2-second delay for demonstration
                     setTimeout(function() {
-                        // Re-enable the submit button and hide the "Please wait..." message
                         submitButton.querySelector('.indicator-label').style.display =
                             'inline-block';
                         submitButton.querySelector('.indicator-progress').style.display =
                             'none';
-
-                        // Submit the form
                         form.submit();
                     }, 2000);
                 } else {
-                    // Handle validation errors
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -226,7 +209,7 @@
                 var another = this;
                 search_index = $(this).attr("index-element");
                 $(this).find('input, select').each(function() {
-                    // Ubah nama atribut 'name' dengan pengindeksan yang benar
+                    
                     this.name = this.name.replace('[' + search_index + ']', '[' + index + ']');
                     $(another).attr("index-element", index);
                 });
@@ -236,54 +219,45 @@
                     $(another).find(".error-block").remove();
                     var tipe = $(this).val();
                     if (tipe == 'element') {
-                        // Menampilkan elemen code_access-input
                         $(another).find(".code_access-input").show();
-                        // Mengaktifkan validasi pada elemen code_access-input
                         $(another).find(".modul_access-code_access-input").prop("disabled", false);
-
-                        // Menghilangkan elemen code_access-select
                         $(another).find(".code_access-select").hide();
-                        // Menonaktifkan validasi pada elemen code_access-select
                         $(another).find(".modul_access-code_access-select").prop("disabled", true);
-                        // Menghapus nilai pada elemen code_access-select
                         $(another).find(".modul_access-code_access-select").val("").attr(
                             "data-parsley-required", "false");
-
-                        // Menambahkan validasi pada elemen code_access-input
                         $(another).find(".modul_access-code_access-input").attr("data-parsley-required",
                             "true");
                     } else if (tipe == 'page') {
-                        // Menampilkan elemen code_access-select
                         $(another).find(".code_access-select").show();
-                        // Mengaktifkan validasi pada elemen code_access-select
+                        
                         $(another).find(".modul_access-code_access-select").prop("disabled", false);
 
-                        // Menghilangkan elemen code_access-input
+                        
                         $(another).find(".code_access-input").hide();
-                        // Menonaktifkan validasi pada elemen code_access-input
+                        
                         $(another).find(".modul_access-code_access-input").prop("disabled", true);
-                        // Menghapus nilai pada elemen code_access-input
+                        
                         $(another).find(".modul_access-code_access-input").val("").attr(
                             "data-parsley-required", "false");
 
-                        // Menambahkan validasi pada elemen code_access-select
+                        
                         $(another).find(".modul_access-code_access-select").attr("data-parsley-required",
                             "true");
                     } else if (tipe == '') {
-                        // Menghilangkan elemen code_access-select
+                        
                         $(another).find(".code_access-select").hide();
-                        // Mengaktifkan validasi pada elemen code_access-select
+                        
                         $(another).find(".modul_access-code_access-select").prop("disabled", false);
-                        // Menghapus nilai pada elemen code_access-select
+                        
                         $(another).find(".modul_access-code_access-select").val("").attr(
                             "data-parsley-required", "false");
 
-                        // Menampilkan elemen code_access-input
+                        
                         $(another).find(".code_access-input").show();
-                        // Mengaktifkan validasi pada elemen code_access-input
+                        
                         $(another).find(".modul_access-code_access-input").prop("disabled", false);
 
-                        // Menambahkan validasi pada elemen code_access-input
+                        
                         $(another).find(".modul_access-code_access-input").attr("data-parsley-required",
                             "true");
                     }

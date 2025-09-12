@@ -49,7 +49,7 @@
                 order: [
                     [0, 'asc']
                 ],
-                // scrollX: true, // Enable horizontal scrolling
+                
                 ajax: {
                     url: '{{ route('admin.blog.getDataCategory') }}',
                     dataType: "JSON",
@@ -66,7 +66,7 @@
                     },
                 ],
                 "rowCallback": function(row, data) {
-                    // Check if inputcategoryProject is not empty and data.id matches
+                    
                     if (inputcategoryProject && data.id == inputcategoryProject) {
                         $(row).addClass('selected');
                     }
@@ -74,35 +74,35 @@
             });
 
 
-            // Click event for row selection
+            
             $('#datatableModalCategory tbody').on('click', 'tr', function() {
-                // Remove selection from other rows
+                
                 $('#datatableModalCategory tbody tr').removeClass('selected');
 
-                // Add selection to the clicked row
+                
                 $(this).addClass('selected');
 
-                // var data = data_table_modal_category.row(this).data();
+                
 
-                // $("#inputCategory").val(data.id);
-                // $("#inputCategoryName").val(data.nama);
+                
+                
             });
 
-            // Click event for "Choose" button
+            
             $('#selectDataCategory').on('click', function() {
-                // Get the selected row
+                
                 var selectedRow = $('#datatableModalCategory tbody tr.selected');
 
-                // Check if any row is selected
+                
                 if (selectedRow.length > 0) {
-                    // Execute the specified code
+                    
                     var data = data_table_modal_category.row(selectedRow).data();
                     $("#category_id").val(data.id);
                     $("#inputCategory").val(data.id);
                     $("#inputCategoryName").val(data.nama);
                     $('#buttonCloseModuleModal').click();
                 } else {
-                    // Inform the user that no row is selected
+                    
                     Swal.fire({
                         title: "Warning!",
                         text: "Choose salah satu data.",

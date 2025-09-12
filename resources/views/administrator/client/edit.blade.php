@@ -136,37 +136,37 @@
             });
         });
 
-        // Fungsi untuk menangani perubahan pada file input
+        
         function handleFileInputChange() {
-            const newInput = this; // 'this' mengacu pada elemen file input yang dipicu oleh perubahan
+            const newInput = this; 
 
-            // Mendapatkan file yang baru dipilih
+            
             const newFiles = newInput.files;
 
-            // Lakukan sesuatu dengan file yang baru dipilih
+            
             for (let i = 0; i < newFiles.length; i++) {
                 const newFile = newFiles[i];
 
-                // Lakukan sesuatu dengan setiap file, misalnya, tampilkan informasi di konsol
+                
                 console.log(`File Baru: ${newFile.name}, Tipe: ${newFile.type}, Ukuran: ${newFile.size} bytes`);
             }
 
-            // Anda dapat menambahkan logika lain sesuai kebutuhan Anda di sini
+            
         }
 
-        // Variabel untuk menyimpan array file
+        
         let filesArray = [];
 
         const otherPicturesInputFile = document.getElementById("otherPicturesInputFile");
         const previewContainerotherPictures = document.querySelector(".fileinput-preview-image");
 
         otherPicturesInputFile.addEventListener("change", function() {
-            // Wipe preview gambar sebelumnya
+            
             previewContainerotherPictures.innerHTML = '';
 
             const files = this.files;
 
-            // Loop melalui semua file yang dipilih
+            
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 const imageType = /^image\//;
@@ -180,7 +180,7 @@
 
                 const img = document.createElement("img");
                 img.classList.add("img-thumbnail");
-                img.width = 200; // Sesuaikan ukuran gambar sesuai kebutuhan
+                img.width = 200; 
                 img.src = URL.createObjectURL(file);
 
                 const deleteButton = document.createElement("a");
@@ -207,21 +207,21 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
 
-                            // Wipe gambar saat tombol "Wipe" diklik
+                            
                             const fileIndex = filesArray.indexOf(file);
                             if (fileIndex !== -1) {
                                 filesArray.splice(fileIndex, 1);
 
-                                // Buat objek DataTransfer baru
+                                
                                 const newFilesList = new DataTransfer();
 
-                                // Tambahkan file ke objek DataTransfer
+                                
                                 filesArray.forEach(file => newFilesList.items.add(file));
 
-                                // Set nilai baru untuk file input
+                                
                                 otherPicturesInputFile.files = newFilesList.files;
 
-                                // Tambahkan event listener ke file input baru
+                                
                                 otherPicturesInputFile.addEventListener("change",
                                     handleFileInputChange);
                             }
@@ -235,7 +235,7 @@
                 imgContainer.appendChild(deleteButton);
                 previewContainerotherPictures.appendChild(imgContainer);
 
-                // Tambahkan file ke dalam array
+                
                 filesArray.push(file);
             }
         });
@@ -250,22 +250,22 @@
 
             const submitButton = document.getElementById("formSubmit");
 
-            // form.addEventListener('keydown', function(e) {
-            //     if (e.key === 'Enter') {
-            //         e.preventDefault();
-            //     }
-            // });
+            
+            
+            
+            
+            
 
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
                 indicatorBlock();
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
                     indicatorSubmit();
                     form.submit();
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -298,7 +298,7 @@
             }
 
             function indicatorBlock() {
-                // Disable the submit button and show the "Please wait..." message
+                
                 submitButton.disabled = true;
                 submitButton.querySelector('.indicator-label').style.display = 'none';
                 submitButton.querySelector('.indicator-progress').style.display =

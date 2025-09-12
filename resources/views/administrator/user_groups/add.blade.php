@@ -157,13 +157,13 @@
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
 
-                // Perform remote validation
+                
                 const remoteValidationResult = await validateRemoteName();
                 const firstNameColumn = $("#first-name-column");
                 const accessErrorName = $("#accessErrorName");
 
                 if (!remoteValidationResult) {
-                    // Remote validation failed, display an error message
+                    
 
                     accessErrorName.addClass('invalid-feedback');
                     firstNameColumn.addClass('is-invalid');
@@ -177,42 +177,42 @@
                 }
 
 
-                // Remote validation passed, clear any previous error message
+                
                 document.getElementById("accessErrorName").textContent = "";
 
-                // Check if at least one checkbox is checked
+                
                 if ($('input[name^="access["]:checked').length === 0) {
-                    $("#table-permissions").addClass('table-invalid'); // Add this line
+                    $("#table-permissions").addClass('table-invalid'); 
                     document.getElementById("accessError").textContent =
                         "Choose setidaknya salah satu modul access";
                     return;
                 } else {
-                    $("#table-permissions").removeClass('table-invalid'); // Add this line
+                    $("#table-permissions").removeClass('table-invalid'); 
                     document.getElementById("accessError").textContent = "";
                 }
 
 
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
-                    // Disable the submit button and show the "Please wait..." message
+                    
                     submitButton.querySelector('.indicator-label').style.display = 'none';
                     submitButton.querySelector('.indicator-progress').style.display = 'inline-block';
 
-                    // Perform your asynchronous form submission here
-                    // Simulating a 2-second delay for demonstration
+                    
+                    
                     setTimeout(function() {
-                        // Re-enable the submit button and hide the "Please wait..." message
+                        
                         submitButton.querySelector('.indicator-label').style.display =
                             'inline-block';
                         submitButton.querySelector('.indicator-progress').style.display =
                             'none';
 
-                        // Submit the form
+                        
                         form.submit();
                     }, 2000);
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -241,7 +241,7 @@
                         }
                     });
 
-                    // Assuming the response is JSON and contains a "valid" key
+                    
                     return {
                         valid: response.valid === true,
                         errorMessage: response.message
@@ -257,12 +257,12 @@
 
 
 
-            // Ambil semua checkbox "All"
+            
             $('.permission-list').each(function() {
                 var that = this;
                 var key_all = $(this).find(".check_all").data('key_all');
 
-                // Event handler for "check all" checkbox
+                
                 $(this).find(".check_all").on("click", function() {
                     if ($(this).is(':checked') == false) {
                         $(that).find('.access_' + $(this).val()).prop('checked', false);
@@ -271,7 +271,7 @@
                     }
                 });
 
-                // Event handler for individual access checkboxes
+                
                 $(this).find(".access_" + key_all).on("click", function() {
                     if (!$(this).is(':checked')) {
                         $(that).find('.check_all').prop('checked', false);

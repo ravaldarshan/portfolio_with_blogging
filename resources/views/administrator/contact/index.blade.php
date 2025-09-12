@@ -98,27 +98,27 @@
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
-                    // Disable the submit button and show the "Please wait..." message
+                    
                     submitButton.querySelector('.indicator-label').style.display = 'none';
                     submitButton.querySelector('.indicator-progress').style.display =
                         'inline-block';
 
-                    // Perform your asynchronous form submission here
-                    // Simulating a 2-second delay for demonstration
+                    
+                    
                     setTimeout(function() {
-                        // Re-enable the submit button and hide the "Please wait..." message
+                        
                         submitButton.querySelector('.indicator-label').style.display =
                             'inline-block';
                         submitButton.querySelector('.indicator-progress').style.display =
                             'none';
 
-                        // Submit the form
+                        
                         form.submit();
                     }, 2000);
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);

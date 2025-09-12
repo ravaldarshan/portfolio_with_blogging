@@ -369,7 +369,7 @@
                 var submitButton = $(this);
 
                 if ($('#inputComment').val() != '') {
-                    // Disable the submit button and show loading state
+                    
                     submitButton.prop('disabled', true).text('Submitting...');
 
                     $.ajax({
@@ -381,7 +381,7 @@
                             "comment": $('#inputComment').val(),
                         },
                         success: function() {
-                            // Enable the submit button and restore its original text
+                            
                             submitButton.prop('disabled', false).text('Submit');
 
                             $.ajax({
@@ -404,13 +404,13 @@
 
                 var comment_id = $(this).data('id');
 
-                // Find the closest comment section
+                
                 var commentSection = $(this).closest('.comment-section');
 
-                // Find the textarea within the comment section
+                
                 var textarea = commentSection.find('.sectionReply textarea');
 
-                // Your code to handle the reply
+                
                 if (textarea.val() != '') {
                     $.ajax({
                         type: "POST",

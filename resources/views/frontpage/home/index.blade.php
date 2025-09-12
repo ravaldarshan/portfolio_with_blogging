@@ -209,7 +209,7 @@
 
             function initOwlCarousel() {
                 $(".logo__carousel").owlCarousel({
-                    // loop: true,
+                    
                     margin: 0,
                     items: 3,
                     dots: true,
@@ -311,7 +311,7 @@
                 }
             });
 
-            // Blog
+            
             $.ajax({
                 type: "GET",
                 url: "{{ route('web.getBlog') }}",
@@ -326,13 +326,13 @@
                         const data = respon.data[i];
                         let imgJsonDecode = JSON.parse(data.img_url);
 
-                        // Assuming data.contents contains the text with HTML tags
+                        
                         let contentWithHTML = data.contents;
 
-                        // Remove HTML tags
+                        
                         let contentWithoutHTML = contentWithHTML.replace(/<\/?[^>]+(>|$)/g, '');
 
-                        // Limit the content to 200 characters
+                        
                         const maxLength = 200;
                         let truncatedContent = contentWithoutHTML.length > maxLength ?
                             contentWithoutHTML.substring(0, maxLength) + '...' :
@@ -360,7 +360,7 @@
                             </div>
                         `;
                     }
-                    // Move this line inside the success callback
+                    
                     $('#blogSection').html(blogHtml);
 
                     $('.set-bg-blog').each(
@@ -480,7 +480,7 @@
                         clientHtml
                     );
 
-                    // Destroy and reinitialize Owl Carousel after updating content
+                    
                     $('.logo__carousel').owlCarousel('destroy');
                     initOwlCarousel();
                 }

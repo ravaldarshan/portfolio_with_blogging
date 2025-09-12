@@ -71,13 +71,13 @@
 
             var comment_id = $(this).data('id');
 
-            // Find the closest comment section
+            
             var commentSection = $(this).closest('.comment-section');
 
-            // Find the textarea within the comment section
+            
             var textarea = commentSection.find('.sectionReply textarea');
 
-            // Your code to handle the reply
+            
             if (textarea.val() != '') {
                 $.ajax({
                     type: "POST",

@@ -64,7 +64,7 @@
                 order: [
                     [0, 'asc']
                 ],
-                scrollX: true, // Enable horizontal scrolling
+                scrollX: true, 
                 ajax: {
                     url: '{{ route('admin.user_groups.getData') }}',
                     dataType: "JSON",
@@ -126,20 +126,20 @@
                                 "id": id,
                             },
                             success: function() {
-                                // data_table.ajax.url(
-                                //         '{{ route('admin.user_groups.getData') }}')
-                                //     .load();
+                                
+                                
+                                
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
                                     title: 'Succeed!',
                                     text: 'Data deleted successfully.',
                                     icon: 'success',
-                                    timer: 1500, // 2 detik
+                                    timer: 1500, 
                                     showConfirmButton: false
                                 });
 
-                                // Remove the deleted row from the DataTable without reloading the page
-                                // data_table.row($(this).parents('tr')).remove().draw();
+                                
+                                
                             }
                         });
                     }
@@ -196,7 +196,7 @@
                                     text: 'Status berhasil diubah ke ' +
                                         changeto,
                                     icon: 'success',
-                                    timer: 1500, // 2 detik
+                                    timer: 1500, 
                                     showConfirmButton: false
                                 });
                             }
@@ -217,12 +217,12 @@
             });
 
             $('#filter_submit').on('click', function(event) {
-                event.preventDefault(); // Prevent the default form submission behavior
+                event.preventDefault(); 
 
-                // Get the filter value using the getStatus() function
+                
                 var filterStatus = getStatus();
 
-                // Update the DataTable with the filtered data
+                
                 data_table.ajax.url('{{ route('admin.user_groups.getData') }}?status=' + filterStatus)
                     .load();
             });

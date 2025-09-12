@@ -59,7 +59,7 @@
                 order: [
                     [0, 'asc']
                 ],
-                scrollX: true, // Enable horizontal scrolling
+                scrollX: true, 
                 ajax: {
                     url: '{{ route('admin.project.getDataArchives') }}',
                     dataType: "JSON",
@@ -120,20 +120,20 @@
                                 "id": id,
                             },
                             success: function() {
-                                // data_table.ajax.url(
-                                //         '{{ route('admin.project.getData') }}')
-                                //     .load();
+                                
+                                
+                                
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
                                     title: 'Succeed!',
                                     text: 'Data has been successfully deleted permanently.',
                                     icon: 'success',
-                                    timer: 1500, // 2 detik
+                                    timer: 1500, 
                                     showConfirmButton: false
                                 });
 
-                                // Remove the deleted row from the DataTable without reloading the page
-                                // data_table.row($(this).parents('tr')).remove().draw();
+                                
+                                
                             }
                         });
                     }
@@ -169,20 +169,20 @@
                                 "id": id,
                             },
                             success: function() {
-                                // data_table.ajax.url(
-                                //         '{{ route('admin.project.getData') }}')
-                                //     .load();
+                                
+                                
+                                
                                 data_table.ajax.reload(null, false);
                                 swalWithBootstrapButtons.fire({
                                     title: 'Succeed!',
                                     text: 'Data berhasil dipulihkan.',
                                     icon: 'success',
-                                    timer: 1500, // 2 detik
+                                    timer: 1500, 
                                     showConfirmButton: false
                                 });
 
-                                // Remove the PUT row from the DataTable without reloading the page
-                                // data_table.row($(this).parents('tr')).remove().draw();
+                                
+                                
                             }
                         });
                     }

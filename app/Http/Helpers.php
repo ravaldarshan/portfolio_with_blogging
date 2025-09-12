@@ -70,7 +70,7 @@ function upload_path($type = '', $file = '')
 		File::makeDirectory($uploadDir, 0755, true);
 	}
 	return  $uploadDir. $file;
-	// return Str::finish('administrator/assets/media/' . $target_folder, '/') . $file;
+	
 }
 
 function img_src($image = '', $img_type = '')
@@ -131,17 +131,17 @@ function createLog($module, $action, $data_id,$data)
     $log['ip_address'] = request()->ip();
     $log['user_id'] = auth()->check() ? auth()->user()->id : 1;	
 
-    // Use Jenssegers/Agent to get device and browser information
+    
     $agent = new Agent();
     $log['device'] = $agent->device();
     $log['browser_name'] = $agent->browser();
-    $log['browser_version'] = $agent->version($log['browser_name']); // Add browser version
+    $log['browser_version'] = $agent->version($log['browser_name']); 
 
     $log['module'] = $module;
     $log['action'] = $action;
     $log['data_id'] = $data_id;
     $log['data'] = json_encode($data);;
-    $log['created_at'] = now(); // Use Carbon for date and time
+    $log['created_at'] = now(); 
 
     Log::create($log);
 }
@@ -160,11 +160,11 @@ function isAllowed($modul, $modul_access)
             $permission = getPermissionGroup($grup_pengguna_id);
             
             if ($permission[$grup_pengguna_id][$modul][$modul_access] == 1) {
-                return true; // Jika user group aktif dan memiliki izin, berikan access
+                return true; 
             }
         }
     }
-    return false; // Default, jika tidak memenuhi syarat maka tidak diizinkan access
+    return false; 
 	
 }
 
@@ -239,7 +239,7 @@ function getPermissionGroup2($x)
 		)
 		->leftJoin(DB::raw("module"), "module.id", "=", "module_access.module_id")
 		->get();
-        // dd($x);
+        
 	$permission = [];
 	$index = 0;
 	foreach ($data_access as $row) {

@@ -80,7 +80,7 @@
                 order: [
                     [4, 'desc']
                 ],
-                scrollX: true, // Enable horizontal scrolling
+                scrollX: true, 
                 ajax: {
                     url: '{{ route('admin.logSystems.getData') }}',
                     dataType: "JSON",
@@ -123,13 +123,13 @@
             });
 
             $('#filter_submit').on('click', function(event) {
-                event.preventDefault(); // Prevent the default form submission behavior
+                event.preventDefault(); 
 
-                // Get the filter value using the getUser() function
+                
                 var filterUser = getUser();
                 var filterModule = getModule();
 
-                // Update the DataTable with the filtered data
+                
                 data_table.ajax.url('{{ route('admin.logSystems.getData') }}?user=' + filterUser +
                         '|module=' + filterModule)
                     .load();
@@ -166,7 +166,7 @@
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Menampilkan spinner dan mengganti teks label
+                        
                         progress.show();
                         label.text('Clearing data...');
 
@@ -193,7 +193,7 @@
                                 label.text('Clear Logs');
 
                                 swalWithBootstrapButtons.fire(
-                                    'Gagal!',
+                                    'Failed!',
                                     'Terjadi kesalahan saat menghapus data.',
                                     'error'
                                 );

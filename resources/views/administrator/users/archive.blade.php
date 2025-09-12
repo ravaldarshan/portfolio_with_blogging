@@ -64,7 +64,7 @@
             order: [
                 [0, 'asc']
             ],
-            scrollX: true, // Enable horizontal scrolling
+            scrollX: true, 
             ajax: {
                 url: '{{ route('admin.users.getDataArchives') }}',
                 dataType: "JSON",
@@ -135,9 +135,9 @@
                             "id": id,
                         },
                         success: function() {
-                            // data_table.ajax.url(
-                            //         '{{ route('admin.users.getData') }}')
-                            //     .load();
+                            
+                            
+                            
                             data_table.ajax.reload(null, false);
                             swalWithBootstrapButtons.fire(
                                 'Succeed!',
@@ -145,8 +145,8 @@
                                 'success'
                             );
 
-                            // Remove the deleted row from the DataTable without reloading the page
-                            // data_table.row($(this).parents('tr')).remove().draw();
+                            
+                            
                         }
                     });
                 }
@@ -182,9 +182,9 @@
                             "id": id,
                         },
                         success: function() {
-                            // data_table.ajax.url(
-                            //         '{{ route('admin.users.getData') }}')
-                            //     .load();
+                            
+                            
+                            
                             data_table.ajax.reload(null, false);
                             swalWithBootstrapButtons.fire(
                                 'Succeed!',
@@ -192,8 +192,8 @@
                                 'success'
                             );
 
-                            // Remove the PUT row from the DataTable without reloading the page
-                            // data_table.row($(this).parents('tr')).remove().draw();
+                            
+                            
                         }
                     });
                 }
@@ -279,46 +279,46 @@
 
         var loadingSpinner = $('#loadingSpinner');
 
-        loadingSpinner.show(); // Tampilkan elemen animasi
+        loadingSpinner.show(); 
 
         $.ajax({
             url: '{{ route('admin.users.getUserGroup') }}',
             method: 'GET',
             success: function(response) {
                 var data = response.usergroup;
-                var optionsHtml = ''; // Store the generated option elements
+                var optionsHtml = ''; 
 
-                // Iterate through each user group in the response data
+                
                 for (var i = 0; i < data.length; i++) {
                     var userGroup = data[i];
                     optionsHtml += '<option value="' + userGroup.id + '">' + userGroup
                         .name + '</option>';
                 }
 
-                // Construct the final dropdown HTML
+                
                 var finalDropdownHtml = '<option value="">Semua</option>' + optionsHtml;
 
                 optionUserGroup.html(finalDropdownHtml);
 
-                loadingSpinner.hide(); // Hide the loading spinner after data is loaded
+                loadingSpinner.hide(); 
             },
             error: function() {
-                // Handle the error case if the AJAX request fails
-                console.error('Gagal memuat data User Group.');
-                optionUserGroup.html('<option>Gagal memuat data</option>')
+                
+                console.error('Failed memuat data User Group.');
+                optionUserGroup.html('<option>Failed memuat data</option>')
                 loadingSpinner
-                    .hide(); // Hide the loading spinner even if there's an error
+                    .hide(); 
             }
         });
 
         $('#filter_submit').on('click', function(event) {
-            event.preventDefault(); // Prevent the default form submission behavior
+            event.preventDefault(); 
 
-            // Get the filter value using the getStatus() function
+            
             var filterStatus = getStatus();
             var filterUserGroup = getUserGroup();
 
-            // Update the DataTable with the filtered data
+            
             data_table.ajax.url('{{ route('admin.users.getData') }}?status=' + filterStatus +
                     '|usergroup=' + filterUserGroup)
                 .load();

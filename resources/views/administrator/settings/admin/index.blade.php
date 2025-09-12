@@ -140,10 +140,10 @@
         logoInputFile.addEventListener("change", function() {
             const files = this.files;
 
-            // Wipe gambar-gambar sebelumnya
+            
             previewContainerLogo.innerHTML = '';
 
-            // Ambil satu file saja
+            
             const file = files[0];
             const imageType = /^image\//;
 
@@ -153,7 +153,7 @@
 
                 const img = document.createElement("img");
                 img.classList.add("img-thumbnail");
-                img.width = 350; // Sesuaikan ukuran gambar sesuai kebutuhan
+                img.width = 350; 
                 img.src = URL.createObjectURL(file);
 
                 imgContainer.appendChild(img);
@@ -167,10 +167,10 @@
         faviconInputFile.addEventListener("change", function() {
             const files = this.files;
 
-            // Wipe gambar-gambar sebelumnya
+            
             previewContainerFavicon.innerHTML = '';
 
-            // Ambil satu file saja
+            
             const file = files[0];
             const imageType = /^image\//;
 
@@ -180,7 +180,7 @@
 
                 const img = document.createElement("img");
                 img.classList.add("img-thumbnail");
-                img.width = 350; // Sesuaikan ukuran gambar sesuai kebutuhan
+                img.width = 350; 
                 img.src = URL.createObjectURL(file);
 
                 imgContainer.appendChild(img);
@@ -198,16 +198,16 @@
             });
 
             $("#logoAppAdminInputFile").fileinput({
-                showUpload: false, // Hilangkan tombol "Upload"
-                showRemove: false, // Hilangkan tombol "Remove"
-                language: 'id', // Gantilah LANG dengan bahasa yang sesuai
-                // Tambahan opsi sesuai kebutuhan Anda
+                showUpload: false, 
+                showRemove: false, 
+                language: 'id', 
+                
             });
             $("#faviconInputFile").fileinput({
-                showUpload: false, // Hilangkan tombol "Upload"
-                showRemove: false, // Hilangkan tombol "Remove"
-                language: 'id', // Gantilah LANG dengan bahasa yang sesuai
-                // Tambahan opsi sesuai kebutuhan Anda
+                showUpload: false, 
+                showRemove: false, 
+                language: 'id', 
+                
             });
 
             //validate parsley form
@@ -216,24 +216,24 @@
 
             const submitButton = document.getElementById("formSubmit");
 
-            // form.addEventListener('keydown', function(e) {
-            //     if (e.key === 'Enter') {
-            //         e.preventDefault();
-            //     }
-            // });
+            
+            
+            
+            
+            
 
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
                 indicatorBlock();
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
                     indicatorSubmit();
 
-                    // Submit the form
+                    
                     form.submit();
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -265,7 +265,7 @@
             }
 
             function indicatorBlock() {
-                // Disable the submit button and show the "Please wait..." message
+                
                 submitButton.disabled = true;
                 submitButton.querySelector('.indicator-label').style.display = 'none';
                 submitButton.querySelector('.indicator-progress').style.display =

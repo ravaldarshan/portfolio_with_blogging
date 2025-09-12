@@ -144,20 +144,20 @@
     <script>
         $(document).ready(function() {
             function addLinkList() {
-                // Use a class selector to get the count of cloned elements
+                
                 var currentIndex = $(".link-list").find('.row').length;
                 $('#link_count').val((currentIndex + 1));
 
-                // Clone the template-link
+                
                 var clonedElement = $(".template-link").clone();
                 clonedElement.addClass("row rowLink_" + currentIndex);
                 clonedElement.removeClass("template-link");
                 clonedElement.removeClass("d-none");
 
-                // Set the index-element attribute on the cloned element
+                
                 clonedElement.attr("index-element", currentIndex);
 
-                // Update IDs and "for" attributes of cloned elements
+                
                 clonedElement.find("[id^='inputNamaLink_']").attr("id", "inputNamaLink_" + currentIndex);
                 clonedElement.find("[id^='inputLinkUrl_']").attr("id", "inputLinkUrl_" +
                     currentIndex);
@@ -166,25 +166,25 @@
                 clonedElement.find("[for^='inputLinkUrl_']").attr("for", "inputLinkUrl_" +
                     currentIndex);
 
-                // Update name attributes of cloned input elements
+                
                 clonedElement.find("[name^='nama_link_']").attr("name", "nama_link_" + currentIndex);
                 clonedElement.find("[name^='url_link_']").attr("name", "url_link_" + currentIndex);
 
                 clonedElement.find(".delete-link").attr("data-index", currentIndex);
 
-                // Append the cloned element to the container
+                
                 $(".link-list").append(clonedElement);
 
-                // Show delete button for the new row, hide for the initial row
+                
                 $(".link-list .delete-link").show();
                 $(".link-list .rowLink_0 .delete-link").hide();
             }
 
-            // Function to handle deleting link-list
+            
             function deleteLinkList(element, index) {
                 var linkList = $(element).find(".rowLink_" + index);
 
-                // Check if it is not the first row before deleting
+                
                 if (linkList.attr("index-element") !== "0") {
                     linkList.remove();
                     const jmlah = parseInt($('#link_count').val()) - 1;
@@ -192,12 +192,12 @@
                 }
             }
 
-            // Event listener for "Add more link" button
+            
             $(".more-link").click(function() {
                 addLinkList();
             });
 
-            // Event listener for "Delete" button
+            
             $("#link").on("click", ".delete-link", function() {
                 let index = $(this).data('index');
                 let link = $(this).data('link');
@@ -228,8 +228,8 @@
                                 data: {
                                     "_token": "{{ csrf_token() }}",
                                     "_method": "GET",
-                                    "index": index, // Make sure you define the variable 'id' to be deleted
-                                    "link": link, // Make sure you define the variable 'id' to be deleted
+                                    "index": index, 
+                                    "link": link, 
                                 },
                                 success: function() {
                                     deleteLinkList(linkList, index);
@@ -237,7 +237,7 @@
                                         title: 'Succeed!',
                                         text: 'Data deleted successfully.',
                                         icon: 'success',
-                                        timer: 1500, // 2 detik
+                                        timer: 1500, 
                                         showConfirmButton: false,
                                     });
                                 }
@@ -248,7 +248,7 @@
                                 title: 'Succeed!',
                                 text: 'Data deleted successfully.',
                                 icon: 'success',
-                                timer: 1500, // 2 detik
+                                timer: 1500, 
                                 showConfirmButton: false,
                             });
                         }
@@ -256,7 +256,7 @@
                 });
             });
 
-            // Hide delete button for the initial row
+            
             $(".link-list[index-element='0'] .delete-link").hide();
         });
     </script>
@@ -274,14 +274,14 @@
                 e.preventDefault();
                 indicatorBlock();
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
                     indicatorSubmit();
 
-                        // Submit the form
+                        
                         form.submit();
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -313,7 +313,7 @@
             }
 
             function indicatorBlock() {
-                // Disable the submit button and show the "Please wait..." message
+                
                 submitButton.disabled = true;
                 submitButton.querySelector('.indicator-label').style.display = 'none';
                 submitButton.querySelector('.indicator-progress').style.display =

@@ -87,11 +87,11 @@
 
             const submitButton = document.getElementById("formSubmit");
 
-            // form.addEventListener('keydown', function(e) {
-            //     if (e.key === 'Enter') {
-            //         e.preventDefault();
-            //     }
-            // });
+            
+            
+            
+            
+            
 
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
@@ -99,17 +99,17 @@
                 indicatorBlock();
 
 
-                // Perform remote validation
+                
                 const remoteValidationResultEmail = await validateRemoteEmail();
                 const inputEmail = $("#inputEmail");
                 const accessErrorEmail = $("#accessErrorEmail");
                 if (!remoteValidationResultEmail.valid) {
-                    // Remote validation failed, display the error message
+                    
                     accessErrorEmail.addClass('invalid-feedback');
                     inputEmail.addClass('is-invalid');
 
                     accessErrorEmail.text(remoteValidationResultEmail
-                        .errorMessage); // Set the error message from the response
+                        .errorMessage); 
                     indicatorNone();
 
                     return;
@@ -119,17 +119,17 @@
                     accessErrorEmail.text('');
                 }
 
-                // Perform remote validation
+                
                 const remoteValidationResultPassword = await validateRemotePassword();
                 const inputPassword = $("#inputPassword");
                 const accessErrorPassword = $("#accessErrorPassword");
                 if (!remoteValidationResultPassword.valid) {
-                    // Remote validation failed, display the error message
+                    
                     accessErrorPassword.addClass('invalid-feedback');
                     inputPassword.addClass('is-invalid');
 
                     accessErrorPassword.text(remoteValidationResultPassword
-                        .errorMessage); // Set the error message from the response
+                        .errorMessage); 
                     indicatorNone();
 
                     return;
@@ -139,13 +139,13 @@
                     accessErrorPassword.text('');
                 }
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
                     indicatorSubmit();
-                    // Submit the form
+                    
                     form.submit();
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         indicatorNone();
@@ -178,7 +178,7 @@
             }
 
             function indicatorBlock() {
-                // Disable the submit button and show the "Please wait..." message
+                
                 submitButton.disabled = true;
                 submitButton.querySelector('.indicator-label').style.display = 'none';
                 submitButton.querySelector('.indicator-progress').style.display =
@@ -202,7 +202,7 @@
                         }
                     });
 
-                    // Assuming the response is JSON and contains a "valid" key
+                    
                     return {
                         valid: response.valid === true,
                         errorMessage: response.message
@@ -231,7 +231,7 @@
                         }
                     });
 
-                    // Assuming the response is JSON and contains a "valid" key
+                    
                     return {
                         valid: response.valid === true,
                         errorMessage: response.message

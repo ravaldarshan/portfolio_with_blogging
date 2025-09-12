@@ -157,7 +157,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            // Add an event listener to the "Generate" button
+            
             const generateCodeButton = document.getElementById("buttonGenerateCode");
             const codeField = document.getElementById("codeField");
             const indicatorLabelCode = document.querySelector(".indicator-label-code");
@@ -165,24 +165,24 @@
             const remoteGenerateCodeUrl = "{{ route('admin.users.generateCode') }}";
 
             generateCodeButton.addEventListener("click", async function() {
-                // Show the indicator when the button is clicked
+                
                 indicatorLabelCode.style.display = "none";
                 indicatorProgressCode.style.display = "inline-block";
 
-                // Make an AJAX request to generate the code
+                
                 try {
                     const response = await $.ajax({
                         method: "GET",
                         url: remoteGenerateCodeUrl,
                     });
 
-                    // Assuming the response is JSON and contains a "generateCode" key
+                    
                     codeField.value = response.generateCode;
                 } catch (error) {
                     console.error("Generate error:", error);
-                    // Handle errors as needed
+                    
                 } finally {
-                    // Hide the indicator when the AJAX request is complete
+                    
                     indicatorLabelCode.style.display = "inline-block";
                     indicatorProgressCode.style.display = "none";
                 }
@@ -205,17 +205,17 @@
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
 
-                // Perform remote validation
+                
                 const remoteValidationResult = await validateRemoteEmail();
                 const emailField = $("#emailField");
                 const accessErrorEmail = $("#accessErrorEmail");
                 if (!remoteValidationResult.valid) {
-                    // Remote validation failed, display the error message
+                    
                     accessErrorEmail.addClass('invalid-feedback');
                     emailField.addClass('is-invalid');
 
                     accessErrorEmail.text(remoteValidationResult
-                        .errorMessage); // Set the error message from the response
+                        .errorMessage); 
 
                     return;
                 } else {
@@ -228,12 +228,12 @@
                 const codeField = $("#codeField");
                 const accessErrorCode = $("#accessErrorCode");
                 if (!remoteValidationResultCode.valid) {
-                    // Remote validation failed, display the error message
+                    
                     accessErrorCode.addClass('invalid-feedback');
                     codeField.addClass('is-invalid');
 
                     accessErrorCode.text(remoteValidationResultCode
-                        .errorMessage); // Set the error message from the response
+                        .errorMessage); 
 
                     return;
                 } else {
@@ -244,10 +244,10 @@
 
                 const inputId = $('#inputId').val();
                 if (inputId !== 1) {
-                    // Get the value from the code field
+                    
                     const codeValue = codeField.val().trim();
     
-                    // Validate the length and format of the code
+                    
                     if (codeValue.length !== 12 || !codeValue.startsWith('webits-') || codeValue.substring(
                             7).length !== 5) {
                         accessErrorCode.addClass('invalid-feedback');
@@ -272,27 +272,27 @@
 
 
 
-                // Validate the form using Parsley
+                
                 if ($(form).parsley().validate()) {
-                    // Disable the submit button and show the "Please wait..." message
+                    
                     submitButton.querySelector('.indicator-label').style.display = 'none';
                     submitButton.querySelector('.indicator-progress').style.display =
                         'inline-block';
 
-                    // Perform your asynchronous form submission here
-                    // Simulating a 2-second delay for demonstration
+                    
+                    
                     setTimeout(function() {
-                        // Re-enable the submit button and hide the "Please wait..." message
+                        
                         submitButton.querySelector('.indicator-label').style.display =
                             'inline-block';
                         submitButton.querySelector('.indicator-progress').style.display =
                             'none';
 
-                        // Submit the form
+                        
                         form.submit();
                     }, 2000);
                 } else {
-                    // Handle validation errors
+                    
                     const validationErrors = [];
                     $(form).find(':input').each(function() {
                         const field = $(this);
@@ -324,7 +324,7 @@
                         }
                     });
 
-                    // Assuming the response is JSON and contains a "valid" key
+                    
                     return {
                         valid: response.valid === true,
                         errorMessage: response.message
@@ -355,7 +355,7 @@
                         }
                     });
 
-                    // Assuming the response is JSON and contains a "valid" key
+                    
                     return {
                         valid: response.valid === true,
                         errorMessage: response.message
@@ -373,7 +373,7 @@
                 if ($('#passwordField').val().trim() !== '') {
                     validatePasswordConfirmation();
                 } else {
-                    // Clear validation messages when password field is empty
+                    
                     $('#passwordField').removeClass('is-invalid');
                     $('#accessErrorPasssword').text('');
                     $('#konfirmasiPasswordField').removeClass('is-invalid');
@@ -427,23 +427,23 @@
                 method: 'GET',
                 success: function(response) {
                     var data = response.usergroup;
-                    var optionsHtml = ''; // Store the generated option elements
+                    var optionsHtml = ''; 
 
-                    // Iterate through each user group in the response data
+                    
                     for (var i = 0; i < data.length; i++) {
                         var userGroup = data[i];
                         optionsHtml += '<option value="' + userGroup.id + '">' + userGroup
                             .name + '</option>';
                     }
 
-                    // Construct the final dropdown HTML
+                    
                     var finalDropdownHtml = optionsHtml;
 
                     optionUserGroup.html(finalDropdownHtml);
 
-                    loadingSpinner.hide(); // Hide the loading spinner after data is loaded
+                    loadingSpinner.hide(); 
 
-                    // Set the selected option based on the value of $data->id
+                    
                     if ('{{ $data->user_group }}') {
                         optionUserGroup.val('{{ $data->user_group->id ?? '' }}');
                     } else {
@@ -451,11 +451,11 @@
                     }
                 },
                 error: function() {
-                    // Handle the error case if the AJAX request fails
-                    console.error('Gagal memuat data User Group.');
-                    optionUserGroup.html('<option>Gagal memuat data</option>')
+                    
+                    console.error('Failed memuat data User Group.');
+                    optionUserGroup.html('<option>Failed memuat data</option>')
                     loadingSpinner
-                        .hide(); // Hide the loading spinner even if there's an error
+                        .hide(); 
                 }
             });
 

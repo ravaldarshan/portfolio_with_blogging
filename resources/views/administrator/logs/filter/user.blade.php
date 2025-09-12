@@ -47,7 +47,7 @@
         $('#filterUserLogSystem').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
 
-            // Now, you can initialize a new DataTable on the same table.
+            
             $("#datatableUserModal").DataTable().destroy(); 
             $('#datatableUserModal tbody').remove(); 
             var data_table_user = $('#datatableUserModal').DataTable({
@@ -64,7 +64,7 @@
                 order: [
                     [0, 'asc']
                 ],
-                // scrollX: true, // Enable horizontal scrolling
+                
                 ajax: {
                     url: '{{ route('admin.logSystems.getDataUser') }}',
                     dataType: "JSON",

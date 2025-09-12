@@ -43,10 +43,10 @@
     {{-- Tambahkan FileInput JavaScript --}}
     <script>
         $("#userphotoInputFile").fileinput({
-            showUpload: false, // Hilangkan tombol "Upload"
-            showRemove: false, // Hilangkan tombol "Remove"
-            language: 'id', // Gantilah LANG dengan bahasa yang sesuai
-            // Tambahan opsi sesuai kebutuhan Anda
+            showUpload: false, 
+            showRemove: false, 
+            language: 'id', 
+            
         });
     </script>
 @endpush

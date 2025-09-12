@@ -64,7 +64,7 @@ class ModuleController extends Controller
             abort(403);
         }
 
-        // Validasi input dari form
+        
         $request->validate([
             'name' => 'required|string',
             'identifiers' => 'required|string',
@@ -73,13 +73,13 @@ class ModuleController extends Controller
             'modul_access.*.code_access' => 'required_if:modul_access.*.tipe,page|string',
         ]);
 
-        // Simpan data modul access ke dalam database
+        
         $module = Module::Create([
             'name' => Str::ucfirst($request->name),
             'identifiers' => Str::lower($request->identifiers),
         ]);
 
-        // Simpan data modul access terkait (modul_access) ke dalam database
+        
         foreach ($request->input('modul_access') as $modulAkses) {
             $module->access()->create([
                 'module_id' => $module->id,
@@ -109,12 +109,12 @@ class ModuleController extends Controller
     
     public function update(Request $request)
     {
-        // Check permission for updating
+        
         if (!isAllowed(static::$module, "update")) {
             abort(403);
         }
 
-        // Validate input from the form
+        
         $request->validate([
             'name' => 'required|string',
             'identifiers' => 'required|string',
@@ -124,12 +124,12 @@ class ModuleController extends Controller
         ]);
 
         $id = $request->id;
-        // Find the module by ID
+        
         $module = Module::find($id);
 
-        // Check if the module exists
+        
         if (!$module) {
-            return redirect()->route('admin.module')->with('error', 'Modul tidak ditemukan.');
+            return redirect()->route('admin.module')->with('error', 'Module not found!');
         }
         $log_module_before = $module;
 
@@ -137,16 +137,16 @@ class ModuleController extends Controller
 
         $log_module_access_after = $module_access;
 
-        // Update the module data
+        
         $module->update([
             'name' => $request->name,
             'identifiers' => $request->identifiers,
         ]);
 
-        // Delete existing module access records for this module
+        
         $module->access()->delete();
 
-        // Save the updated module access data
+        
         foreach ($request->input('modul_access') as $modulAkses) {
             $module->access()->create([
                 'module_id' => $module->id,
@@ -171,16 +171,16 @@ class ModuleController extends Controller
     
     public function delete(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
 
-        // Ensure you have authorization mechanisms here before proceeding to delete data.
+        
 
         $id = $request->id;
 
-        // Find the user based on the provided ID.
+        
         $data = Module::findorfail($id);
 
         if (!$data) {
@@ -190,17 +190,17 @@ class ModuleController extends Controller
             ], 404);
         }
 
-        // Delete the user.
+        
         $data->delete();
 
         $logAccess = ModuleAccess::where('module_id',$id)->get();
 
         if (!empty($data->access())) {
-            // Check if the modul$modulAkses is being force-deleted
+            
             $data->access()->delete();
         }
 
-        // Write logs only for soft delete (not force delete)
+        
         createLog(static::$module, __FUNCTION__, $id, ['Deleted data' => ['Module' => $data, 'Module Access' => $logAccess]]);
 
         return response()->json([

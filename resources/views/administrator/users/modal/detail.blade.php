@@ -31,7 +31,7 @@
                 '</div>');
             var loadingSpinner = $('#loadingSpinner');
 
-            loadingSpinner.show(); // Tampilkan elemen animasi
+            loadingSpinner.show(); 
 
             $.ajax({
                 url: '{{ route('admin.users.getDetail', ':id') }}'.replace(':id', id),
@@ -39,10 +39,10 @@
                 success: function(response) {
                     var data = response.data;
 
-                    // Assuming data.user_group is an object, you can check if it exists before rendering it.
+                    
                     var userGroupHtml = data.user_group ? data.user_group.name : '';
 
-                    // Fungsi untuk mengubah angka bulan menjadi nama bulan
+                    
                     function formatBulan(angkaBulan) {
                         const namaBulan = [
                             "Januari", "Februari", "Maret", "April",
@@ -52,16 +52,16 @@
                         return namaBulan[angkaBulan - 1] || "";
                     }
 
-                    // Ubah format date
+                    
                     var rawDate = data.profile.date_of_birth ? data.profile.date_of_birth : '';
                     var date = new Date(rawDate).getDate();
                     var bulan = new Date(rawDate).getMonth() +
-                    1; // Tambahkan 1 karena bulan dimulai dari 0
+                    1; 
                     var tahun = new Date(rawDate).getFullYear();
 
                     var formattedDate = date + " " + formatBulan(bulan) + " " + tahun;
 
-                    // Tampilkan data dengan format bulan yang baru
+                    
                     modalBody.html(
                         '<div class="row">' +
                         '<div class="col-5">' +
@@ -169,7 +169,7 @@
                     );
 
 
-                    loadingSpinner.hide(); // Sembunyikan elemen animasi setelah data dimuat
+                    loadingSpinner.hide(); 
                 }
             });
         });

@@ -31,7 +31,7 @@
                 '</div>');
             var loadingSpinner = $('#loadingSpinner');
 
-            loadingSpinner.show(); // Tampilkan elemen animasi
+            loadingSpinner.show(); 
 
             $.ajax({
                 url: '{{ route('admin.category_project.getDetail', ':id') }}'.replace(':id', id),
@@ -115,7 +115,7 @@
                         }
                     }
 
-                    loadingSpinner.hide(); // Sembunyikan elemen animasi setelah data dimuat
+                    loadingSpinner.hide(); 
                 }
             });
         });
