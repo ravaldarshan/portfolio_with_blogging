@@ -75,7 +75,7 @@ class AuthController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->route('admin.login')->with('error', 'Email atau password salah.');
+        return redirect()->route('admin.login')->with('error', 'Incorrect email or password.');
     }
 
     public function logout()

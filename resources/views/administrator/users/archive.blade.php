@@ -201,7 +201,6 @@
         });
 
 
-        //Change Status Confirmation
         $(document).on('click', '.changeStatus', function(event) {
             var ix = $(this).data('ix');
             if ($(this).is(':checked')) {
@@ -228,8 +227,8 @@
                 icon: "info",
                 buttonsStyling: false,
                 showCancelButton: true,
-                confirmButtonText: "Ya, saya yakin!",
-                cancelButtonText: 'Tidak, batalkan',
+                confirmButtonText: "Yes, I’m sure!",
+                cancelButtonText: 'No, cancel',
                 reverseButtons: true
 
             }).then((result) => {

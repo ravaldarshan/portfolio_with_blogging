@@ -215,7 +215,7 @@
 
 
 
-            //validate parsley form
+            
             const form = document.getElementById("form");
             const validator = $(form).parsley();
 
@@ -358,9 +358,9 @@
                         ], 
                         ui: { 
                             quickActions: {
-                                today: "Hari Ini",
-                                tomorrow: "Besok",
-                                inTwoDays: "Lusa",
+                                today: "Today",
+                                tomorrow: "Tomorrow",
+                                inTwoDays: "The Day After Tomorrow",
                             }
                         }
                     }

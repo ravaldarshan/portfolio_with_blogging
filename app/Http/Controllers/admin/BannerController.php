@@ -13,7 +13,7 @@ class BannerController extends Controller
     private static $module = "banner";
 
     public function edit(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -21,14 +21,13 @@ class BannerController extends Controller
         
         $data = array_column($data, 'value', 'name');
 
-        // Ambil pengaturan dari database dan tampilkan di halaman
         return view('administrator.banner.index', compact('data'));
     }
     
     public function update(Request $request)
     {
-        // dd($request);
-        //Check permission
+        
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -36,7 +35,7 @@ class BannerController extends Controller
         $banner = Banner::get()->toArray();
         $banner = array_column($banner, 'value', 'name');
 
-        // dd($request);
+        
         
         $data_banner = [];
         for ($i = 0; $i < 3; $i++) {
@@ -44,7 +43,7 @@ class BannerController extends Controller
             $body = $request->input('body_' . $i);
         
             if ($request->hasFile('icon_' . $i)) {
-                // Check and delete the existing file
+                
                 if (!empty($data_banner["icon_" . $i])) {
                     $image_path = "./administrator/assets/media/banner/" . $data_banner["icon_" . $i];
                     if (File::exists($image_path)) {
@@ -52,25 +51,25 @@ class BannerController extends Controller
                     }
                 }
         
-                // Handle file upload
+                
                 $image = $request->file('icon_' . $i);
                 $fileName = 'icon_' . $i . '.' . $image->getClientOriginalExtension();
                 $path = upload_path('banner') . $fileName;
 
-                // dd([
-                //     'path' => $path,
-                //     'is_writable' => is_writable(dirname($path)),
-                //     'exists' => file_exists(dirname($path))
-                // ]);
                 
-                // Save the uploaded file
+                
+                
+                
+                
+                
+                
                 try {
                     Image::make($image->getRealPath())->save($path, 100);
                     $img_url = $fileName;
                 } catch (\Exception $e) {
-                    // Handle file upload error
-                    // dd($e);
-                    // Log or return an error response
+                    
+                    
+                    
                     return response()->json(['error' => 'File upload failed'], 500);
                 }
             }
@@ -78,7 +77,7 @@ class BannerController extends Controller
             $data_banner['banner_'.$i] = json_encode(['title' => $title, 'body' => $body, 'img_url' => ($request->hasFile('icon_' . $i) ? $img_url : (array_key_exists('banner_'.$i, $banner) ? (json_decode($banner['banner_'.$i])->img_url) : ''))]);
         }
 
-        $logs = []; // Buat array kosong untuk menyimpan log
+        $logs = [];
 
         foreach ($data_banner as $key => $value) {
             $data = [];

@@ -15,7 +15,7 @@ class GalleryController extends Controller
     private static $module = "gallery";
 
     public function index(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -26,7 +26,7 @@ class GalleryController extends Controller
     }
     
     public function add(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }

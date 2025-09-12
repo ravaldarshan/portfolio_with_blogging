@@ -13,7 +13,7 @@ class ServiceController extends Controller
     private static $module = "service";
 
     public function edit(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -25,8 +25,8 @@ class ServiceController extends Controller
     
     public function update(Request $request)
     {
-        // dd($request);
-        //Check permission
+        
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -34,7 +34,7 @@ class ServiceController extends Controller
         $service = Service::get()->toArray();
         $service = array_column($service, 'value', 'name');
 
-        // dd($request);
+        
         
         $data_service = [];
         for ($i = 0; $i < 6; $i++) {
@@ -42,7 +42,7 @@ class ServiceController extends Controller
             $body = $request->input('body_' . $i);
         
             if ($request->hasFile('icon_' . $i)) {
-                // Check and delete the existing file
+                
                 if (!empty($data_service["icon_" . $i])) {
                     $image_path = "./administrator/assets/media/service/" . $data_service["icon_" . $i];
                     if (File::exists($image_path)) {
@@ -50,18 +50,18 @@ class ServiceController extends Controller
                     }
                 }
         
-                // Handle file upload
+                
                 $image = $request->file('icon_' . $i);
                 $fileName = 'icon_' . $i . '.' . $image->getClientOriginalExtension();
                 $path = upload_path('service') . $fileName;
                 
-                // Save the uploaded file
+                
                 try {
                     Image::make($image->getRealPath())->save($path, 100);
                     $img_url = $fileName;
                 } catch (\Exception $e) {
-                    // Handle file upload error
-                    // Log or return an error response
+                    
+                    
                     return response()->json(['error' => 'File upload failed'], 500);
                 }
             }
@@ -76,7 +76,7 @@ class ServiceController extends Controller
         
         
 
-        $logs = []; // Buat array kosong untuk menyimpan log
+        $logs = [];
 
         foreach ($data_service as $key => $value) {
             $data = [];
@@ -95,7 +95,7 @@ class ServiceController extends Controller
                 $logs[] = $set;
             }
         }
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
         return redirect(route('admin.service'))->with(['success' => 'Data updated successfully.']);

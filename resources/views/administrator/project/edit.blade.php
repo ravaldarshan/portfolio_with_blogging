@@ -62,7 +62,6 @@
                                 <label for="otherPicturesInputFile" class="form-label">More Images</label>
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview-other_pictures thumbnail mb20">
-                                        <!-- Tampilkan preview gambar-gambar yang diunggah di sini -->
                                         @if (!empty($decodeImg))
                                             @foreach ($decodeImg as $img)
                                                 <div class="img-thumbnail-container" id="{{ $img }}"><img
@@ -269,7 +268,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            //validate parsley form
+            
             const form = document.getElementById("form");
             const validator = $(form).parsley();
 

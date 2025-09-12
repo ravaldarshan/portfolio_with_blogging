@@ -90,7 +90,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             
-            //validate parsley form
+            
             const form = document.getElementById("form");
             const validator = $(form).parsley();
 

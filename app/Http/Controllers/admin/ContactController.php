@@ -12,7 +12,7 @@ class ContactController extends Controller
 
     public function index()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -20,7 +20,6 @@ class ContactController extends Controller
         
         $data = array_column($data, 'value', 'name');
 
-        // Ambil pengaturan dari database dan tampilkan di halaman
         return view('administrator.contact.index', compact('data'));
     }
 
@@ -40,7 +39,7 @@ class ContactController extends Controller
         $data_contact["email"] = $request->email;
         $data_contact["location"] = $request->location;
 
-        $logs = []; // Buat array kosong untuk menyimpan log
+        $logs = [];
 
         foreach ($data_contact as $key => $value) {
             $data = [];
@@ -60,7 +59,7 @@ class ContactController extends Controller
             }
         }
 
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
         return redirect(route('admin.contact'))->with(['success' => 'Data updated successfully.']);

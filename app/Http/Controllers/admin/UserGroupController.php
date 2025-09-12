@@ -16,7 +16,7 @@ class UserGroupController extends Controller
 
     public function index()
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -37,7 +37,7 @@ class UserGroupController extends Controller
 
         return DataTables::of($data)
             ->addColumn('status', function ($row) {
-                if (isAllowed(static::$module, "status")) : //Check permission
+                if (isAllowed(static::$module, "status")) : 
                     if ($row->status) {
                         $status = '<div class="d-flex"><div>
                         <input class="tgl tgl-ios h-20px w-30px changeStatus" data-ix="' . $row->id . '" type="checkbox" value="1"
@@ -58,17 +58,17 @@ class UserGroupController extends Controller
             })
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "edit")) : //Check permission
+                if (isAllowed(static::$module, "edit")) : 
                     $btn .= '<a href="'.route('admin.user_groups.edit',$row->id).'" class="btn btn-primary btn-sm mx-3">
                     Edit
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "detail")) : //Check permission
+                if (isAllowed(static::$module, "detail")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-secondary btn-sm me-3" data-toggle="modal" data-target="#detailUserGroups">
                     Detail
                 </a>';
@@ -81,7 +81,7 @@ class UserGroupController extends Controller
 
     public function add()
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -92,7 +92,7 @@ class UserGroupController extends Controller
 
     public function save(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -142,7 +142,7 @@ class UserGroupController extends Controller
         $permission = getPermissionGroup($user_group->id);
 
 
-        // Write log after all operations are complete
+        
         createLog(static::$module, __FUNCTION__, $user_group->id, ['data' => $data,'access rights' => $permission]);
 
         return redirect(route('admin.user_groups'))->with(['success' => 'Data saved successfully.']);
@@ -150,7 +150,7 @@ class UserGroupController extends Controller
 
     public function getDetail($id)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "detail")) {
             abort(403);
         }
@@ -171,7 +171,7 @@ class UserGroupController extends Controller
 
     public function edit($id)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -187,7 +187,7 @@ class UserGroupController extends Controller
 
     public function update(Request $request)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -240,7 +240,7 @@ class UserGroupController extends Controller
         }
 
         $permissionAfter = getPermissionGroup($user_group->id);
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, $id, [
             'Data before updating' => ['data' => $user_group], 
             'Data after updating' => ['data'=> $user_group_updated],
@@ -252,13 +252,12 @@ class UserGroupController extends Controller
 
     public function delete(Request $request)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
         $id = $request->id;
         
-        // Temukan grup pengguna berdasarkan ID yang diberikan.
         $user_group = UserGroup::find($id);
         
         if (!$user_group) {
@@ -266,13 +265,8 @@ class UserGroupController extends Controller
         }
 
         $log = $user_group;
-        // Wipe semua entri access rights (permissions) terkait dengan grup pengguna ini.
         $user_group->permissions()->delete();
-
-        // Wipe grup pengguna.
         $data = $user_group->delete();
-
-        // Tulis log jika diperlukan.
         createLog(static::$module, __FUNCTION__, $id,['Deleted data' => $log]);
 
         return response()->json(['message' => 'User group deleted successfully']);
@@ -281,7 +275,7 @@ class UserGroupController extends Controller
 
     public function changeStatus(Request $request)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "status")) {
             abort(403);
         }
@@ -293,10 +287,10 @@ class UserGroupController extends Controller
         $user_group->update($data);
 
 
-        // Set a session flash message
+        
         Session::flash('success', 'Status has been changed.');
 
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, $id,['User Group' => $user_group, 'Statusnya diubah menjadi' => $log]);
         return response()->json(['success' => 'Status has been changed.']);
     }

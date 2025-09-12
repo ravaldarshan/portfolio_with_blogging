@@ -162,7 +162,6 @@
             });
 
 
-            //Change Status Confirmation
             $(document).on('click', '.changeStatus', function(event) {
                 var ix = $(this).data('ix');
                 if ($(this).is(':checked')) {
@@ -184,12 +183,12 @@
                 });
 
                 swalWithBootstrapButtons.fire({
-                    html: 'Apakah anda yakin ingin mengubah status ke ' + changeto + '?' + message,
+                    html: 'Are you sure you want to change the status to ' + changeto + '?' + message,
                     icon: "info",
                     buttonsStyling: false,
                     showCancelButton: true,
-                    confirmButtonText: "Ya, saya yakin!",
-                    cancelButtonText: 'Tidak, batalkan',
+                    confirmButtonText: "Yes, I’m sure!",
+                    cancelButtonText: 'No, cancel',
                     reverseButtons: true
 
                 }).then((result) => {

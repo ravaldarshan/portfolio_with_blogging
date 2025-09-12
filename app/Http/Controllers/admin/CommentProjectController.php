@@ -13,7 +13,7 @@ class CommentProjectController extends Controller
     private static $module = "blog_comments";
 
     public function index(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -31,12 +31,12 @@ class CommentProjectController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete mx-1">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "detail")) : //Check permission
+                if (isAllowed(static::$module, "detail")) : 
                     $btn .= '<a href="'.route('admin.comment_project.detail',$row->id).'" data-id="' . $row->id . '" class="btn btn-secondary btn-sm mx-1">
                     Detail
                 </a>';
@@ -86,7 +86,7 @@ class CommentProjectController extends Controller
     }
 
     public function detail($id){
-        //Check permission
+        
         if (!isAllowed(static::$module, "detail")) {
             abort(403);
         }
@@ -109,7 +109,7 @@ class CommentProjectController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete mx-1">
                     Delete
                 </a>';

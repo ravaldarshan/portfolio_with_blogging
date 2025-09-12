@@ -2,12 +2,10 @@
     <label for="inputModule">Module</label>
     <div class="row">
         <div class="col-8" style="padding-right: 0;">
-            <!-- Menggunakan col-8 agar input lebih lebar dan menghapus padding kanan -->
             <input type="text" class="form-control" id="inputModuleName" readonly>
             <input type="text" class="d-none" name="module" id="inputModule">
         </div>
         <div class="col-4" style="padding-left: 0;">
-            <!-- Menggunakan col-4 agar tombol "Search" lebih kecil dan menghapus padding kiri -->
             <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#filterModuleLogSystem">
                 Search
             </a>
@@ -87,7 +85,6 @@
                     },
                 ],
             });
-            //click di baris tabel barang
             $('#datatableModuleModal tbody').on('click', 'tr', function() {
 
                 var data = data_table_module.row(this).data();
@@ -98,7 +95,6 @@
                 $('#buttonCloseModuleModal').click();
 
             });
-            //end click di baris tabel barang
         });
     </script>
 @endpush

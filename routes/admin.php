@@ -120,7 +120,6 @@ Route::prefix('admin')->group(function () {
         Route::get('settings/frontpage/homepage', [SettingController::class, 'frontpage_homepage_index'])->name('admin.settings.frontpage.homepage');
         Route::put('settings/frontpage/homepage/update', [SettingController::class, 'frontpage_homepage_update'])->name('admin.settings.frontpage.homepage.update');
 
-        //Modul dan Modul Akses
         Route::get('module', [ModuleController::class, 'index'])->name('admin.module');
         Route::get('module/add', [ModuleController::class, 'add'])->name('admin.module.add');
         Route::get('module/getData', [ModuleController::class, 'getData'])->name('admin.module.getData');

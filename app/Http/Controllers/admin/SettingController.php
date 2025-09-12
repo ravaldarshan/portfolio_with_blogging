@@ -15,7 +15,7 @@ class SettingController extends Controller
     private static $module = "settings";
 
     public function main(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "main")) {
             abort(403);
         }
@@ -24,7 +24,7 @@ class SettingController extends Controller
     }
 
     public function frontpage(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "frontpage")) {
             abort(403);
         }
@@ -33,7 +33,7 @@ class SettingController extends Controller
     }
 
     public function admin(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "admin")) {
             abort(403);
         }
@@ -43,27 +43,22 @@ class SettingController extends Controller
 
     public function index()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "admin_general")) {
             abort(403);
         }
         $settings = Setting::get()->toArray();
-        
         $settings = array_column($settings, 'value', 'name');
 
-        // Ambil pengaturan dari database dan tampilkan di halaman
         return view('administrator.settings.admin.index', compact('settings'));
     }
 
     public function update(Request $request)
     {
-        // return $request;
-        //Check permission
+        
         if (!isAllowed(static::$module, "admin_general")) {
             abort(403);
         }
-
-        
 
         $settings = Setting::get()->toArray();
         $settings = array_column($settings, 'value', 'name');
@@ -118,7 +113,7 @@ class SettingController extends Controller
         }
         
 
-        $logs = []; // Buat array kosong untuk menyimpan log
+        $logs = []; 
 
         foreach ($data_settings as $key => $value) {
             $data = [];
@@ -138,7 +133,7 @@ class SettingController extends Controller
             }
         }
 
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
         return redirect(route('admin.settings.admin.general'))->with(['success' => 'Data updated successfully.']);
@@ -147,7 +142,7 @@ class SettingController extends Controller
     
     public function frontpage_footer_index()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "frontpage_footer")) {
             abort(403);
         }
@@ -155,14 +150,13 @@ class SettingController extends Controller
         
         $settings = array_column($settings, 'value', 'name');
 
-        // Ambil pengaturan dari database dan tampilkan di halaman
         return view('administrator.settings.frontpage.footer', compact('settings'));
     }
 
     public function frontpage_footer_update(Request $request)
     {
-        // return $request;
-        //Check permission
+        
+        
         if (!isAllowed(static::$module, "frontpage_footer")) {
             abort(403);
         }
@@ -187,14 +181,14 @@ class SettingController extends Controller
             ];
         }
 
-        // Encode the array to JSON
+        
         $json_encoded_link = json_encode($dataLink);
 
         if (!empty($dataLink)) {
             $data_settings["link_frontpage_footer"] = $json_encoded_link;
         }
 
-        $logs = []; // Buat array kosong untuk menyimpan log
+        $logs = [];
 
         foreach ($data_settings as $key => $value) {
             $data = [];
@@ -214,7 +208,7 @@ class SettingController extends Controller
             }
         }
 
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
         return redirect(route('admin.settings.frontpage.footer'))->with(['success' => 'Data updated successfully.']);
@@ -226,7 +220,7 @@ class SettingController extends Controller
         $nama_link = $request->nama_link;
         $index = $request->index;
 
-        // Get the settings
+        
         $settings = Setting::get()->toArray();
         $settings = array_column($settings, 'value', 'name');
 
@@ -242,17 +236,17 @@ class SettingController extends Controller
             }
         }
 
-        // Encode the array to JSON
+        
         $jsonEncodedData = json_encode($dataLink);
 
-        // Update the database record
+        
         $set = Setting::where('name', 'link_frontpage_footer')->first();
         $set->update(['value' => $jsonEncodedData]);
     }
     
     public function frontpage_general_index()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "frontpage_general")) {
             abort(403);
         }
@@ -260,14 +254,12 @@ class SettingController extends Controller
         
         $settings = array_column($settings, 'value', 'name');
 
-        // Ambil pengaturan dari database dan tampilkan di halaman
         return view('administrator.settings.frontpage.general', compact('settings'));
     }
 
     public function frontpage_general_update(Request $request)
     {
-        // return $request;
-        //Check permission
+        
         if (!isAllowed(static::$module, "frontpage_general")) {
             abort(403);
         }
@@ -275,7 +267,7 @@ class SettingController extends Controller
         $settings = Setting::get()->toArray();
         $settings = array_column($settings, 'value', 'name');
         
-        // dd($request);
+        
         $data_settings = [];
         $data_settings["general_nama_app"] = $request->general_nama_app;
         $data_settings["general_main_text_color"] = $request->general_main_text_color;
@@ -295,7 +287,7 @@ class SettingController extends Controller
             }
         }
 
-        // Encode the array to JSON
+        
         $json_encoded_socialMedia = json_encode($data_socialMedia);
 
         if (!empty($data_socialMedia)) {
@@ -322,7 +314,7 @@ class SettingController extends Controller
             $data_settings['general_frontpage_favicon'] = $fileName;
         }
 
-        $logs = []; // Buat array kosong untuk menyimpan log
+        $logs = [];
 
         foreach ($data_settings as $key => $value) {
             $data = [];
@@ -342,7 +334,7 @@ class SettingController extends Controller
             }
         }
 
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
         return redirect(route('admin.settings.frontpage.general'))->with(['success' => 'Data updated successfully.']);
@@ -354,7 +346,7 @@ class SettingController extends Controller
         $nama_socialMedia = $request->nama_socialMedia;
         $index = $request->index;
 
-        // Get the settings
+        
         $settings = Setting::get()->toArray();
         $settings = array_column($settings, 'value', 'name');
 
@@ -370,17 +362,17 @@ class SettingController extends Controller
             }
         }
 
-        // Encode the array to JSON
+        
         $jsonEncodedData = json_encode($dataSocialMedia);
 
-        // Update the database record
+        
         $set = Setting::where('name', 'general_socialMedia')->first();
         $set->update(['value' => $jsonEncodedData]);
     }
 
     public function frontpage_homepage_index()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "frontpage_homepage")) {
             abort(403);
         }
@@ -388,14 +380,13 @@ class SettingController extends Controller
         
         $settings = array_column($settings, 'value', 'name');
 
-        // Ambil pengaturan dari database dan tampilkan di halaman
         return view('administrator.settings.frontpage.homepage', compact('settings'));
     }
 
     public function frontpage_homepage_update(Request $request)
     {
-        // return $request;
-        //Check permission
+        
+        
         if (!isAllowed(static::$module, "frontpage_homepage")) {
             abort(403);
         }
@@ -413,7 +404,7 @@ class SettingController extends Controller
         $data_settings["url_button_promosi_frontpage_homepage"] = $request->url_button_promosi_frontpage_homepage;
         $data_settings["body_service_frontpage_homepage"] = $request->body_service_frontpage_homepage;
 
-        $logs = []; // Buat array kosong untuk menyimpan log
+        $logs = [];
 
         foreach ($data_settings as $key => $value) {
             $data = [];
@@ -433,7 +424,7 @@ class SettingController extends Controller
             }
         }
 
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
         return redirect(route('admin.settings.frontpage.homepage'))->with(['success' => 'Data updated successfully.']);

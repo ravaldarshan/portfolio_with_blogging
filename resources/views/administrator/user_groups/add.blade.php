@@ -184,7 +184,7 @@
                 if ($('input[name^="access["]:checked').length === 0) {
                     $("#table-permissions").addClass('table-invalid'); 
                     document.getElementById("accessError").textContent =
-                        "Choose setidaknya salah satu modul access";
+                        "Choose at least one access module";
                     return;
                 } else {
                     $("#table-permissions").removeClass('table-invalid'); 

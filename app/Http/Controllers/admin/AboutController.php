@@ -13,7 +13,6 @@ class AboutController extends Controller
 
     public function index()
     {
-        //Check permission
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -21,14 +20,12 @@ class AboutController extends Controller
         
         $settings = array_column($settings, 'value', 'name');
 
-        // Ambil pengaturan dari database dan tampilkan di halaman
         return view('administrator.about.index', compact('settings'));
     }
 
     public function update(Request $request)
     {
-        // return $request;
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -41,7 +38,7 @@ class AboutController extends Controller
         $data_settings["description"] = $request->description;
         $data_settings["image"] = $request->image;
 
-        $logs = []; // Buat array kosong untuk menyimpan log
+        $logs = [];
 
         foreach ($data_settings as $key => $value) {
             $data = [];
@@ -60,13 +57,6 @@ class AboutController extends Controller
                 $logs[] = $set;
             }
         }
-
-        
-
-        // Setelah perulangan selesai, $logs akan bercontents semua log untuk setiap data yang diproses.
-
-
-        //Write log
         createLog(static::$module, __FUNCTION__, 0,$logs);
 
         return redirect(route('admin.about'))->with(['success' => 'Data updated successfully.']);

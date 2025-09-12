@@ -89,14 +89,12 @@
                     },
                 ],
             });
-            //click di baris tabel barang
         $('#datatableUserModal tbody').on('click', 'tr', function () {
             var data = data_table_user.row(this).data();
 			$("#inputUserName").val(data.name);
 			$("#inputUser").val(data.id);
             $('#buttonCloseUserLogSystem').click();
         }); 
-		//end click di baris tabel barang
         });
     </script>
 @endpush

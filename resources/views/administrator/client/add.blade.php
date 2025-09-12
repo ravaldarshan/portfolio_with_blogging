@@ -47,7 +47,6 @@
                                 <label for="otherPicturesInputFile" class="form-label">Image</label>
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview-image thumbnail mb20">
-                                        <!-- Tampilkan preview gambar-gambar yang diunggah di sini -->
                                     </div>
                                     <div class="mt-3">
                                         <label for="otherPicturesInputFile" class="btn btn-light btn-file">
@@ -188,7 +187,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            //validate parsley form
+            
             const form = document.getElementById("form");
             const validator = $(form).parsley();
 

@@ -16,7 +16,7 @@ class BlogController extends Controller
     private static $module = "blog";
 
     public function index(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -32,17 +32,17 @@ class BlogController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "edit")) : //Check permission
+                if (isAllowed(static::$module, "edit")) : 
                     $btn .= '<a href="'.route('admin.blog.edit',$row->id).'" class="btn btn-primary btn-sm mx-3 ">
                     Edit
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "detail")) : //Check permission
+                if (isAllowed(static::$module, "detail")) : 
                     $btn .= '<a href="'.route('admin.blog.detail',$row->slug).'" data-id="' . $row->id . '" class="btn btn-secondary btn-sm ">
                     Detail
                 </a>';
@@ -54,7 +54,7 @@ class BlogController extends Controller
     }
     
     public function add(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -64,7 +64,7 @@ class BlogController extends Controller
     
     public function save(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -79,12 +79,12 @@ class BlogController extends Controller
 
         $request->validate($rules);
 
-        // dd($request);
+        
 
         $slug = Str::slug($request->title);
         $cekSlugCount = Blog::where('slug', $slug)->count();
 
-        // Handle duplicate slug
+        
         if ($cekSlugCount > 0) {
             $slug = $slug . '-' . ($cekSlugCount + 1);
         }
@@ -133,14 +133,14 @@ class BlogController extends Controller
             $data->update();
         }
 
-        // Log the data
+        
         createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
 
         return redirect()->route('admin.blog')->with('success', 'Data saved successfully.');
     }
     
     public function edit($id){
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -157,7 +157,7 @@ class BlogController extends Controller
     
     public function update(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -175,7 +175,7 @@ class BlogController extends Controller
 
         $request->validate($rules);
 
-        // Simpan Data before updating
+        
         $previousData = $data->toArray();
 
         $img_contents = $data->contents;
@@ -188,7 +188,7 @@ class BlogController extends Controller
         $images = $dom->getelementsbytagname('img');
         foreach($images as $k => $img){
             $datas = $img->getattribute('src');
-            // Check if the image has base64 encoding
+            
             $data_replace = str_replace('/administrator/assets/media/blog/', '', $datas);
             $image_path = "./administrator/assets/media/blog/" . $data_replace;
                     if (File::exists($image_path)) {
@@ -199,7 +199,7 @@ class BlogController extends Controller
         $slug = Str::slug($request->title);
         $cekSlugCount = Blog::where('id','!=',$id)->where('slug', $slug)->count();
 
-        // Handle duplicate slug
+        
         if ($cekSlugCount > 0) {
             $slug = $slug . ($cekSlugCount + 1);
         }
@@ -214,7 +214,7 @@ class BlogController extends Controller
         $images = $dom->getelementsbytagname('img');
         foreach($images as $k => $img){
             $datas = $img->getattribute('src');
-            // Check if the image has base64 encoding
+            
             if (strpos($datas, ';') !== false) {
                 list($type, $datas) = explode(';', $datas);
                 list(, $datas) = explode(',', $datas);
@@ -245,7 +245,7 @@ class BlogController extends Controller
         $decodeImg = json_decode($data->img_url, true);
 
         if ($decodeImg === null && json_last_error() !== JSON_ERROR_NONE) {
-            // Handle error decoding JSON
+            
             $errorMessage = 'Error decoding JSON: ' . json_last_error_msg();
             error_log($errorMessage);
         }
@@ -260,7 +260,6 @@ class BlogController extends Controller
                 $dataImgJson[] = $fileName;
             }
 
-            // Menggabungkan array dari file gambar baru dengan array dari decodeImg
             $dataImgJson = array_merge($decodeImg, $dataImgJson);
 
             $updates['img_url'] = json_encode($dataImgJson);
@@ -268,7 +267,7 @@ class BlogController extends Controller
             $updates['img_url'] = $data->img_url;
         }
 
-        // Filter only the updated data
+        
         $updatedData = array_intersect_key($updates, $data->getOriginal());
 
         $data->update($updates);
@@ -279,26 +278,26 @@ class BlogController extends Controller
     
     public function delete(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
 
         $id = $request->id;
 
-        // Find the data based on the provided ID or throw a 404 exception.
+        
         $data = Blog::findOrFail($id);
 
-        // Store the data to be logged before deletion
+        
         $deletedData = $data->toArray();
 
         $dataJson = [
             'data' => $deletedData
         ];
-        // Delete the data.
+        
         $data->delete();
 
-        // Write logs for soft delete
+        
         createLog(static::$module, __FUNCTION__, $id, ['Archived data' => $dataJson]);
 
         return response()->json([
@@ -338,7 +337,7 @@ class BlogController extends Controller
     }
 
     public function archives(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "archives")) {
             abort(403);
         }
@@ -355,12 +354,12 @@ class BlogController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "restore")) : //Check permission
+                if (isAllowed(static::$module, "restore")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-primary restore btn-sm mx-3 ">
                     Restore
                 </a>';
@@ -373,7 +372,7 @@ class BlogController extends Controller
 
     public function restore(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "restore")) {
             abort(403);
         }
@@ -382,7 +381,7 @@ class BlogController extends Controller
 
         $data = Blog::onlyTrashed()->find($id);
 
-        // Check if data exists in the trash
+        
         if (!$data) {
             return response()->json([
                 'status' => 'error',
@@ -390,7 +389,7 @@ class BlogController extends Controller
             ], 404);
         }
 
-        // Restore the category
+        
         $data->restore();
 
 
@@ -398,8 +397,8 @@ class BlogController extends Controller
             'Blog' => $data,
         ];
 
-        // Write logs if needed.
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dipulihkan' => $updated]);
+        
+        createLog(static::$module, __FUNCTION__, $id, ['Recovered data' => $updated]);
 
         return response()->json([
             'status' => 'success',
@@ -411,7 +410,7 @@ class BlogController extends Controller
 
     public function forceDelete(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
@@ -420,7 +419,7 @@ class BlogController extends Controller
 
         $data = Blog::onlyTrashed()->with('blog_comments')->with('blog_comments_reply')->find($id);
 
-        // Check if data exists in the trash
+        
         if (!$data) {
             return redirect()->route('admin.blog.archives')->with('error', 'Data not found.');
         }
@@ -445,7 +444,7 @@ class BlogController extends Controller
         $images = $dom->getelementsbytagname('img');
         foreach($images as $k => $img){
             $datas = $img->getattribute('src');
-            // Check if the image has base64 encoding
+            
             $data_replace = str_replace('/administrator/assets/media/blog/', '', $datas);
             $image_path = "./administrator/assets/media/blog/" . $data_replace;
                     if (File::exists($image_path)) {
@@ -468,7 +467,7 @@ class BlogController extends Controller
             'Data' => $data,
         ];
 
-        // Write logs if needed.
+        
         createLog(static::$module, __FUNCTION__, $id, $dataJson);
 
         return response()->json([
@@ -478,7 +477,7 @@ class BlogController extends Controller
     }
 
     public function deleteImage(Request $request){
-        // Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -507,7 +506,7 @@ class BlogController extends Controller
     }
 
     public function detail($slug){
-        //Check permission
+        
         if (!isAllowed(static::$module, "detail")) {
             abort(403);
         }

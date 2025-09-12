@@ -81,24 +81,12 @@
 @push('js')
     <script type="text/javascript">
         $(document).ready(function() {
-            //validate parsley form
             const form = document.getElementById("form");
             const validator = $(form).parsley();
-
             const submitButton = document.getElementById("formSubmit");
-
-            
-            
-            
-            
-            
-
             submitButton.addEventListener("click", async function(e) {
                 e.preventDefault();
-
                 indicatorBlock();
-
-
                 
                 const remoteValidationResultEmail = await validateRemoteEmail();
                 const inputEmail = $("#inputEmail");

@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function index()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -48,7 +48,7 @@ class UserController extends Controller
 
         return DataTables::of($data)
             ->addColumn('status', function ($row) {
-                if (isAllowed(static::$module, "status")) : //Check permission
+                if (isAllowed(static::$module, "status")) : 
                     if ($row->status) {
                         $status = '<div class="d-flex"><div>
                         <input class="tgl tgl-ios changeStatus" data-ix="' . $row->id . '" type="checkbox" value="1"
@@ -69,17 +69,17 @@ class UserController extends Controller
             })
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "edit")) : //Check permission
+                if (isAllowed(static::$module, "edit")) : 
                     $btn .= '<a href="' . route('admin.users.edit', $row->id) . '" class="btn btn-primary btn-sm mx-3 ">
                     Edit
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "detail")) : //Check permission
+                if (isAllowed(static::$module, "detail")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#detailUser">
                     Detail
                 </a>';
@@ -92,7 +92,7 @@ class UserController extends Controller
 
     public function add()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -102,7 +102,7 @@ class UserController extends Controller
 
     public function save(Request $request)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -142,7 +142,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -161,7 +161,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -183,7 +183,7 @@ class UserController extends Controller
 
         $request->validate($rules);
 
-        // Simpan Data before updating
+        
         $previousData = $data->toArray();
 
         $updates = [
@@ -198,17 +198,17 @@ class UserController extends Controller
             $updates['password'] = Hash::make($request->password);
         }
 
-        // Check if a profile exists for the user
+        
         $profile = Profile::where('user_id', $data->id)->firstOrNew([
             'user_id' => $data->id,
             'social_media' => '{"linkedin":"","twitter":"","instagram":"","facebook":""}',
         ]);
 
-        // Update the profile data
+        
         $profile->user_id = $updates['code'];
         $profile->save();
 
-        // Filter only the updated data
+        
         $updatedData = array_intersect_key($updates, $data->getOriginal());
 
         $data->update($updates);
@@ -222,13 +222,13 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
         $id = $request->id;
 
-        // Find the user based on the provided ID.
+        
         $user = User::findorfail($id);
 
         if (!$user) {
@@ -238,20 +238,20 @@ class UserController extends Controller
             ], 404);
         }
 
-        // Store the data to be logged before deletion
+        
         $deletedData = $user->toArray();
 
-        // Delete the user.
+        
         $user->delete();
 
         $profile = Profile::where('user_id', $user->id)->first();
 
         if ($profile) {
-            // Check if the profile is being force-deleted
+            
             $profile->delete();
         }
 
-        // Write logs only for soft delete (not force delete)
+        
         createLog(static::$module, __FUNCTION__, $id, ['Deleted data' => ['User' => $deletedData, 'User Profile' => $profile]]);
 
         return response()->json([
@@ -264,7 +264,7 @@ class UserController extends Controller
 
     public function getDetail($id)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "detail")) {
             abort(403);
         }
@@ -280,7 +280,7 @@ class UserController extends Controller
 
     public function changeStatus(Request $request)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "status")) {
             abort(403);
         }
@@ -289,11 +289,11 @@ class UserController extends Controller
         $log = $request->status;
         $id = $request->ix;
         $updates = User::where(["id" => $id])->first();
-        // Simpan Data before updating
+        
         $previousData = $updates->toArray();
         $updates->update($data);
 
-        //Write log
+        
         createLog(static::$module, __FUNCTION__, $id, ['Data User' => $previousData, 'Statusnya diubah menjadi' => $log]);
         return response()->json([
             'status' => 'success',
@@ -366,7 +366,7 @@ class UserController extends Controller
 
     public function archives()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "archives")) {
             abort(403);
         }
@@ -398,7 +398,7 @@ class UserController extends Controller
 
         return DataTables::of($data)
             ->addColumn('status', function ($row) {
-                if (isAllowed(static::$module, "status")) : //Check permission
+                if (isAllowed(static::$module, "status")) : 
                     if ($row->status) {
                         $status = '<div class="d-flex"><div class="form-check form-switch form-check-custom form-check-solid">
                         <input class="form-check-input h-20px w-30px changeStatus" data-ix="' . $row->id . '" type="checkbox" value="1"
@@ -421,12 +421,12 @@ class UserController extends Controller
             })
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "restore")) : //Check permission
+                if (isAllowed(static::$module, "restore")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-primary restore btn-sm mx-3 ">
                     Restore
                 </a>';
@@ -439,7 +439,7 @@ class UserController extends Controller
 
     public function restore(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "restore")) {
             abort(403);
         }
@@ -464,7 +464,7 @@ class UserController extends Controller
             # code...
             $userProfiletoarray = "'User Profile' => $profile->toArray()";
         }
-        // Simpan Data before updating
+        
         $previousData = [
             'User' => $data->toArray(),
             $userProfiletoarray
@@ -477,8 +477,8 @@ class UserController extends Controller
 
         $updated = ['User' => $data, 'User Profile' => $profile];
 
-        // Write logs if needed.
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dipulihkan' => $updated]);
+        
+        createLog(static::$module, __FUNCTION__, $id, ['Recovered data' => $updated]);
 
         return response()->json([
             'status' => 'success',
@@ -489,7 +489,7 @@ class UserController extends Controller
 
     public function forceDelete(Request $request)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
@@ -515,7 +515,7 @@ class UserController extends Controller
             $dataJsonProfile
         ];
 
-        // Write logs if needed.
+        
         createLog(static::$module, __FUNCTION__, $id, $dataJson);
 
         return response()->json([

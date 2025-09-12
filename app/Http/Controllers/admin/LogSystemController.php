@@ -19,7 +19,7 @@ class LogSystemController extends Controller
     private static $module = "log_system";
 
     public function index(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -43,7 +43,7 @@ class LogSystemController extends Controller
             }
             $data->get();
         }
-        // dd($request->module);
+        
 
 
         return DataTables::of($data)
@@ -79,18 +79,14 @@ class LogSystemController extends Controller
 
     public function clearLogs()
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "clear")) {
             abort(403);
         }
 
         try {
-            // Hitung date tujuh hari yang lalu
             $DaysAgo = Carbon::now()->subDays(7);
-
-            // Wipe data log yang lebih lama dari 7 hari kebelakang
             Log::where('created_at', '<', $DaysAgo)->delete();
-
             return redirect()->route('admin.logSystems')->with('success', 'Log data older than 7 days was successfully deleted.');
         } catch (\Exception $e) {
             return redirect()->route('admin.logSystems')->with('error', 'An error occurred while deleting log data: ' . $e->getMessage());
@@ -103,24 +99,24 @@ class LogSystemController extends Controller
             abort(403);
         }
 
-        ini_set('max_execution_time', 600); // Set the maximum execution time to 600 seconds (5 minutes)
+        ini_set('max_execution_time', 600); 
 
         $data = Log::with('user')->orderBy('created_at', 'desc')->get();
 
         $settings = Setting::get()->toArray();
         $settings = array_column($settings, 'value', 'name');
 
-        // Render the view using Laravel's View class
+        
         $html = View::make('administrator.logs.export', compact('data'))->render();
 
-        // Configure PDF settings (optional)
+        
         $pdf = PDF::loadHTML($html);
 
-        // Output the PDF (open in browser)
+        
         try {
             return $pdf->stream('log-export.pdf');
         } catch (\Exception $e) {
-            return $e->getMessage(); // Output any error message to help diagnose the problem
+            return $e->getMessage(); 
         }
     }
 }

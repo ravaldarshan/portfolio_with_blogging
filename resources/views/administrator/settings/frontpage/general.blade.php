@@ -458,7 +458,7 @@
                 component: '.input-group-append',
             });
 
-            //validate parsley form
+            
             const form = document.getElementById("form");
             const validator = $(form).parsley();
 

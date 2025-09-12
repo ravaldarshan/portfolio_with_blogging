@@ -14,7 +14,7 @@ class CategoryProjectController extends Controller
     private static $module = "category_project";
 
     public function index(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -30,17 +30,17 @@ class CategoryProjectController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "edit")) : //Check permission
+                if (isAllowed(static::$module, "edit")) : 
                     $btn .= '<a href="'.route('admin.category_project.edit',$row->id).'" class="btn btn-primary btn-sm mx-3 ">
                     Edit
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "detail")) : //Check permission
+                if (isAllowed(static::$module, "detail")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#detailCategoryProject">
                     Detail
                 </a>';
@@ -52,7 +52,7 @@ class CategoryProjectController extends Controller
     }
     
     public function add(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -62,7 +62,7 @@ class CategoryProjectController extends Controller
     
     public function save(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -76,7 +76,7 @@ class CategoryProjectController extends Controller
         $slug = Str::slug($request->nama);
         $cekSlugCount = CategoryProject::where('slug', $slug)->count();
 
-        // Handle duplicate slug
+        
         if ($cekSlugCount > 0) {
             $slug = $slug . '-' . ($cekSlugCount + 1);
         }
@@ -87,14 +87,14 @@ class CategoryProjectController extends Controller
             'created_by' => auth()->user()->id,
         ]);
 
-        // Log the data
+        
         createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
 
         return redirect()->route('admin.category_project')->with('success', 'Data saved successfully.');
     }
     
     public function edit($id){
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -106,7 +106,7 @@ class CategoryProjectController extends Controller
     
     public function update(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -120,13 +120,13 @@ class CategoryProjectController extends Controller
 
         $request->validate($rules);
 
-        // Simpan Data before updating
+        
         $previousData = $data->toArray();
 
         $slug = Str::slug($request->nama);
         $cekSlugCount = CategoryProject::where('id','!=',$id)->where('slug', $slug)->count();
 
-        // Handle duplicate slug
+        
         if ($cekSlugCount > 0) {
             $slug = $slug . '-' . ($cekSlugCount + 1);
         }
@@ -136,7 +136,7 @@ class CategoryProjectController extends Controller
             'slug' => $slug,
             'updated_by' => auth()->user()->id,
         ];
-        // Filter only the updated data
+        
         $updatedData = array_intersect_key($updates, $data->getOriginal());
 
         $data->update($updates);
@@ -147,32 +147,32 @@ class CategoryProjectController extends Controller
     
     public function delete(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
 
         $id = $request->id;
 
-        // Find the data based on the provided ID or throw a 404 exception.
+        
         $data = CategoryProject::findOrFail($id);
 
-        // Store the data to be logged before deletion
+        
         $deletedData = $data->toArray();
 
-        // Delete the data.
+        
         $data->delete();
 
         $projects = Project::where('category_project_id', $data->id)->get();
 
-        // Delete related projects if any
+        
         if ($projects->isNotEmpty()) {
             $projects->each(function ($project) {
                 $project->delete();
             });
         }
 
-        // Write logs for soft delete
+        
         createLog(static::$module, __FUNCTION__, $id, ['Archived data' => ['Category' => $deletedData, 'Project' => $projects]]);
 
         return response()->json([
@@ -185,7 +185,7 @@ class CategoryProjectController extends Controller
     
     
     public function getDetail($id){
-        //Check permission
+        
         if (!isAllowed(static::$module, "detail")) {
             abort(403);
         }
@@ -221,7 +221,7 @@ class CategoryProjectController extends Controller
     }
 
     public function archives(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "archives")) {
             abort(403);
         }
@@ -237,12 +237,12 @@ class CategoryProjectController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "restore")) : //Check permission
+                if (isAllowed(static::$module, "restore")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-primary restore btn-sm mx-3 ">
                     Restore
                 </a>';
@@ -255,7 +255,7 @@ class CategoryProjectController extends Controller
 
     public function restore(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "restore")) {
             abort(403);
         }
@@ -264,7 +264,7 @@ class CategoryProjectController extends Controller
 
         $data = CategoryProject::onlyTrashed()->find($id);
 
-        // Check if data exists in the trash
+        
         if (!$data) {
             return response()->json([
                 'status' => 'error',
@@ -274,10 +274,10 @@ class CategoryProjectController extends Controller
 
         $projects = Project::onlyTrashed()->where('category_project_id', $data->id)->get();
 
-        // Restore the category
+        
         $data->restore();
 
-        // Restore related projects if any
+        
         if ($projects->isNotEmpty()) {
             $projects->each(function ($project) {
                 $project->restore();
@@ -289,8 +289,8 @@ class CategoryProjectController extends Controller
             'project' => $projects,
         ];
 
-        // Write logs if needed.
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dipulihkan' => $updated]);
+        
+        createLog(static::$module, __FUNCTION__, $id, ['Recovered data' => $updated]);
 
         return response()->json([
             'status' => 'success',
@@ -302,7 +302,7 @@ class CategoryProjectController extends Controller
 
     public function forceDelete(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
@@ -311,17 +311,17 @@ class CategoryProjectController extends Controller
 
         $data = CategoryProject::onlyTrashed()->find($id);
 
-        // Check if data exists in the trash
+        
         if (!$data) {
             return redirect()->route('admin.category_project.archives')->with('error', 'Data not found.');
         }
 
         $projects = Project::onlyTrashed()->where('category_project_id', $data->id)->get();
 
-        // Force delete the category
+        
         $data->forceDelete();
 
-        // Force delete related projects if any
+        
         if ($projects->isNotEmpty()) {
             $projects->each(function ($project) {
                 $project->forceDelete();
@@ -336,7 +336,7 @@ class CategoryProjectController extends Controller
             'project' => $dataJsonProject,
         ];
 
-        // Write logs if needed.
+        
         createLog(static::$module, __FUNCTION__, $id, $dataJson);
 
         return response()->json([

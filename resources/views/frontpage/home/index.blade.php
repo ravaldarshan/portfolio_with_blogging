@@ -232,7 +232,6 @@
             }
 
 
-            //Service
             $.ajax({
                 type: "GET",
                 url: "{{ route('web.getService') }}",
@@ -264,7 +263,6 @@
                 }
             });
 
-            //Project
             $.ajax({
                 type: "GET",
                 url: "{{ route('web.getProject') }}",
@@ -398,7 +396,6 @@
                 });
             }
 
-            //Service
             $.ajax({
                 type: "GET",
                 url: "{{ route('web.getBanner') }}",
@@ -487,7 +484,6 @@
             });
 
 
-            //Count
             $.ajax({
                 type: "GET",
                 url: "{{ route('web.count') }}",

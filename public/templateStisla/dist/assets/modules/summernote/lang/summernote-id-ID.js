@@ -2,57 +2,57 @@
   $.extend($.summernote.lang, {
     'id-ID': {
       font: {
-        bold: 'Tebal',
-        italic: 'Miring',
-        underline: 'Garis bawah',
-        clear: 'Bersihkan gaya',
-        height: 'Jarak baris',
+        bold: 'Bold',
+        italic: 'Italic',
+        underline: 'Underline',
+        clear: 'Clear style',
+        height: 'Line height',
         name: 'Font Family',
-        strikethrough: 'Coret',
+        strikethrough: 'Strikethrough',
         subscript: 'Subscript',
         superscript: 'Superscript',
-        size: 'Ukuran font'
+        size: 'Font size'
       },
       image: {
-        image: 'Gambar',
-        insert: 'Sisipkan gambar',
-        resizeFull: 'Ukuran penuh',
-        resizeHalf: 'Ukuran 50%',
-        resizeQuarter: 'Ukuran 25%',
-        floatLeft: 'Rata kiri',
-        floatRight: 'Rata kanan',
-        floatNone: 'Tidak ada perataan',
+        image: 'Image',
+        insert: 'Insert image',
+        resizeFull: 'Resize full',
+        resizeHalf: 'Resize 50%',
+        resizeQuarter: 'Resize 25%',
+        floatLeft: 'Float left',
+        floatRight: 'Float right',
+        floatNone: 'Float none',
         shapeRounded: 'Shape: Rounded',
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
         shapeNone: 'Shape: None',
-        dragImageHere: 'Tarik gambar pada area ini',
+        dragImageHere: 'Drag image here',
         dropImage: 'Drop image or Text',
-        selectFromFiles: 'Pilih gambar dari berkas',
+        selectFromFiles: 'Select image from files',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',
-        url: 'URL gambar',
-        remove: 'Hapus Gambar',
+        url: 'Image URL',
+        remove: 'Remove image',
         original: 'Original'
       },
       video: {
         video: 'Video',
-        videoLink: 'Link video',
-        insert: 'Sisipkan video',
-        url: 'Tautan video',
-        providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion atau Youku)'
+        videoLink: 'Video link',
+        insert: 'Insert video',
+        url: 'Video URL',
+        providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)'
       },
       link: {
-        link: 'Tautan',
-        insert: 'Tambah tautan',
-        unlink: 'Hapus tautan',
+        link: 'Link',
+        insert: 'Add link',
+        unlink: 'Remove link',
         edit: 'Edit',
-        textToDisplay: 'Tampilan teks',
-        url: 'Tautan tujuan',
-        openInNewWindow: 'Buka di jendela baru'
+        textToDisplay: 'Text to display',
+        url: 'Link target',
+        openInNewWindow: 'Open in new window'
       },
       table: {
-        table: 'Tabel',
+        table: 'Table',
         addRowAbove: 'Add row above',
         addRowBelow: 'Add row below',
         addColLeft: 'Add column left',
@@ -62,13 +62,13 @@
         delTable: 'Delete table'
       },
       hr: {
-        insert: 'Masukkan garis horizontal'
+        insert: 'Insert horizontal line'
       },
       style: {
-        style: 'Gaya',
+        style: 'Style',
         p: 'p',
-        blockquote: 'Kutipan',
-        pre: 'Kode',
+        blockquote: 'Blockquote',
+        pre: 'Code',
         h1: 'Heading 1',
         h2: 'Heading 2',
         h3: 'Heading 3',
@@ -77,40 +77,40 @@
         h6: 'Heading 6'
       },
       lists: {
-        unordered: 'Pencacahan',
-        ordered: 'Penomoran'
+        unordered: 'Bulleted list',
+        ordered: 'Numbered list'
       },
       options: {
-        help: 'Bantuan',
-        fullscreen: 'Layar penuh',
-        codeview: 'Kode HTML'
+        help: 'Help',
+        fullscreen: 'Fullscreen',
+        codeview: 'HTML code'
       },
       paragraph: {
-        paragraph: 'Paragraf',
+        paragraph: 'Paragraph',
         outdent: 'Outdent',
         indent: 'Indent',
-        left: 'Rata kiri',
-        center: 'Rata tengah',
-        right: 'Rata kanan',
-        justify: 'Rata kanan kiri'
+        left: 'Align left',
+        center: 'Align center',
+        right: 'Align right',
+        justify: 'Justify'
       },
       color: {
-        recent: 'Warna sekarang',
-        more: 'Selengkapnya',
-        background: 'Warna latar',
-        foreground: 'Warna font',
-        transparent: 'Transparan',
-        setTransparent: 'Atur transparansi',
-        reset: 'Atur ulang',
-        resetToDefault: 'Kembalikan kesemula'
+        recent: 'Recent color',
+        more: 'More',
+        background: 'Background color',
+        foreground: 'Font color',
+        transparent: 'Transparent',
+        setTransparent: 'Set transparent',
+        reset: 'Reset',
+        resetToDefault: 'Reset to default'
       },
       shortcut: {
-        shortcuts: 'Jalan pintas',
-        close: 'Keluar',
-        textFormatting: 'Format teks',
-        action: 'Aksi',
-        paragraphFormatting: 'Format paragraf',
-        documentStyle: 'Gaya dokumen',
+        shortcuts: 'Shortcuts',
+        close: 'Close',
+        textFormatting: 'Text formatting',
+        action: 'Action',
+        paragraphFormatting: 'Paragraph formatting',
+        documentStyle: 'Document style',
         extraKeys: 'Extra keys'
       },
       help: {
@@ -120,8 +120,8 @@
         'tab': 'Tab',
         'untab': 'Untab',
         'bold': 'Set a bold style',
-        'italic': 'Set a italic style',
-        'underline': 'Set a underline style',
+        'italic': 'Set an italic style',
+        'underline': 'Set an underline style',
         'strikethrough': 'Set a strikethrough style',
         'removeFormat': 'Clean a style',
         'justifyLeft': 'Set left align',
@@ -132,7 +132,7 @@
         'insertOrderedList': 'Toggle ordered list',
         'outdent': 'Outdent on current paragraph',
         'indent': 'Indent on current paragraph',
-        'formatPara': 'Change current block\'s format as a paragraph(P tag)',
+        'formatPara': 'Change current block\'s format as a paragraph (P tag)',
         'formatH1': 'Change current block\'s format as H1',
         'formatH2': 'Change current block\'s format as H2',
         'formatH3': 'Change current block\'s format as H3',
@@ -143,8 +143,8 @@
         'linkDialog.show': 'Show Link Dialog'
       },
       history: {
-        undo: 'Kembali',
-        redo: 'Ulang'
+        undo: 'Undo',
+        redo: 'Redo'
       },
       specialChar: {
         specialChar: 'SPECIAL CHARACTERS',

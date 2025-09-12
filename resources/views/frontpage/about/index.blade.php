@@ -86,7 +86,6 @@
 
 @push('js')
     <script type="text/javascript">
-        //Service
         $.ajax({
             type: "GET",
             url: "{{ route('web.about.getService') }}",
@@ -118,7 +117,6 @@
             }
         });
 
-        //About
         $.ajax({
             type: "GET",
             url: "{{ route('web.about.getAbout') }}",

@@ -15,7 +15,7 @@ class TeamController extends Controller
 
     public function index()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -31,17 +31,17 @@ class TeamController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "edit")) : //Check permission
+                if (isAllowed(static::$module, "edit")) : 
                     $btn .= '<a href="' . route('admin.teams.edit', $row->id) . '" class="btn btn-primary btn-sm mx-3 ">
                     Edit
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "detail")) : //Check permission
+                if (isAllowed(static::$module, "detail")) : 
                     $btn .= '<a href="' . route('admin.teams.detail', $row->id) . '" data-id="' . $row->id . '" class="btn btn-secondary btn-sm ">
                     Detail
                 </a>';
@@ -54,7 +54,7 @@ class TeamController extends Controller
 
     public function add()
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -64,7 +64,7 @@ class TeamController extends Controller
 
     public function save(Request $request)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -141,7 +141,7 @@ class TeamController extends Controller
 
     public function update(Request $request)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -259,7 +259,7 @@ class TeamController extends Controller
 
     public function detail($id)
     {
-        //Check permission
+        
         if (!isAllowed(static::$module, "detail")) {
             abort(403);
         }

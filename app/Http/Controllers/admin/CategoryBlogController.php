@@ -15,7 +15,7 @@ class CategoryBlogController extends Controller
     private static $module = "category_blog";
 
     public function index(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "view")) {
             abort(403);
         }
@@ -31,17 +31,17 @@ class CategoryBlogController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "edit")) : //Check permission
+                if (isAllowed(static::$module, "edit")) : 
                     $btn .= '<a href="'.route('admin.category_blog.edit',$row->id).'" class="btn btn-primary btn-sm mx-3 ">
                     Edit
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "detail")) : //Check permission
+                if (isAllowed(static::$module, "detail")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#detailCategoryBlog">
                     Detail
                 </a>';
@@ -53,7 +53,7 @@ class CategoryBlogController extends Controller
     }
     
     public function add(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -63,7 +63,7 @@ class CategoryBlogController extends Controller
     
     public function save(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "add")) {
             abort(403);
         }
@@ -78,7 +78,7 @@ class CategoryBlogController extends Controller
         $slug = Str::slug($request->nama);
         $cekSlugCount = CategoryBlog::where('slug', $slug)->count();
 
-        // Handle duplicate slug
+        
         if ($cekSlugCount > 0) {
             $slug = $slug . '-' . ($cekSlugCount + 1);
         }
@@ -90,14 +90,14 @@ class CategoryBlogController extends Controller
             'created_by' => auth()->user()->id,
         ]);
 
-        // Log the data
+        
         createLog(static::$module, __FUNCTION__, $data->id, ['Saved data' => $data]);
 
         return redirect()->route('admin.category_blog')->with('success', 'Data saved successfully.');
     }
     
     public function edit($id){
-        //Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -109,7 +109,7 @@ class CategoryBlogController extends Controller
     
     public function update(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "edit")) {
             abort(403);
         }
@@ -124,13 +124,13 @@ class CategoryBlogController extends Controller
 
         $request->validate($rules);
 
-        // Simpan Data before updating
+        
         $previousData = $data->toArray();
 
         $slug = Str::slug($request->nama);
         $cekSlugCount = CategoryBlog::where('id','!=',$id)->where('slug', $slug)->count();
 
-        // Handle duplicate slug
+        
         if ($cekSlugCount > 0) {
             $slug = $slug . '-' . ($cekSlugCount + 1);
         }
@@ -141,7 +141,7 @@ class CategoryBlogController extends Controller
             'status' => $request->status,
             'updated_by' => auth()->user()->id,
         ];
-        // Filter only the updated data
+        
         $updatedData = array_intersect_key($updates, $data->getOriginal());
 
         $data->update($updates);
@@ -152,23 +152,23 @@ class CategoryBlogController extends Controller
     
     public function delete(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
 
         $id = $request->id;
 
-        // Find the data based on the provided ID or throw a 404 exception.
+        
         $data = CategoryBlog::findOrFail($id);
         $data->update(['deleted_by' => auth()->user()->id]);
         
-        // Store the data to be logged before deletion
+        
         $deletedData = $data->toArray();
         
         $projects = Blog::where('category_id', $data->id)->get();
         
-        // Delete related projects if any
+        
         if ($projects->isNotEmpty()) {
             $projects->each(function ($project) {
                 $project->update(['deleted_by' => auth()->user()->id]);
@@ -176,10 +176,10 @@ class CategoryBlogController extends Controller
             });
         }
 
-        // Delete the data.
+        
         $data->delete();
 
-        // Write logs for soft delete
+        
         createLog(static::$module, __FUNCTION__, $id, ['Archived data' => ['Category' => $deletedData, 'Project' => $projects]]);
 
         return response()->json([
@@ -192,7 +192,7 @@ class CategoryBlogController extends Controller
     
     
     public function getDetail($id){
-        //Check permission
+        
         if (!isAllowed(static::$module, "detail")) {
             abort(403);
         }
@@ -228,7 +228,7 @@ class CategoryBlogController extends Controller
     }
 
     public function archives(){
-        //Check permission
+        
         if (!isAllowed(static::$module, "archives")) {
             abort(403);
         }
@@ -244,12 +244,12 @@ class CategoryBlogController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($row) {
                 $btn = "";
-                if (isAllowed(static::$module, "delete")) : //Check permission
+                if (isAllowed(static::$module, "delete")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-danger btn-sm delete  ">
                     Delete
                 </a>';
                 endif;
-                if (isAllowed(static::$module, "restore")) : //Check permission
+                if (isAllowed(static::$module, "restore")) : 
                     $btn .= '<a href="#" data-id="' . $row->id . '" class="btn btn-primary restore btn-sm mx-3 ">
                     Restore
                 </a>';
@@ -262,7 +262,7 @@ class CategoryBlogController extends Controller
 
     public function restore(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "restore")) {
             abort(403);
         }
@@ -271,7 +271,7 @@ class CategoryBlogController extends Controller
 
         $data = CategoryBlog::onlyTrashed()->find($id);
 
-        // Check if data exists in the trash
+        
         if (!$data) {
             return response()->json([
                 'status' => 'error',
@@ -281,10 +281,10 @@ class CategoryBlogController extends Controller
 
         $projects = Blog::onlyTrashed()->where('category_id', $data->id)->get();
 
-        // Restore the category
+        
         $data->restore();
 
-        // Restore related projects if any
+        
         if ($projects->isNotEmpty()) {
             $projects->each(function ($project) {
                 $project->restore();
@@ -296,8 +296,8 @@ class CategoryBlogController extends Controller
             'project' => $projects,
         ];
 
-        // Write logs if needed.
-        createLog(static::$module, __FUNCTION__, $id, ['Data yang dipulihkan' => $updated]);
+        
+        createLog(static::$module, __FUNCTION__, $id, ['Recovered data' => $updated]);
 
         return response()->json([
             'status' => 'success',
@@ -309,7 +309,7 @@ class CategoryBlogController extends Controller
 
     public function forceDelete(Request $request)
     {
-        // Check permission
+        
         if (!isAllowed(static::$module, "delete")) {
             abort(403);
         }
@@ -318,17 +318,17 @@ class CategoryBlogController extends Controller
 
         $data = CategoryBlog::onlyTrashed()->find($id);
 
-        // Check if data exists in the trash
+        
         if (!$data) {
             return redirect()->route('admin.category_blog.archives')->with('error', 'Data not found.');
         }
 
         $projects = Blog::onlyTrashed()->where('category_id', $data->id)->get();
 
-        // Force delete the category
+        
         $data->forceDelete();
 
-        // Force delete related projects if any
+        
         if ($projects->isNotEmpty()) {
             $projects->each(function ($project) {
                 $project->forceDelete();
@@ -343,7 +343,7 @@ class CategoryBlogController extends Controller
             'project' => $dataJsonProject,
         ];
 
-        // Write logs if needed.
+        
         createLog(static::$module, __FUNCTION__, $id, $dataJson);
 
         return response()->json([

@@ -190,7 +190,7 @@
 
 
 
-            //validate parsley form
+            
             const form = document.getElementById("form");
             const validator = $(form).parsley();
 
@@ -253,7 +253,7 @@
                         accessErrorCode.addClass('invalid-feedback');
                         codeField.addClass('is-invalid');
     
-                        accessErrorCode.text('Code harus 12 characters dan diawali dengan webits- lalu diakhiri oleh 5 uniqid.');
+                        accessErrorCode.text('Code must be 12 characters and start with webits- then end with 5 uniqid.');
                         return;
                     } else {
                         accessErrorCode.removeClass('invalid-feedback');
@@ -390,13 +390,13 @@
 
                 if (passwordField.val().length < 8) {
                     passwordField.addClass('is-invalid');
-                    accessErrorPassword.text('Password harus memiliki setidaknya 8 karakter');
+                    accessErrorPassword.text('Password must be at least 8 characters long');
                     return false;
                 } else if (passwordField.val() !== konfirmasiPasswordField.val()) {
                     passwordField.removeClass('is-invalid');
                     accessErrorPassword.text('');
                     konfirmasiPasswordField.addClass('is-invalid');
-                    accessErrorConfirmationPassword.text('Confirmation Password harus sama dengan Password');
+                    accessErrorConfirmationPassword.text('Confirmation password must match the password');
                     return false;
                 } else {
                     passwordField.removeClass('is-invalid');
